@@ -1,0 +1,36 @@
+	<md-sidenav class="md-sidenav-right md-whiteframe-z2 md-padding" md-component-id="right" layout='column'>
+		<md-subheader class="md-primary">Selecione os dados a serem filtrados...</md-subheader>
+			<md-select placeholder="Estados" ng-model="estados.select" ng-blur='nextSlct = true'>
+				<md-option value="1">One</md-option>
+				<md-option value="2">Two</md-option> 
+			</md-select>
+
+			<md-select ng-if='nextSlct' placeholder="Municipios" ng-model="estados.city" >
+				<md-option value="1">Three</md-option>
+				<md-option value="2">Four</md-option> 
+			</md-select>
+
+			<div ng-if='nextSlct'>
+				<md-autocomplete
+					md-selected-item="selectedItem"
+					md-search-text-change="searchTextChange(searchText)"
+					md-search-text="searchText"
+					md-selected-item-change="selectedItemChange(item)"
+					md-items="item in querySearch(searchText)"
+					md-item-text="item.display"
+					md-min-length="0"
+					placeholder="Nome da Empresa ou Empreendimento">
+					<md-item-template>
+						<span md-highlight-text="searchText" md-highlight-flags="^i">{{item.display}}</span>
+					</md-item-template>
+					<md-not-found>
+						Sem registros
+					</md-not-found>
+				</md-autocomplete>
+			</div>
+
+			<br/>
+			<md-content layout-padding layout-align='center' layout='row'>
+				<md-button class="md-raised md-primary"  layout-align='center'>Enviar</md-button>
+			</md-content>
+	</md-sidenav>

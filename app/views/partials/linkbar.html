@@ -1,0 +1,31 @@
+<!-- 
+<div class='container panel panel-default'>
+  <div class='quick quick-btn' id='quick1'>
+    <a ng-repeat='ufs in ufs' class='item' ng-click='changeClass(this)'>
+      <img id='{{ufs.name}}' href='#' ng-src='{{ufs.image}}' value='{{ufs.name}}'>
+      <span class=''>{{ufs.subtitle}}</span>
+    </a>
+  </div>
+</div>
+-->
+
+<md-content class='md-padding' flex layout="column">
+	<form ng-submit='validate(myItems)'>
+		<md-content class="md-padding" >
+			<md-chips ng-model='subcategorias' placeholder='+subCategorias' secondary-placeholder="+subCategorias" >
+			</md-chips>
+		</md-content>
+
+		<div class='md-padding'>
+			<md-select placeholder="Estado" ng-model="filtro1.estado" ng-change='queryMunicipio(filtro1.estado)'>
+				<md-option ng-repeat='uf in ufs'>{{uf.name}}</md-option>
+			</md-select>
+		</div>
+
+		<div class='md-padding' ng-if='municipios[0] != null'>
+			<md-select placeholder="Municipio" ng-model="filtro1.estado">
+				<md-option ng-repeat='municipio in municipios'>{{municipio.name}}</md-option>
+			</md-select>
+		</div>
+	</form>
+</md-content>

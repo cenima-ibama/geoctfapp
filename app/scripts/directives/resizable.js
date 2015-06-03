@@ -11,7 +11,8 @@ angular.module('geoCtfApp')
     return function($scope) {
       $scope.initializeWindowSize = function() {
         $scope.windowHeight = $window.innerHeight;
-        return $scope.windowWidth = $window.innerWidth;
+        $scope.windowWidth = $window.innerWidth;
+        return $scope.windowWidth;
       };
       $scope.initializeWindowSize();
       return angular.element($window).bind('resize', function() {

@@ -11,22 +11,29 @@ angular.module('geoCtfApp')
     return {
       templateUrl: 'views/partials/sidenav.html',
       restrict: 'E',
-      link: function postLink(scope, element, attrs) {
-          event.preventDefault();
-      },
-      controller: function($scope, $timeout, $mdSidenav, $mdUtil, $log){
-
-
-        $scope.toggleRight = construirToggle('right');
-        $scope.close = function(){$mdSidenav('right').close()};
+      // link: function postLink(scope, element, attrs) {
+      //     event.preventDefault();
+      // },
+      controller: function($scope, $timeout, $mdSidenav, $mdUtil){
 
         function construirToggle(nav) {
           var debounceFn =  $mdUtil.debounce(function(){
                 $mdSidenav(nav)
-                  .toggle()
+                  .toggle();
               },300);
           return debounceFn;
         }
+
+        $scope.selectCh = function(value){
+          console.log(value.sigla);
+        };
+
+        $scope.toggleRight = construirToggle('right');
+        
+        $scope.close = function(){
+          $mdSidenav('right').close();
+        };
+
       },
     };
   });

@@ -11,10 +11,17 @@ angular.module('geoCtfApp')
     return {
       templateUrl: 'views/partials/login.html',
       restrict: 'E',
-      link: function postLink(scope, element, attrs) {
-      },
-      controller: function($scope, RestApi, $rootScope){
+      // link: function postLink(scope, element, attrs) {
+      // },
+      controller: function($scope, RestApi, $rootScope, $location){
       	
+        $rootScope.logout = function(){
+          $rootScope.dataUser = null;
+          $rootScope.logged = false;
+          Auth.setUser(false, false);
+        };
+
+
       	$scope.acessar = function(obj){
 
           function base64_encode(data) {
@@ -49,7 +56,7 @@ angular.module('geoCtfApp')
             var r = data.length % 3;
 
             return (r ? enc.slice(0, r - 3) : enc) + '==='.slice(r || 3);
-          }
+          };
 
           $scope.error = false;
           $scope.carregar = true;
@@ -64,7 +71,7 @@ angular.module('geoCtfApp')
           }
 
           var request = $http({
-            method: "post",
+            method: 'post',
             url:'//10.1.8.139/server/access.php',
             data:{
               cca : base64_encode(obj.login),
@@ -76,12 +83,12 @@ angular.module('geoCtfApp')
           request.
           success(function(data, status){
             if(data.msg != 0){
-              $rootScope.logged_in = data.logged_in ;
-              $rootScope.logged = true;
-              $rootScope.dataUser = data.user;
+              $('#loginModal').modal('hide');
               Auth.setUser(data.user.name);
 
-              $('#loginModal').modal('hide');
+              $rootScope.logged_in = data.logged_in ;
+              $rootScope.dataUser = data.user;
+              $rootScope.logged = true;
             }
             else{ 
               $rootScope.logged = false;
@@ -94,7 +101,7 @@ angular.module('geoCtfApp')
             console.log('error code: ' + status );
             $scope.carregar = false;
           })
-      	}
+      	};
 
       }
     };

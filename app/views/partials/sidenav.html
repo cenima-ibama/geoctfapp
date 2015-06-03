@@ -1,33 +1,49 @@
 	<md-sidenav class="md-sidenav-right md-whiteframe-z2 md-padding" md-component-id="right" layout='column'>
 		<md-subheader class="md-primary">Selecione os dados a serem filtrados...</md-subheader>
-			<md-select placeholder="Estados" ng-model="estados.select" ng-blur='nextSlct = true'>
-				<md-option value="1">One</md-option>
-				<md-option value="2">Two</md-option> 
-			</md-select>
 
-			<md-select ng-if='nextSlct' placeholder="Municipios" ng-model="estados.city" >
-				<md-option value="1">Three</md-option>
-				<md-option value="2">Four</md-option> 
-			</md-select>
+		<md-select ng-model="estado" placeholder="Estado" ng-change='selectCh(estado)'> 
+		    <md-optgroup label="Norte">
+				<md-option ng-value="estado" ng-repeat="estado in estados | filter: {regiao: 'norte' }" >{{estado.name}}</md-option>
+		    </md-optgroup>
+		    <md-optgroup label="Nordeste">
+				<md-option ng-value="estado" ng-repeat="estado in estados | filter: {regiao: 'nordeste' }">{{estado.name}}</md-option>
+		    </md-optgroup>    
+		    <md-optgroup label="Centro-Oeste">
+				<md-option ng-value="estado" ng-repeat="estado in estados | filter: {regiao: 'centro' }">{{estado.name}}</md-option>
+		    </md-optgroup>    
+		    <md-optgroup label="Sudeste">
+				<md-option ng-value="estado" ng-repeat="estado in estados | filter: {regiao: 'sudeste' }">{{estado.name}}</md-option>
+		    </md-optgroup>
+		    <md-optgroup label="Sul">
+				<md-option ng-value="estado" ng-repeat="estado in estados | filter: {regiao: 'sul' }">{{estado.name}}</md-option>
+		    </md-optgroup>
+		</md-select>
+		
+		<md-select ng-if='municipios!=null' placeholder="Municipios" ng-model="estados.city" >
+			<md-option value="1">Three</md-option>
+			<md-option value="2">Four</md-option> 
+		</md-select>
 
-			<div ng-if='nextSlct'>
-				<md-autocomplete
-					md-selected-item="selectedItem"
-					md-search-text-change="searchTextChange(searchText)"
-					md-search-text="searchText"
-					md-selected-item-change="selectedItemChange(item)"
-					md-items="item in querySearch(searchText)"
-					md-item-text="item.display"
-					md-min-length="0"
-					placeholder="Nome da Empresa ou Empreendimento">
-					<md-item-template>
-						<span md-highlight-text="searchText" md-highlight-flags="^i">{{item.display}}</span>
-					</md-item-template>
-					<md-not-found>
-						Sem registros
-					</md-not-found>
-				</md-autocomplete>
-			</div>
+		<!-- 
+		<div>
+			<md-autocomplete
+				md-selected-item="selectedItem"
+				md-search-text-change="searchTextChange(searchText)"
+				md-search-text="searchText"
+				md-selected-item-change="selectedItemChange(item)"
+				md-items="item in querySearch(searchText)"
+				md-item-text="item.display"
+				md-min-length="0"
+				placeholder="Nome da Empresa ou Empreendimento">
+				<md-item-template>
+					<span md-highlight-text="searchText" md-highlight-flags="^i">{{item.display}}</span>
+				</md-item-template>
+				<md-not-found>
+					Sem registros
+				</md-not-found>
+			</md-autocomplete>
+		</div>
+		-->
 
 			<br/>
 			<md-content layout-padding layout-align='center' layout='row'>

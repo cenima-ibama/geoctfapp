@@ -11,7 +11,7 @@ angular.module('geoCtfApp')
     return {
       templateUrl: 'views/partials/topbar.html',
       restrict: 'AE',
-      controller: function($scope){
+      controller: function(){
       },
     };
   });

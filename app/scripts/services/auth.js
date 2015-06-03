@@ -17,5 +17,5 @@ angular.module('geoCtfApp')
       isLoggedIn : function(){
         return(user)? user : false;
       }
-    }
+    };
   });

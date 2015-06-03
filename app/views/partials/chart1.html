@@ -1,0 +1,21 @@
+
+<div class='col-lg-6'>
+	<div class="panel panel-danger" flex >
+	    <div class="panel-heading">Atividades por UF</div>
+	        <div class="panel-body">
+				
+		        <div ng-if='carregar.chart1'>
+		        	<md-progress-circular md-mode="indeterminate" flex offset='45'></md-progress-circular>
+		        </div>
+				<canvas ng-if='!carregar.chart1'
+					class="chart-bar chart-stats" 
+					data="chart1data" 
+					labels="chart1labels" 
+					series="chart1series" 
+					legend="true" 
+					options="options" 
+					>
+				</canvas>
+			</div>
+	</div>
+</div>

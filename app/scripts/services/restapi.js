@@ -10,12 +10,15 @@
 angular.module('geoCtfApp')
   .factory('RestApi', function ($resource) {
     // return $resource('//' + window.location.hostname + window.location.pathname + '/moduleGeoCTF.php?:type', {},
-    return $resource('//10.1.8.139/server/access.php?:type', {},
+    return $resource('http://10.1.8.178:8000/api/:type/?:subtype', {type: '@type', subtype: '@subtype'},
       {
         get: {
           method:'GET',
-          params:{ format:'json' },
-          isArray: true
+          // params:{ format:'json' },
+          isArray: true,
+          headers: {
+            'Content-Type': 'application/json'
+          },
         },
         post: {
           method:'POST',

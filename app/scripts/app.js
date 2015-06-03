@@ -16,7 +16,8 @@ angular
     'ngRoute',
     'ngSanitize',
     'ngTouch',
-    'ngMaterial'
+    'ngMaterial',
+    'chart.js'
   ])
   .config(function ($routeProvider) {
     $routeProvider

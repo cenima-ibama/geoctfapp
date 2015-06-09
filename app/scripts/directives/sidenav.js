@@ -7,7 +7,7 @@
  * # sidenav
  */
 angular.module('geoCtfApp')
-  .directive('sidenav', function () {
+  .directive('sidenav', function (RestApi) {
     return {
       templateUrl: 'views/partials/sidenav.html',
       restrict: 'E',
@@ -16,6 +16,22 @@ angular.module('geoCtfApp')
       // },
       controller: function($scope, $timeout, $mdSidenav, $mdUtil){
 
+        $scope.filter = {};
+        $scope.listMunicipios = false;
+
+        $scope.requestFilter = function(value){
+          console.log(value);
+        }
+
+        $scope.selectCh = function(value){
+          $scope.municipios = '';
+          $scope.filter.municipio = '';
+          RestApi.getMunicipios({type: 'estado', estado: value.sigla}, function(data){
+            $scope.listMunicipios = true;
+            $scope.municipios = data.municipio_set;
+          })
+        };
+
         function construirToggle(nav) {
           var debounceFn =  $mdUtil.debounce(function(){
                 $mdSidenav(nav)
@@ -23,10 +39,6 @@ angular.module('geoCtfApp')
               },300);
           return debounceFn;
         }
-
-        $scope.selectCh = function(value){
-          console.log(value.sigla);
-        };
 
         $scope.toggleRight = construirToggle('right');
         

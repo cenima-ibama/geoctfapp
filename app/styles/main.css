@@ -13,15 +13,8 @@ md-optgroup label {
 
 }
 
-.panel-danger > .panel-heading {
-  
-  color: white;
-  background-color: rgb(63,81,181);
-  border-color: rgb(63,81,181);
-
-  /*color: #9d9d9d;*/
-  /*background-color: #222;*/
-  /*border-color: #222;*/
+.md-select-label {
+  width: 100% !important;
 }
 
 #selectMin > md-select{
@@ -32,11 +25,32 @@ md-optgroup label {
   height: 700px;
 }
 
+.panel-danger > .panel-heading {
+  
+  color: white;
+  background-color: rgb(63,81,181);
+
+  /*color: #9d9d9d;*/
+  /*background-color: #222;*/
+}
+
+#chart > .panel-danger{
+  border-color: rgba(63,81,181,.4);
+}
+
 .modal-dialog{
   max-width: 350px;
   /*margin-top: 5%;*/
   margin: 5% auto !important; 
+}
 
+.legend{
+  max-width: 30em;
+  min-width: 20em;
+  max-height: 20em;
+  overflow: auto;
+  color: rgba(0,0,0,0.7);
+  border: 1px solid #ccc;
 }
 
 .navbar{
@@ -46,15 +60,10 @@ md-optgroup label {
   border: 0 !important;
 }
 
-/*.row {
-  margin-left: auto !important;
-  margin-right: auto !important;
-  max-width: 90%;
-  width: 58%;
-  width: -moz-max-content;
-
-  margin-top: 2%;
-}*/
+.navbar-brand-img{
+    margin-top: -5px;
+    color:white;
+}
 
 .quick-btn .item {
   background-color: #fcfcfc 0%;
@@ -75,6 +84,7 @@ md-optgroup label {
   max-width: 15%;
   min-height: 102px;
 }
+
 .quick-btn .item a {
   outline: none;
   text-decoration: none;

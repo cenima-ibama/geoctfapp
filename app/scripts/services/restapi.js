@@ -20,6 +20,15 @@ angular.module('geoCtfApp')
             'Content-Type': 'application/json'
           },
         },
+        getMunicipios: {
+          url: 'http://10.1.8.178:8000/api/:type/:estado',
+          method:'GET',
+          // params:{ format:'json' },
+          // isArray: true,
+          headers: {
+            'Content-Type': 'application/json'
+          },
+        },
         post: {
           method:'POST',
           headers: {

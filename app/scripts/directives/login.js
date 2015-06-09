@@ -24,6 +24,9 @@ angular.module('geoCtfApp')
 
       	$scope.acessar = function(obj){
 
+          $scope.login = {};
+          $scope.login.carregar = false;
+
           function base64_encode(data) {
             var b64 = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
             var o1, o2, o3, h1, h2, h3, h4, bits, i = 0,
@@ -59,7 +62,7 @@ angular.module('geoCtfApp')
           };
 
           $scope.error = false;
-          $scope.carregar = true;
+          $scope.login.carregar = true;
 
           if(!obj){
             obj = {};
@@ -95,11 +98,11 @@ angular.module('geoCtfApp')
               $scope.error = true;
               $scope.errorLogin = 'Usu' + String.fromCharCode(225) +'rio ou senha Inv' + String.fromCharCode(225) + 'lidos';
             }
-            $scope.carregar = false;
+            $scope.login.carregar = false;
           }).
           error(function(data, status){
             console.log('error code: ' + status );
-            $scope.carregar = false;
+            $scope.login.carregar = false;
           })
       	};
 

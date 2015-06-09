@@ -3,7 +3,10 @@
   <div class="modal-content md-padding" >
     <div class="modal-header">
       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-      <h4 class="modal-title text-center" id="myModalLabel"><img src='images/ctf.png' height="30" width="80"></h4>
+      <div layout='row' flex offset='25'>
+        <h4 class="modal-title" id="myModalLabel" ><img src='images/ibama-logo.png' height="30" width="30"></h4>
+        <h4 class="modal-title" id="myModalLabel" ><img src='images/ctf.png' height="30" width="80" ></h4>
+      </div>
     </div>
 
     <div class="modal-body">
@@ -26,7 +29,7 @@
         </md-input-container>
 
         <md-container layout='row'>
-          <div ng-if='carregar' layout="column" layout-align="space-around" flex >
+          <div ng-if='login.carregar' layout="column" layout-align="space-around" flex >
             <md-progress-circular md-mode="indeterminate"></md-progress-circular>
           </div>
           <div flex class='text-right' >

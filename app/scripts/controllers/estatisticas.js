@@ -8,7 +8,7 @@
  * Controller of the geoCtfApp
  */
 angular.module('geoCtfApp')
-  .controller('EstatisticasCtrl', function ($scope, $rootScope, $cookies, Auth, $location, RestApi) {
+  .controller('EstatisticasCtrl', function ($scope, $rootScope, $cookies, Auth, $location, RestApi, $log) {
     $scope.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
@@ -26,7 +26,7 @@ angular.module('geoCtfApp')
         anos.push(data);
         data++;
       }
-      return anos.reverse();
+      return anos;
     }
 
     $scope.$watch(Auth.isLoggedIn, function (value, oldValue) {
@@ -59,7 +59,7 @@ angular.module('geoCtfApp')
       { name: 'Piauí', regiao: 'nordeste', sigla: 'PI'},
       { name: 'Rio Grande do Norte', regiao: 'nordeste', sigla: 'RN'},
       { name: 'Sergipe', regiao: 'nordeste', sigla: 'SE'},
-      { name: 'Brasília', regiao: 'centro', sigla: 'DF'},
+      { name: 'Distrito Federal', regiao: 'centro', sigla: 'DF'},
       { name: 'Goiás', regiao: 'centro', sigla: 'GO'},
       { name: 'Mato Grosso', regiao: 'centro', sigla: 'MT'},
       { name: 'Mato Grosso do Sul', regiao: 'centro', sigla: 'MS'},
@@ -72,42 +72,76 @@ angular.module('geoCtfApp')
       { name: 'Santa Catarina', regiao: 'sul', sigla: 'SC'},
     ];
 
-    $scope.anos = getYears(1988);
+    var years = getYears(1988);
+    years.push('Todos');
+
+    $scope.anos = years.reverse();
     $scope.chart = {};
 
     RestApi.get({ type: 'categorias'}, function(data){
       $scope.categorias = data;
+      $scope.categorias.push({id: 'Todos' , nome: 'Todos'});
     });
 
     $scope.listCity = function(categoria){
       $scope.chart.subCategoria = '';
-      $scope.subCategorias = categoria.subcategoria_set;
-      $scope.subCategorias.push({id: 'Todos' , nome: 'Todos'});
+      if(categoria.id != 'Todos'){
+        $scope.subCategorias = categoria.subcategoria_set;
+        $scope.subCategorias.push({id: 'Todos' , nome: 'Todos'});
+      }
     };
 
     $scope.carregar = {}
 
     $scope.request = function(form){
-      $scope.carregar.chart1 = true;
-      var sub = '';
-      console.log(form);
 
-      if(form.ano)
-        sub = sub + '&ano=' + form.ano;
+      $scope.carregar.chart1 = true;
+
+      var subchart1 = '';
+      var subchart2 = '';
+
+      if(form.ano != 'Todos'){
+        if(form.ano){
+          subchart1 = subchart1 + '&ano=' + form.ano;
+          subchart2 = subchart2 + '&ano=' + form.ano;
+        }
+      }
+      
       if(form.estado)
-        sub = sub + '&uf=' + form.estado;
-      if(form.categoria)
-        sub = sub + '&categoria=' + form.categoria.id;
+        subchart2 = subchart2 + '&uf=' + form.estado.sigla;
+
+      if(form.categoria){
+        if(form.categoria.nome != 'Todos'){
+          subchart1 = subchart1 + '&categoria=' + form.categoria.id;
+          // subchart2 = subchart2 + '&categoria=' + form.categoria.id;
+        }
+      }
+      
       if(form.subCategoria){
-        if(form.subCategoria.nome != 'Todos')
-        sub = sub + '&subcategoria=' + form.subCategoria.id;
+        if(form.subCategoria.nome != 'Todos'){
+          subchart1 = subchart1 + '&subcategoria=' + form.subCategoria.id;
+          // subchart2 = subchart2 + '&subcategoria=' + form.subCategoria.id;
+        }
       }
 
-      $scope.chart1series = [form.ano];
+      $rootScope.chart1series = [form.ano];
 
-      RestApi.get({type: 'estatistica-uf', subtype: sub}, function(data){
+      $log.debug('chart1 = estatistica-uf/?' + subchart1);
+      $log.debug('chart2 = estatistica-categoria/?' + subchart2);
+
+      if(form.estado){
+        $scope.carregar.chart2 = true;
+        $rootScope.chart2series = [form.estado.name];
+        // $rootScope.chart2labels = [form.estado.name];
+        RestApi.get({type: 'estatistica-categoria', subtype: subchart2}, function(data){
+          $scope.$broadcast('drawchart2', data);
+        });
+      }
+
+      RestApi.get({type: 'estatistica-uf', subtype: subchart1}, function(data){
         $scope.$broadcast('drawchart1', data);
-      })
+      });      
+
     };
 
 

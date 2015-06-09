@@ -21,9 +21,12 @@ angular.module('geoCtfApp')
 
 		$scope.options = {
 			animationSteps: 5,
-			bezierCurve : false
+			bezierCurve : false,
+			labelLength: 2,
+			segmentStrokeWidth: 0.1,
+			customTooltip: true,
+			tooltipTemplate: "<%if (label){%><%= label %>: <%}%><%= value %>",
 		};
-	
 
 		// $scope.chart1labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
 		// $scope.chart1series = ['Series A', 'Series B'];
@@ -46,12 +49,6 @@ angular.module('geoCtfApp')
 			$scope.chart1data = [data];
       		$scope.carregar.chart1 = false;
 		});
-
-
-		$scope.onClick = function (points, evt) {
-			console.log(points, evt);
-		};
-
       },
     };
   });

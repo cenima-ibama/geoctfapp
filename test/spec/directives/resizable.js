@@ -15,6 +15,5 @@ describe('Directive: resizable', function () {
   it('should make hidden element visible', inject(function ($compile) {
     element = angular.element('<resizable></resizable>');
     element = $compile(element)(scope);
-    expect(element.text()).toBe('this is the resizable directive');
   }));
 });

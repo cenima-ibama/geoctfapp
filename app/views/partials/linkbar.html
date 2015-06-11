@@ -21,26 +21,28 @@
 		<!-- Select de estados separado por regiões, e possibilidade de seleção para o país inteiro -->
 		<md-select ng-model="chart.estado" placeholder="Estado" class='md-padding' required>
 		    <md-optgroup >
-		    	<md-option ng-value='estado.name' ng-repeat="estado in estados | filter: {regiao: 'brasil' }">{{estado.name}}</md-option>
+		    	<md-option ng-value='estado' ng-repeat="estado in estados | filter: {regiao: 'brasil' }">{{estado.nome}}</md-option>
 		    </md-optgroup>
 		    <md-optgroup label="Norte">
-				<md-option ng-value="estado" ng-repeat="estado in estados | filter: {regiao: 'norte' }">{{estado.name}}</md-option>
+				<md-option ng-value="estado" ng-repeat="estado in estados | filter: {regiao: 'norte' }">{{estado.nome}}</md-option>
 		    </md-optgroup>
 		    <md-optgroup label="Nordeste">
-				<md-option ng-value="estado" ng-repeat="estado in estados | filter: {regiao: 'nordeste' }">{{estado.name}}</md-option>
+				<md-option ng-value="estado" ng-repeat="estado in estados | filter: {regiao: 'nordeste' }">{{estado.nome}}</md-option>
 		    </md-optgroup>    
 		    <md-optgroup label="Centro-Oeste">
-				<md-option ng-value="estado" ng-repeat="estado in estados | filter: {regiao: 'centro' }">{{estado.name}}</md-option>
+				<md-option ng-value="estado" ng-repeat="estado in estados | filter: {regiao: 'centro' }">{{estado.nome}}</md-option>
 		    </md-optgroup>    
 		    <md-optgroup label="Sudeste">
-				<md-option ng-value="estado" ng-repeat="estado in estados | filter: {regiao: 'sudeste' }">{{estado.name}}</md-option>
+				<md-option ng-value="estado" ng-repeat="estado in estados | filter: {regiao: 'sudeste' }">{{estado.nome}}</md-option>
 		    </md-optgroup>
 		    <md-optgroup label="Sul">
-				<md-option ng-value="estado" ng-repeat="estado in estados | filter: {regiao: 'sul' }">{{estado.name}}</md-option>
+				<md-option ng-value="estado" ng-repeat="estado in estados | filter: {regiao: 'sul' }">{{estado.nome}}</md-option>
 		    </md-optgroup>
 		</md-select>
 		 		
-		<md-select ng-model='chart.categoria' placeholder='Atividade' class='md-padding' ng-change='listCity(chart.categoria)' >
+
+		 		
+		<md-select ng-model='chart.categoria' placeholder='Atividade' class='md-padding' ng-change='listSubcategoria(chart.categoria)' >
 			<md-option ng-repeat='categoria in categorias | orderBy: "id"' ng-value='categoria'>{{categoria.id}} - {{categoria.nome}}</md-option>
 		</md-select>
 

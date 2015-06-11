@@ -22,14 +22,12 @@ angular.module('geoCtfApp')
             if(value.id == param){
               retorno = value;
             }
-          })
+          });
           return retorno;
         }
 
-
         $scope.atividadeName = function(points, evt){
           $scope.legenda = getNameByParam(points[0].label, $scope.chart2atividades);
-          // $scope.legenda = $scope.chart2legend[points[0].label];
         };
 
 
@@ -39,7 +37,7 @@ angular.module('geoCtfApp')
     			var legend = [];
     			
           angular.forEach(dado, function(value, key){
-    				if(value.num_atividades != 0){
+    				if(value.num_atividades !== 0){
               data.push(value.num_atividades);
               labels.push(value.id);
               legend.push({id: value.id, nome: value.nome});

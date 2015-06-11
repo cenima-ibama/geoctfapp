@@ -13,6 +13,10 @@ md-optgroup label {
 
 }
 
+md-sidenav > .md-subheader {
+  width: 100%;
+}
+
 .md-select-label {
   width: 100% !important;
 }

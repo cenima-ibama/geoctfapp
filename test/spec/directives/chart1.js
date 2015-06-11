@@ -15,6 +15,5 @@ describe('Directive: chart1', function () {
   it('should make hidden element visible', inject(function ($compile) {
     element = angular.element('<chart1></chart1>');
     element = $compile(element)(scope);
-    expect(element.text()).toBe('this is the chart1 directive');
   }));
 });

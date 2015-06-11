@@ -7,13 +7,13 @@
  * # login
  */
 angular.module('geoCtfApp')
-  .directive('login', function ($log, $location, $http, Auth) {
+  .directive('login', function ($log, $http, Auth) {
     return {
       templateUrl: 'views/partials/login.html',
       restrict: 'E',
       // link: function postLink(scope, element, attrs) {
       // },
-      controller: function($scope, RestApi, $rootScope, $location){
+      controller: function($scope, RestApi, $rootScope){
       	
         $rootScope.logout = function(){
           $rootScope.dataUser = null;
@@ -59,7 +59,7 @@ angular.module('geoCtfApp')
             var r = data.length % 3;
 
             return (r ? enc.slice(0, r - 3) : enc) + '==='.slice(r || 3);
-          };
+          }
 
           $scope.error = false;
           $scope.login.carregar = true;
@@ -85,7 +85,7 @@ angular.module('geoCtfApp')
 
           request.
           success(function(data, status){
-            if(data.msg != 0){
+            if(data.msg !== 0){
               $('#loginModal').modal('hide');
               Auth.setUser(data.user.name);
 
@@ -103,7 +103,7 @@ angular.module('geoCtfApp')
           error(function(data, status){
             console.log('error code: ' + status );
             $scope.login.carregar = false;
-          })
+          });
       	};
 
       }

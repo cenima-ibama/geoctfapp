@@ -15,6 +15,5 @@ describe('Directive: toolbar', function () {
   it('should make hidden element visible', inject(function ($compile) {
     element = angular.element('<toolbar></toolbar>');
     element = $compile(element)(scope);
-    expect(element.text()).toBe('this is the toolbar directive');
   }));
 });

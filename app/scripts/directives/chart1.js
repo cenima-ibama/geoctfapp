@@ -24,8 +24,6 @@ angular.module('geoCtfApp')
 			bezierCurve : false,
 			labelLength: 2,
 			segmentStrokeWidth: 0.1,
-			customTooltip: true,
-			tooltipTemplate: "<%if (label){%><%= label %>: <%}%><%= value %>",
 		};
 
 		// $scope.chart1labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
@@ -39,7 +37,7 @@ angular.module('geoCtfApp')
 			var labels = [];
 			var data = [];
 			angular.forEach(dado, function(value, key){
-				if(value.num_atividades != 0){
+				if(value.num_atividades !== 0){
 					labels.push(value.sigla);
 					data.push(value.num_atividades);
 				}

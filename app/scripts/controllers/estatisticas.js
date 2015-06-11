@@ -42,34 +42,34 @@ angular.module('geoCtfApp')
 
 
     $scope.estados = [
-      { name: 'Brasil', regiao: 'brasil', sigla: 'BR'},
-      { name: 'Acre', regiao: 'norte', sigla: 'AC'},
-      { name: 'Amapá', regiao: 'norte', sigla: 'AP'},
-      { name: 'Amazonas', regiao: 'norte', sigla: 'AM'},
-      { name: 'Pará', regiao: 'norte', sigla: 'PA'},
-      { name: 'Rondônia', regiao: 'norte', sigla: 'RO'},
-      { name: 'Roraima', regiao: 'norte', sigla: 'RR'},
-      { name: 'Tocantins', regiao: 'norte', sigla: 'TO'},
-      { name: 'Alagoas', regiao: 'nordeste', sigla: 'AL'},
-      { name: 'Bahia', regiao: 'nordeste', sigla: 'BA'},
-      { name: 'Ceará', regiao: 'nordeste', sigla: 'CE'},
-      { name: 'Maranhão', regiao: 'nordeste', sigla: 'MA'},
-      { name: 'Paraíba', regiao: 'nordeste', sigla: 'PB'},
-      { name: 'Pernambuco', regiao: 'nordeste', sigla: 'PE'},
-      { name: 'Piauí', regiao: 'nordeste', sigla: 'PI'},
-      { name: 'Rio Grande do Norte', regiao: 'nordeste', sigla: 'RN'},
-      { name: 'Sergipe', regiao: 'nordeste', sigla: 'SE'},
-      { name: 'Distrito Federal', regiao: 'centro', sigla: 'DF'},
-      { name: 'Goiás', regiao: 'centro', sigla: 'GO'},
-      { name: 'Mato Grosso', regiao: 'centro', sigla: 'MT'},
-      { name: 'Mato Grosso do Sul', regiao: 'centro', sigla: 'MS'},
-      { name: 'Espírito Santo', regiao: 'sudeste', sigla: 'ES'},
-      { name: 'Minas Gerais', regiao: 'sudeste', sigla: 'MG'},
-      { name: 'Rio de Janeiro', regiao: 'sudeste', sigla: 'RJ'},
-      { name: 'São Paulo', regiao: 'sudeste', sigla: 'SP'},
-      { name: 'Paraná', regiao: 'sul', sigla: 'PR'},
-      { name: 'Rio grande do Sul', regiao: 'sul', sigla: 'RS'},
-      { name: 'Santa Catarina', regiao: 'sul', sigla: 'SC'},
+      { nome: 'Brasil', regiao: 'brasil', sigla: 'BR', value: 'Todos'},
+      { nome: 'Acre', regiao: 'norte', sigla: 'AC'},
+      { nome: 'Amapá', regiao: 'norte', sigla: 'AP'},
+      { nome: 'Amazonas', regiao: 'norte', sigla: 'AM'},
+      { nome: 'Pará', regiao: 'norte', sigla: 'PA'},
+      { nome: 'Rondônia', regiao: 'norte', sigla: 'RO'},
+      { nome: 'Roraima', regiao: 'norte', sigla: 'RR'},
+      { nome: 'Tocantins', regiao: 'norte', sigla: 'TO'},
+      { nome: 'Alagoas', regiao: 'nordeste', sigla: 'AL'},
+      { nome: 'Bahia', regiao: 'nordeste', sigla: 'BA'},
+      { nome: 'Ceará', regiao: 'nordeste', sigla: 'CE'},
+      { nome: 'Maranhão', regiao: 'nordeste', sigla: 'MA'},
+      { nome: 'Paraíba', regiao: 'nordeste', sigla: 'PB'},
+      { nome: 'Pernambuco', regiao: 'nordeste', sigla: 'PE'},
+      { nome: 'Piauí', regiao: 'nordeste', sigla: 'PI'},
+      { nome: 'Rio Grande do Norte', regiao: 'nordeste', sigla: 'RN'},
+      { nome: 'Sergipe', regiao: 'nordeste', sigla: 'SE'},
+      { nome: 'Distrito Federal', regiao: 'centro', sigla: 'DF'},
+      { nome: 'Goiás', regiao: 'centro', sigla: 'GO'},
+      { nome: 'Mato Grosso', regiao: 'centro', sigla: 'MT'},
+      { nome: 'Mato Grosso do Sul', regiao: 'centro', sigla: 'MS'},
+      { nome: 'Espírito Santo', regiao: 'sudeste', sigla: 'ES'},
+      { nome: 'Minas Gerais', regiao: 'sudeste', sigla: 'MG'},
+      { nome: 'Rio de Janeiro', regiao: 'sudeste', sigla: 'RJ'},
+      { nome: 'São Paulo', regiao: 'sudeste', sigla: 'SP'},
+      { nome: 'Paraná', regiao: 'sul', sigla: 'PR'},
+      { nome: 'Rio grande do Sul', regiao: 'sul', sigla: 'RS'},
+      { nome: 'Santa Catarina', regiao: 'sul', sigla: 'SC'},
     ];
 
     var years = getYears(1988);
@@ -83,60 +83,67 @@ angular.module('geoCtfApp')
       $scope.categorias.push({id: 'Todos' , nome: 'Todos'});
     });
 
-    $scope.listCity = function(categoria){
+    $scope.listSubcategoria = function(categoria){
       $scope.chart.subCategoria = '';
-      if(categoria.id != 'Todos'){
-        $scope.subCategorias = categoria.subcategoria_set;
+      if(categoria.id !== 'Todos'){
+        $scope.subCategorias = categoria.subcategorias;
         $scope.subCategorias.push({id: 'Todos' , nome: 'Todos'});
       }
     };
 
-    $scope.carregar = {}
+    $scope.carregar = {};
 
     $scope.request = function(form){
 
+      $scope.legenda = null;
+      $scope.chart2atividades = null;
+
       $scope.carregar.chart1 = true;
+      $scope.carregar.chart2 = true;
 
       var subchart1 = '';
       var subchart2 = '';
 
-      if(form.ano != 'Todos'){
+      if(form.ano !== 'Todos'){
         if(form.ano){
           subchart1 = subchart1 + '&ano=' + form.ano;
           subchart2 = subchart2 + '&ano=' + form.ano;
         }
       }
       
-      if(form.estado)
-        subchart2 = subchart2 + '&uf=' + form.estado.sigla;
-
       if(form.categoria){
-        if(form.categoria.nome != 'Todos'){
+        if(form.categoria.nome !== 'Todos'){
           subchart1 = subchart1 + '&categoria=' + form.categoria.id;
-          // subchart2 = subchart2 + '&categoria=' + form.categoria.id;
         }
       }
       
       if(form.subCategoria){
-        if(form.subCategoria.nome != 'Todos'){
+        if(form.subCategoria.nome !== 'Todos'){
           subchart1 = subchart1 + '&subcategoria=' + form.subCategoria.id;
-          // subchart2 = subchart2 + '&subcategoria=' + form.subCategoria.id;
         }
       }
-
+      
+      if(form.estado){
+        if(form.estado.nome !== 'Brasil'){
+          subchart2 = subchart2 + '&uf=' + form.estado.sigla;
+          $rootScope.chart2series = [form.estado.nome];
+        } else {
+          $rootScope.chart2series = ['Brasil'];
+        }
+      } else if(!form.estado){
+          $rootScope.chart2series = ['Brasil'];
+      }
+      
       $rootScope.chart1series = [form.ano];
 
+      //Print var on debug
       $log.debug('chart1 = estatistica-uf/?' + subchart1);
       $log.debug('chart2 = estatistica-categoria/?' + subchart2);
 
-      if(form.estado){
-        $scope.carregar.chart2 = true;
-        $rootScope.chart2series = [form.estado.name];
-        // $rootScope.chart2labels = [form.estado.name];
-        RestApi.get({type: 'estatistica-categoria', subtype: subchart2}, function(data){
-          $scope.$broadcast('drawchart2', data);
-        });
-      }
+      // Requests para a aplicação com posterior envio aos escopos das diretivas
+      RestApi.get({type: 'estatistica-categoria', subtype: subchart2}, function(data){
+        $scope.$broadcast('drawchart2', data);
+      });
 
       RestApi.get({type: 'estatistica-uf', subtype: subchart1}, function(data){
         $scope.$broadcast('drawchart1', data);

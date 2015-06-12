@@ -9,7 +9,7 @@
     "angular-route": "^1.3.0",
     "angular-sanitize": "^1.3.0",
     "angular-touch": "^1.3.0",
-    "angular-material": "latest",
+    "angular-material": "~0.9.7",
     "bootstrap": "~3.3.4",
     "leaflet": "latest",
     "angular-chart.js": "~0.7.1",

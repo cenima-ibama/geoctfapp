@@ -1,5 +1,10 @@
+	
 	<md-sidenav class="md-sidenav-right md-whiteframe-z2 md-padding" md-component-id="right" layout='column'>
 		<md-subheader class="md-primary">Selecione os dados a serem filtrados...</md-subheader>
+		<div ng-if='filter.error' class="alert alert-danger alert-dismissible" role="alert">
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			<strong>{{filter.errorMessage}}</strong> 
+		</div>
 
 		<form ng-submit='requestPoints(filter)' id='formSide' novalidate name='points'>
 
@@ -31,15 +36,16 @@
 				<md-select ng-model='filter.categoria' placeholder='Atividade' ng-change='listSubcategoria(filter.categoria)' layout='row' required>
 					<md-option ng-repeat='categoria in categorias | orderBy: "id"' ng-value='categoria'>{{categoria.id}} - {{categoria.nome}}</md-option>
 				</md-select>
-
+				<!--
 				<md-select ng-model='filter.subCategoria' placeholder='Detalhe' layout='row'>
 					<md-option ng-repeat='subcategoria in subCategorias | orderBy: "id"' ng-value='subcategoria'>{{subcategoria.nome}}</md-option>
-				</md-select>
+				</md-select> 
+				-->
 			<!-- <div> -->
 
 			<br/>
 			<md-content layout-padding layout-align='center' layout='row'>
-				<md-button type='submit' class="md-raised md-primary" layout-align='center' ng-disabled='points.$invalid'>Enviar</md-button>
+				<md-button type='submit' class="md-raised md-primary" layout-align='center' ng-disabled='points.$invalid || filter.carregar || !filter.municipio'>Enviar</md-button>
 			</md-content>
 		</form>
 	</md-sidenav>

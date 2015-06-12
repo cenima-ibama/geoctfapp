@@ -14,54 +14,68 @@ angular.module('geoCtfApp')
       // link: function postLink(scope, element, attrs) {
       //     event.preventDefault();
       // },
-      controller: function($scope, $timeout, $mdSidenav, $mdUtil, $log){
+      controller: function($scope, $timeout, $mdSidenav, $mdUtil, $log, Auth){
 
         $scope.filter = {};
         $scope.filter.listMunicipios = false;
 
+        L.Icon.Default.imagePath = 'images';
+
         $scope.requestPoints = function(value){
+          $scope.filter.error = false;
+          $scope.filter.carregar = true;
+
+          function populatePopup(object){
+            // console.log(Auth.isLoggedIn());
+            var html = '<b>' + object.properties.atividades[0].empresa  + '</b><br/><hr />' ;
+            angular.forEach(object.properties.atividades, function(value, key){
+              html += '<b>Categoria:</b> ' + value.categoria + '<br/>';
+              html += '<b>Subcategoria:</b> ' + value.subcategoria + '<br/>',
+              html += '<b>Grau de Poluicao:</b> ' + value.grau_poluicao  + '<br/>',
+              html += '<b>Inicio da Atividade:</b> ' + value.inicio_atividade + '<br/>',
+              html += '<hr />';
+            })
+            return html;
+          }
+
+          if($scope.markers!== undefined) $scope.map.removeLayer($scope.markers);
 
           var categoria = value.categoria;
           var subCategoria = value.subCategoria;
           var municipio = value.municipio.geocodigo;
-
           if(categoria){
-            if(subCategoria !== '')
+            if(subCategoria !== '' && subCategoria.nome !== 'Todos')
               var restCategoria = subCategoria.id;
             else
               var restCategoria = categoria.id;
           }
 
-          $log.debug('atividades/' + municipio + '/' + restCategoria );
-
-          function populatePopup(object){
-            var html = '';
-            html += '<b>Número da Ordem:</b> '+object.properties.num_ordem_fiscalizacao + "<br/>";
-            html += '<b>Estado:</b> '+object.properties.nom_uf + "<br/>";
-            html += '<b>Total Autos:</b> '+object.properties.total_autos + "<br/>";
-            html += '<b>Valor Total Autos:</b> '+object.properties.valor_total_autos_formatado + "<br/>";
-            html += '<b>Total Apreensão:</b> '+object.properties.total_apreensao + "<br/>";
-            html += '<b>Tipo Infração:</b> '+object.properties.tipo_infracao + "<br/>";
-            html += '<b>Descrição do Local da Ação:</b> '+object.properties.des_local_acao + "<br/>";
-            html += '<b>Municipio Ação:</b> '+object.properties.municipios_acao + "<br/>";
-            return html;
-          }
-
-        // var markers;
-
-          RestApi.getPoints({municipio: municipio, categoria: restCategoria}, function(data){
+          RestApi.getPoints({municipio: municipio, categoria: restCategoria}, 
+            function success(data){
             // function success(data){
-              var markers = new L.MarkerClusterGroup();
-              $scope.points = L.geoJson(data, {
-                pointToLayer: function(feature, latlng) {
-                  var html = populatePopup(feature);
-                  return markers.addLayer(L.marker(latlng).bindPopup(html));
-                },
-              });
-             $scope.map.addLayer(markers);
+              if(data.features[0]){
+                $scope.markers = new L.MarkerClusterGroup();
+                $scope.points = L.geoJson(data, {
+                  pointToLayer: function(feature, latlng) {
+                    var html = populatePopup(feature);
+                    return $scope.markers.addLayer(L.marker(latlng).bindPopup(html));
+                  },
+                });
+                
+                $scope.map.addLayer($scope.markers);
+                $scope.map.fitBounds($scope.markers);
 
-              $mdSidenav('right').close();
-          });
+                $scope.filter.carregar = false;
+                $mdSidenav('right').close();
+                
+              } else {
+                $scope.filter.error = true;
+                $scope.filter.errorMessage = 'Não foram encontrados pontos para este cruzamento';
+                $scope.filter.carregar = false;
+
+
+              }
+           });
 
         };
 

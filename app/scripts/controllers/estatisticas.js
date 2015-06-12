@@ -15,7 +15,9 @@ angular.module('geoCtfApp')
       'Karma'
     ];
 
+    $cookies.SystemName = 'CTF-GEO';
     $rootScope.SystemName = $cookies.SystemName;
+    
     $rootScope.map = false;
 
     function getYears(data){

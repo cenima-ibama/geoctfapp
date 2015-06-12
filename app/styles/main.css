@@ -17,6 +17,12 @@ md-sidenav > .md-subheader {
   width: 100%;
 }
 
+/*Caso de mudanca de cor nos pontos*/
+path{
+  stroke: red !important;
+  fill: red !important;
+}
+
 
 #formSide > md-select{
   padding: 5% 0% 5% 0%;

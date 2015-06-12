@@ -63,7 +63,7 @@ angular.module('geoCtfApp')
                 $scope.points = L.geoJson(data, {
                   pointToLayer: function(feature, latlng) {
                     var html = populatePopup(feature);
-                    return $scope.markers.addLayer(L.marker(latlng).bindPopup(html));
+                    return $scope.markers.addLayer(L.circleMarker(latlng).bindPopup(html));
                   },
                 });
                 

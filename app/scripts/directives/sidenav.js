@@ -29,10 +29,15 @@ angular.module('geoCtfApp')
             // console.log(Auth.isLoggedIn());
             var html = '<b>' + object.properties.atividades[0].empresa  + '</b><br/><hr />' ;
             angular.forEach(object.properties.atividades, function(value, key){
+              
+              // console.log(value.inicio_atividade);
+              // var data = value.inicio_atividade.split('-');
+              // var data = data[2] + '-' + data[1] + '-' + data[0];
+
               html += '<b>Categoria:</b> ' + value.categoria + '<br/>';
-              html += '<b>Subcategoria:</b> ' + value.subcategoria + '<br/>',
-              html += '<b>Grau de Poluicao:</b> ' + value.grau_poluicao  + '<br/>',
-              html += '<b>Inicio da Atividade:</b> ' + value.inicio_atividade + '<br/>',
+              html += '<b>Subcategoria:</b> ' + value.subcategoria + '<br/>';
+              html += '<b>Grau de Poluicao:</b> ' + value.grau_poluicao  + '<br/>';
+              if(Auth.isLoggedIn())html += '<b>Inicio da Atividade:</b> ' + value.inicio_atividade + '<br/>';
               html += '<hr />';
             })
             return html;

@@ -8,28 +8,15 @@
  * Controller of the geoCtfApp
  */
 angular.module('geoCtfApp')
-  .controller('EstatisticasCtrl', function ($scope, $rootScope, $cookies, Auth, $location, RestApi, $log) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+  .controller('EstatisticasCtrl', function ($scope, $rootScope, $cookies, Auth, $location, RestApi, $log, formData) {
+
 
     $cookies.SystemName = 'CTF-GEO';
     $rootScope.SystemName = $cookies.SystemName;
     
     $rootScope.map = false;
 
-    function getYears(data){
-      var d = new Date();
-      var ano = d.getFullYear();
-      var anos = [];
-      while(data <= ano){
-        anos.push(data);
-        data++;
-      }
-      return anos;
-    }
+
 
     $scope.$watch(Auth.isLoggedIn, function (value, oldValue) {
       if(!value && oldValue) {
@@ -43,41 +30,9 @@ angular.module('geoCtfApp')
     }, true);
 
 
-    $scope.estados = [
-      { nome: 'Brasil', regiao: 'brasil', sigla: 'BR', value: 'Todos'},
-      { nome: 'Acre', regiao: 'norte', sigla: 'AC'},
-      { nome: 'Amapá', regiao: 'norte', sigla: 'AP'},
-      { nome: 'Amazonas', regiao: 'norte', sigla: 'AM'},
-      { nome: 'Pará', regiao: 'norte', sigla: 'PA'},
-      { nome: 'Rondônia', regiao: 'norte', sigla: 'RO'},
-      { nome: 'Roraima', regiao: 'norte', sigla: 'RR'},
-      { nome: 'Tocantins', regiao: 'norte', sigla: 'TO'},
-      { nome: 'Alagoas', regiao: 'nordeste', sigla: 'AL'},
-      { nome: 'Bahia', regiao: 'nordeste', sigla: 'BA'},
-      { nome: 'Ceará', regiao: 'nordeste', sigla: 'CE'},
-      { nome: 'Maranhão', regiao: 'nordeste', sigla: 'MA'},
-      { nome: 'Paraíba', regiao: 'nordeste', sigla: 'PB'},
-      { nome: 'Pernambuco', regiao: 'nordeste', sigla: 'PE'},
-      { nome: 'Piauí', regiao: 'nordeste', sigla: 'PI'},
-      { nome: 'Rio Grande do Norte', regiao: 'nordeste', sigla: 'RN'},
-      { nome: 'Sergipe', regiao: 'nordeste', sigla: 'SE'},
-      { nome: 'Distrito Federal', regiao: 'centro', sigla: 'DF'},
-      { nome: 'Goiás', regiao: 'centro', sigla: 'GO'},
-      { nome: 'Mato Grosso', regiao: 'centro', sigla: 'MT'},
-      { nome: 'Mato Grosso do Sul', regiao: 'centro', sigla: 'MS'},
-      { nome: 'Espírito Santo', regiao: 'sudeste', sigla: 'ES'},
-      { nome: 'Minas Gerais', regiao: 'sudeste', sigla: 'MG'},
-      { nome: 'Rio de Janeiro', regiao: 'sudeste', sigla: 'RJ'},
-      { nome: 'São Paulo', regiao: 'sudeste', sigla: 'SP'},
-      { nome: 'Paraná', regiao: 'sul', sigla: 'PR'},
-      { nome: 'Rio grande do Sul', regiao: 'sul', sigla: 'RS'},
-      { nome: 'Santa Catarina', regiao: 'sul', sigla: 'SC'},
-    ];
+    $scope.estados = formData.estados;
 
-    var years = getYears(1988);
-    years.push('Todos');
-
-    $scope.anos = years.reverse();
+    $scope.anos = formData.anos;
     $scope.chart = {};
 
     RestApi.get({ type: 'categorias'}, function(data){

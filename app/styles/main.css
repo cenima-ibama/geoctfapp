@@ -16,10 +16,10 @@ md-optgroup label {
 md-sidenav > .md-subheader {
   width: 100%;
 }
-
+/*
 md-content {
     overflow: inherit;
-}
+}*/
 
 /*Caso de mudanca de cor nos pontos*/
 
@@ -113,4 +113,8 @@ md-content {
 .button-sheet{
   height: 1%;
   margin-top: 6%;
+}
+
+.md-center-tabs{
+  margin: 0 !important;
 }

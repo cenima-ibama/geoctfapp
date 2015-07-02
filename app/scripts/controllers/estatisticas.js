@@ -112,6 +112,11 @@ angular.module('geoCtfApp')
     $scope.carregar = {};
 
     $scope.solicitar = function(estados, categorias, atividades){
+
+
+      $scope.carregar.chart1 = true;
+      $scope.carregar.chart2 = true;
+    
       var arrEstado = '';
       var arrCategoria = '';
       var arrSubcategoria = '';

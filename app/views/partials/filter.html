@@ -34,17 +34,17 @@
 			<small>adicionar</small>
 		</md-button>
 	</md-select-group>
-		<div ng-if='es.length' >
-			<label >Estados</label>
-			<md-chips ng-model="es" readonly="true" >
-		      <md-chip-template>
-		        <span>
-		          <strong>{{$chip.sigla}}</strong>
-		        </span>
-		      </md-chip-template>
-		       <md-icon md-svg-icon="md-cancel" md-chip-remove></md-icon>
-		    </md-chips>
-		</div>
+	<div ng-if='es.length' >
+		<label >Estados:</label>
+		<md-chips ng-model="es" readonly="true" >
+	      <md-chip-template>
+	        <span>
+	          <strong>{{$chip.sigla}}</strong>
+	        </span>
+	      </md-chip-template>
+	       <md-icon md-svg-icon="md-cancel" md-chip-remove></md-icon>
+	    </md-chips>
+	</div>
 
 
 	<md-select-group layout='row'>
@@ -90,7 +90,7 @@
 	</div>
 
 	<div ng-if='at.length'>
-		<label>Atividades</label>
+		<label>Atividades:</label>
 		<md-chips ng-model="at" readonly="true">
 	      <md-chip-template>
 	        <span>
@@ -103,14 +103,22 @@
 	    </md-chips>
 	</div>
 
+	<md-input-container flex offset='70'>
+        <label>Colunas</label>
+        <input required type="number" ng-model="totalColumns" min="0" max='200'>
+    </md-input-container>
+	
+<!-- 	<input type='text' ng-model='totalColumns' placeholder='30'style='color: black; width:2em; height: 1.5em'/>
+ -->
 
 </md-content>
 
 <hr>
-<br>
+
 <md-button 
 layout='row'
 class='md-raised md-warn right'
+ng-disabled='carregar.chart1 || carregar.chart2'
 ng-click='solicitar(es, ct, at)'>
 	Enviar
 </md-button>

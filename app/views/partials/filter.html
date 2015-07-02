@@ -30,7 +30,8 @@
 	<md-button 
 	layout='row'
 	class='md-raised md-primary'
-	ng-click='addValues(chart.regiao, "e", chart.estado)' flex>
+	ng-click='addValues(chart.regiao, "e", chart.estado)' 
+	ng-disabled='!chart.regiao' flex>
 		<small>adicionar</small>
 	</md-button>
 
@@ -59,55 +60,60 @@
 	<md-button 
 	layout='row'
 	class='md-raised md-primary'
-	ng-click='addValues(chart.categoria, "a", chart.atividade)' flex>
+	ng-click='addValues(chart.categoria, "a", chart.atividade)' 
+	ng-disabled='!chart.categoria' flex>
 		<small>adicionar</small>
 	</md-button>
 
 	<md-button 
 	layout='row'
 	class='md-raised md-warn'
-	ng-click='solicitar(chart)'>
+	ng-click='solicitar(es, ct, at)'>
 		Enviar
 	</md-button>
 
-	{{req}}
 </md-content>
 
 <hr>
 <br>
 <md-content>
-	<label>Estados</label>
-	<md-chips ng-model="es" readonly="true">
-      <md-chip-template>
-        <span>
-          <strong>{{$chip.sigla}}</strong>
-          <!-- <em>({{$chip.type}})</em> -->
-        </span>
-      </md-chip-template>
-       <md-icon md-svg-icon="md-cancel" md-chip-remove></md-icon>
-    </md-chips>
+	<div ng-if='es.length' >
+		<label >Estados</label>
+		<md-chips ng-model="es" readonly="true" >
+	      <md-chip-template>
+	        <span>
+	          <strong>{{$chip.sigla}}</strong>
+	        </span>
+	      </md-chip-template>
+	       <md-icon md-svg-icon="md-cancel" md-chip-remove></md-icon>
+	    </md-chips>
+	</div>
 
-	<label>Categorias:</label>
-	<md-chips ng-model="ct" readonly="true">
-      <md-chip-template>
-        <span>
-          <strong>{{$chip.id}}</strong>
-          <!-- <em>({{$chip.type}})</em> -->
-        </span>
-      </md-chip-template>
-       <md-icon md-svg-icon="md-cancel" md-chip-remove></md-icon>
-    </md-chips>
+	<div ng-if='ct.length'>
+		<label layout='row'>Categorias:</label>
+		<md-chips ng-model="ct" readonly="true">
+	      <md-chip-template>
+	        <span>
+	          <strong>{{$chip.id}}</strong>
+	        </span>
+	      </md-chip-template>
+	       <md-icon md-svg-icon="md-cancel" md-chip-remove></md-icon>
+	    </md-chips>
+	</div>
 
-	<label>Atividades</label>
-	<md-chips ng-model="at" readonly="true">
-      <md-chip-template>
-        <span>
-          <strong>{{$chip.categoria}}-</strong>
-          <strong>{{$chip.codigo}}</strong>
-          <!-- <em>({{$chip.type}})</em> -->
-        </span>
-      </md-chip-template>
-       <md-icon md-svg-icon="md-cancel" md-chip-remove></md-icon>
-    </md-chips>
+	<div ng-if='at.length'>
+		<label>Atividades</label>
+		<md-chips ng-model="at" readonly="true">
+	      <md-chip-template>
+	        <span>
+	          <strong>{{$chip.categoria}}-</strong>
+	          <strong>{{$chip.codigo}}</strong>
+	          <!-- <em>({{$chip.type}})</em> -->
+	        </span>
+	      </md-chip-template>
+	       <md-icon md-svg-icon="md-cancel" md-chip-remove></md-icon>
+	    </md-chips>
+	</div>
+
 
 </md-content>

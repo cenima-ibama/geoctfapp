@@ -33,11 +33,6 @@ angular.module('geoCtfApp')
       		$scope.filterEstados = statesFiltered;
       	}
 
-      	$scope.request = function(values){
-      		$scope.req = values;
-      	}
-
-
       	$scope.addValues = function(obj, type, param){
       		switch(type){
 	      		case 'e':
@@ -63,11 +58,13 @@ angular.module('geoCtfApp')
 	      					var categoria = {id: obj.id, nome: obj.nome};
 	      					$scope.ct.push(categoria);
 	      				}
+	      				$scope.chart.categoria = $scope.chart.atividade = null;
 	      			} else {
 	      				if(!containsObject($scope.at, obj.id, 'id')){
 	      					param.categoria = obj.id;
 	      					$scope.at.push(param);
 	      				}
+	      				$scope.chart.categoria = $scope.chart.atividade = null;
 	      			}
   			}
       	}

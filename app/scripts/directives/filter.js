@@ -12,10 +12,11 @@ angular.module('geoCtfApp')
       templateUrl: 'views/partials/filter.html',
       restrict: 'E',
       controller: function($scope, containsObject){
-      	$scope.chart = {};
-      	$scope.es = []; //Initializing objects to push on function beloew
-      	$scope.ct = []; //Initializing objects to push on function beloew
-      	$scope.at = []; //Initializing objects to push on function beloew
+      	$scope.chart = {}; //Object to 'form' on view filter.html
+      	$scope.es = []; //Initializing array to push values on function addValues below
+      	$scope.ct = []; //Initializing array to push values on function addValues below
+      	$scope.at = []; //Initializing array to push values on function addValues below
+
 
       	$scope.changeStates = function(region){
       		// if(!($scope.estados.length)){
@@ -32,6 +33,7 @@ angular.module('geoCtfApp')
 
       		$scope.filterEstados = statesFiltered;
       	}
+
 
       	$scope.addValues = function(obj, type, param){
       		switch(type){
@@ -66,12 +68,10 @@ angular.module('geoCtfApp')
 	      				}
 	      				$scope.chart.categoria = $scope.chart.atividade = null;
 	      			}
-  			}
+          }
       	}
 
+
       }
-      // link: function postLink(scope, element, attrs) {
-      //   element.text('this is the filter directive');
-      // }
     };
   });

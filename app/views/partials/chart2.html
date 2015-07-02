@@ -2,15 +2,16 @@
 <div id='chart'>
 	<div class="panel panel-danger" flex>
 	    <div class="panel-heading text-center" layout='row'>
-	    	<div class='dropdown' ng-if='chart2atividades !=  null' >
+	    	<!-- <div class='dropdown' ng-if='chart2atividades !=  null' >
 				<a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
 				  	Legenda <small><span class="glyphicon glyphicon-menu-down"></span></small>
 			  	</a>
 				<div class="legend dropdown-menu" role="menu">
 					<li ng-repeat='legenda in chart2atividades'> <b>&nbsp;{{legenda.id}}</b> - {{legenda.nome}}</li>
 				</div>
-	        </div>
+	        </div> -->
 	    	<div class='panel-title' flex>Quantidade por Atividade <span ng-if='chart2series != null' > - </span>{{chart2series[0]}}</div>
+	    	Colunas:<input type='text' ng-model='totalColumns' placeholder='30'style='color: black; width:2em; height: 1.5em'/>
 	    </div>
         <div class="panel-body">
 	        <div ng-if='carregar.chart2'>

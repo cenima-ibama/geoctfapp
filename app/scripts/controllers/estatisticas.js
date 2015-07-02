@@ -141,9 +141,9 @@ angular.module('geoCtfApp')
         $scope.$broadcast('drawchart2', data);
       });
 
-      console.log(arrEstado);
-      console.log(arrSubcategoria);
-      console.log(arrCategoria);
+      // console.log(arrEstado);
+      // console.log(arrSubcategoria);
+      // console.log(arrCategoria);
 
     }
 

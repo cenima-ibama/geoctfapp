@@ -25,15 +25,27 @@
 		flex>
 			<md-option ng-repeat='estado in filterEstados | orderBy: "nome"' ng-value='estado'>{{estado.nome}}</md-option>
 		</md-select>
-	</md-select-group>
 
-	<md-button 
-	layout='row'
-	class='md-raised md-primary'
-	ng-click='addValues(chart.regiao, "e", chart.estado)' 
-	ng-disabled='!chart.regiao' flex>
-		<small>adicionar</small>
-	</md-button>
+		<md-button
+		layout-sm='row'
+		class='md-raised md-primary button-sheet'
+		ng-click='addValues(chart.regiao, "e", chart.estado)' 
+		ng-disabled='!chart.regiao'>
+			<small>adicionar</small>
+		</md-button>
+	</md-select-group>
+		<div ng-if='es.length' >
+			<label >Estados</label>
+			<md-chips ng-model="es" readonly="true" >
+		      <md-chip-template>
+		        <span>
+		          <strong>{{$chip.sigla}}</strong>
+		        </span>
+		      </md-chip-template>
+		       <md-icon md-svg-icon="md-cancel" md-chip-remove></md-icon>
+		    </md-chips>
+		</div>
+
 
 	<md-select-group layout='row'>
 		<md-select 
@@ -55,39 +67,15 @@
 		flex>
 			<md-option ng-repeat='atividade in atividades | orderBy: "codigo"' ng-value='atividade'>{{atividade.codigo}}-{{atividade.nome}}</md-option>
 		</md-select>
+
+		<md-button 
+		layout-sm='row'
+		class='md-raised md-primary button-sheet'
+		ng-click='addValues(chart.categoria, "a", chart.atividade)' 
+		ng-disabled='!chart.categoria'>
+			<small>adicionar</small>
+		</md-button>
 	</md-select-group>
-
-	<md-button 
-	layout='row'
-	class='md-raised md-primary'
-	ng-click='addValues(chart.categoria, "a", chart.atividade)' 
-	ng-disabled='!chart.categoria' flex>
-		<small>adicionar</small>
-	</md-button>
-
-	<md-button 
-	layout='row'
-	class='md-raised md-warn'
-	ng-click='solicitar(es, ct, at)'>
-		Enviar
-	</md-button>
-
-</md-content>
-
-<hr>
-<br>
-<md-content>
-	<div ng-if='es.length' >
-		<label >Estados</label>
-		<md-chips ng-model="es" readonly="true" >
-	      <md-chip-template>
-	        <span>
-	          <strong>{{$chip.sigla}}</strong>
-	        </span>
-	      </md-chip-template>
-	       <md-icon md-svg-icon="md-cancel" md-chip-remove></md-icon>
-	    </md-chips>
-	</div>
 
 	<div ng-if='ct.length'>
 		<label layout='row'>Categorias:</label>
@@ -117,3 +105,12 @@
 
 
 </md-content>
+
+<hr>
+<br>
+<md-button 
+layout='row'
+class='md-raised md-warn right'
+ng-click='solicitar(es, ct, at)'>
+	Enviar
+</md-button>

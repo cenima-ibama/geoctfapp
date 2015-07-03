@@ -16,6 +16,8 @@ md-optgroup label {
 md-sidenav > .md-subheader {
   width: 100%;
 }
+
+md-icon.porra { color: #FB8C00; }
 /*
 md-content {
     overflow: inherit;

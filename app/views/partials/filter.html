@@ -1,11 +1,11 @@
-<md-content>
+<md-content layout-padding>
 	<md-select-group>
 		<md-select ng-model='chart.ano' aria-label='chartAno' placeholder='Ano'>
 			<md-option ng-repeat='ano in anos' ng-value='ano'>{{ano}}</md-option>
 		</md-select>
 	</md-select-group>
 
-	<md-select-group layout='row'>
+	<md-select-group layout='row' layout-sm='column'>
 		<md-select 
 		ng-model='chart.regiao' 
 		aria-label='chartRegiao' 
@@ -26,11 +26,14 @@
 			<md-option ng-repeat='estado in filterEstados | orderBy: "nome"' ng-value='estado'>{{estado.nome}}</md-option>
 		</md-select>
 
-		<md-button
-		layout-sm='row'
+		<md-button flex 
 		class='md-raised md-primary button-sheet'
+		flex offset='50'
+		layout-sm='row'
 		ng-click='addValues(chart.regiao, "e", chart.estado)' 
 		ng-disabled='!chart.regiao'>
+		
+ 			<!-- <ng-md-icon  class='md-primary' icon="add_circle_outline" style="fill: lightgreen" size="36"></ng-md-icon>  -->
 			<small>adicionar</small>
 		</md-button>
 	</md-select-group>

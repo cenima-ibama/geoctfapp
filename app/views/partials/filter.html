@@ -26,17 +26,24 @@
 			<md-option ng-repeat='estado in filterEstados | orderBy: "nome"' ng-value='estado'>{{estado.nome}}</md-option>
 		</md-select>
 
-		<md-button flex 
+<!-- 		<md-button flex 
 		class='md-raised md-primary button-sheet'
 		flex offset='50'
 		layout-sm='row'
 		ng-click='addValues(chart.regiao, "e", chart.estado)' 
 		ng-disabled='!chart.regiao'>
-		
- 			<!-- <ng-md-icon  class='md-primary' icon="add_circle_outline" style="fill: lightgreen" size="36"></ng-md-icon>  -->
 			<small>adicionar</small>
 		</md-button>
-	</md-select-group>
+ -->
+ 		<button 
+		layout-sm='row'
+		ng-click='addValues(chart.regiao, "e", chart.estado)' 
+		ng-disabled='!chart.regiao'
+ 		class='btn btn-link button-sheet'>
+ 			<span class='glyphicon glyphicon-plus-sign glyphicon-big'></span>
+ 		</button>	
+
+ 	</md-select-group>
 	<div ng-if='es.length' >
 		<label >Estados:</label>
 		<md-chips ng-model="es" readonly="true" >
@@ -71,13 +78,22 @@
 			<md-option ng-repeat='atividade in atividades | orderBy: "codigo"' ng-value='atividade'>{{atividade.codigo}}-{{atividade.nome}}</md-option>
 		</md-select>
 
-		<md-button 
+<!-- 		<md-button 
 		layout-sm='row'
 		class='md-raised md-primary button-sheet'
 		ng-click='addValues(chart.categoria, "a", chart.atividade)' 
 		ng-disabled='!chart.categoria'>
 			<small>adicionar</small>
 		</md-button>
+ -->
+		<button 
+		layout-sm='row'
+		ng-click='addValues(chart.categoria, "a", chart.atividade)' 
+		ng-disabled='!chart.categoria'
+ 		class='btn btn-link button-sheet'>
+ 			<span class='glyphicon glyphicon-plus-sign glyphicon-big'></span>
+ 		</button>	
+
 	</md-select-group>
 
 	<div ng-if='ct.length'>
@@ -117,11 +133,20 @@
 </md-content>
 
 <hr>
-
+<!-- 
 <md-button 
 layout='row'
-class='md-raised md-warn right'
+class='md-raised md-primary right'
 ng-disabled='carregar.chart1 || carregar.chart2'
 ng-click='solicitar(es, ct, at)'>
 	Enviar
 </md-button>
+
+ -->
+<button 
+layout='row'
+class='btn btn-success right'
+ng-disabled='carregar.chart1 || carregar.chart2'
+ng-click='solicitar(es, ct, at)'>
+ENVIAR
+</button>

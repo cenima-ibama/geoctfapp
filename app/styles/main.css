@@ -17,7 +17,11 @@ md-sidenav > .md-subheader {
   width: 100%;
 }
 
-md-icon.porra { color: #FB8C00; }
+
+md-tabs md-ink-bar {
+  color: green;
+  background: green;
+}
 /*
 md-content {
     overflow: inherit;
@@ -139,8 +143,21 @@ md-content {
 }
 
 .button-sheet{
-  height: 1%;
-  margin-top: 6%;
+  /*height: 1%;*/
+  margin-top: 8%;
+  height: 2.4em;
+  width: 3em;
+  color: #5cb85c;
+
+}
+
+.button-sheet:hover{
+  color: #5EA937;
+}
+
+.glyphicon-big{
+  font-size: 24px;
+  margin: -4px;
 }
 
 .md-center-tabs{

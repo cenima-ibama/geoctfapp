@@ -110,7 +110,6 @@ md-content {
   float: right !important;
 }
 
-<<<<<<< HEAD
 .md-sidenav-right {
     overflow-x: visible;
 }
@@ -136,7 +135,7 @@ md-content {
 .sidenav-alert {
     display: inline-block;
 }
-=======
+
 .button-sheet{
   height: 1%;
   margin-top: 6%;
@@ -145,4 +144,3 @@ md-content {
 .md-center-tabs{
   margin: 0 !important;
 }
->>>>>>> acd9c87b5f85e33227513a05b570ca5f8a8f6e44

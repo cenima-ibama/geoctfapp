@@ -11,7 +11,7 @@ angular.module('geoCtfApp')
     return {
       templateUrl: 'views/partials/filter.html',
       restrict: 'E',
-      controller: function($scope, containsObject){
+      controller: function($scope, containsObject, formData){
       	$scope.chart = {}; //Object to 'form' on view filter.html
       	$scope.es = []; //Initializing array to push values on function addValues below
       	$scope.ct = []; //Initializing array to push values on function addValues below
@@ -19,10 +19,10 @@ angular.module('geoCtfApp')
 
 
       	$scope.changeStates = function(region){
-      		// if(!($scope.estados.length)){
+      		// if(!(states.length)){
       		// 	var states = angular.copy(service);
       		// }
-      		var states = angular.copy($scope.estados);
+      		var states = formData.estados;
       		var statesFiltered = [];
 
       		angular.forEach(states, function(value){
@@ -36,10 +36,11 @@ angular.module('geoCtfApp')
 
 
       	$scope.addValues = function(obj, type, param){
+            var states = formData.estados;
       		switch(type){
 	      		case 'e':
 	      			if(!param || param.nome === 'Todos'){
-	      				angular.forEach($scope.estados, function(value){
+	      				angular.forEach(states, function(value){
 	      					if(value.regiao === obj.nome){
 		      					if(!containsObject($scope.es, value.sigla, 'sigla')){
 		      						$scope.es.push(value);

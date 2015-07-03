@@ -112,6 +112,32 @@ md-content {
   float: right !important;
 }
 
+.md-sidenav-right {
+    overflow-x: visible;
+}
+
+.sidenav-toggle-button {
+    width: 30px !important;
+    z-index:59;
+    position: absolute;
+    right: 2px;
+    top:2px;
+    text-transform: inherit !important;
+    border-radius: 0.3em;
+}
+
+.sidenav-alert-container {
+    padding-top: 10px;
+    z-index:70;
+    position:relative;
+    display: block;
+    text-align: center;
+}
+
+.sidenav-alert {
+    display: inline-block;
+}
+
 .button-sheet{
   height: 1%;
   margin-top: 6%;

@@ -16,13 +16,12 @@ md-optgroup label {
 md-sidenav > .md-subheader {
   width: 100%;
 }
+/*
+md-content {
+    overflow: inherit;
+}*/
 
 /*Caso de mudanca de cor nos pontos*/
-path{
-  stroke: red !important;
-  fill: red !important;
-}
-
 
 #formSide > md-select{
   padding: 5% 0% 5% 0%;
@@ -102,61 +101,16 @@ path{
     color:white;
 }
 
-.quick-btn .item {
-  background-color: #fcfcfc 0%;
-  /* Old browsers */
-  background-image: -moz-linear-gradient(top, #fcfcfc 0%, #efefef 100%);
-  /* FF3.6+ */
-  background-image: -webkit-linear-gradient(top, #fcfcfc 0%, #efefef 100%);
-  /* Chrome10+,Safari5.1+ */
-  background-image: linear-gradient(to bottom, #fcfcfc 0%, #efefef 100%);
-  /* W3C */
-  border-right: 1px solid lightgrey;
-  border-bottom: 1px solid lightgrey;
-  box-shadow: 1px 1px 0 0 #FFFFFF;
-  float: left;
-  padding: 10px;
-  text-align: center;
-  min-width: 90px;
-  max-width: 15%;
-  min-height: 102px;
+.select-form{
+    min-width: 10em;
+    max-width: 10.01em;
 }
 
-.quick-btn .item a {
-  outline: none;
-  text-decoration: none;
+.right{
+  float: right !important;
 }
 
-.quick-btn .item:hover {
-  background: #FCFCFC;
-  text-decoration: none;
-  transition: all 0.2s ease 0s;
-}
-
-.quick-btn .item i {
-  background-color: transparent;
-  background-position: center;
-  background-repeat: no-repeat;
-  margin: 5px;
-  vertical-align: middle;
-}
-.quick-btn .item span {
-  display: block;
-  font-size: 12px;
-  font-weight: bold;
-  position: relative;
-  bottom: -12px;
-  color: #333333;
-}
-.quick-btn .item.active,
-.quick-btn .item:active {
-  background: #FCFCFC;
-  /*background: white;*/
-  -moz-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15) inset, 0 1px 2px rgba(0, 0, 0, 0.05);
-  -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15) inset, 0 1px 2px rgba(0, 0, 0, 0.05);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15) inset, 0 1px 2px rgba(0, 0, 0, 0.05);
-}
-
+<<<<<<< HEAD
 .md-sidenav-right {
     overflow-x: visible;
 }
@@ -182,3 +136,13 @@ path{
 .sidenav-alert {
     display: inline-block;
 }
+=======
+.button-sheet{
+  height: 1%;
+  margin-top: 6%;
+}
+
+.md-center-tabs{
+  margin: 0 !important;
+}
+>>>>>>> acd9c87b5f85e33227513a05b570ca5f8a8f6e44

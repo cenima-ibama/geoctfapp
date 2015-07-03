@@ -1,25 +1,25 @@
 
-<div class='col-lg-6'  id='chart'>
-	<div class="panel panel-danger" flex >
-	    <div class="panel-heading">
-	    	<div class='panel-title'> Quantidade de Atividades por UF
+<md-content id='chart'>
+	<md-content class="panel panel-danger" >
+	    <div class="panel-heading text-center">
+	    	<div class='panel-title' flex> Quantidade de Atividades por UF
 	    		<span ng-if='chart2series != null' > - </span> 
 				{{chart1series[0]}}
     		</div>
 	    </div>
-        <div class="panel-body">
+        <md-content class="panel-body">
 			
 	        <div ng-if='carregar.chart1'>
-	        	<md-progress-circular md-mode="indeterminate"  class="md-hue-2" flex offset='45'></md-progress-circular>
+	        	<md-progress-circular md-mode="indeterminate"  class="md-hue-2" offset='45'></md-progress-circular>
 	        </div>
 			<canvas ng-if='!carregar.chart1'
-				class="chart-bar chart-stats" 
+				class="chart-bar" 
 				data="chart1data" 
 				labels="chart1labels" 
 				series="chart1series" 
 				legend="false" 
 				options="options">
 			</canvas>			
-		</div>
-	</div>
-</div>
+		</md-content>
+	</md-content>
+</md-content>

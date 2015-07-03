@@ -26,13 +26,6 @@ angular.module('geoCtfApp')
 			segmentStrokeWidth: 0.1,
 		};
 
-		// $scope.chart1labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
-		// $scope.chart1series = ['Series A', 'Series B'];
-		// $scope.chart1data = [
-		// 	[65, 59, 80, 81, 56, 55, 40],
-		// 	[28, 48, 40, 19, 86, 27, 90]
-		// ];
-
 		$scope.$on('drawchart1', function(event, dado){
 			var labels = [];
 			var data = [];

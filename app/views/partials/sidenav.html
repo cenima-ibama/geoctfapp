@@ -44,13 +44,13 @@
             </md-option>
         </md-select>
 
-        <md-select ng-model='filter.categoria' placeholder='Categoria' ng-change='listSubcategoria(filter.categoria)' layout='row' required>
+        <md-select ng-model='filter.categoria' placeholder='Categoria'  layout='row' required ng-change='filter.subcategoria = null'>
             <md-option ng-repeat='categoria in categorias | orderBy: "id"' ng-value='categoria'>{{categoria.id}} - {{categoria.nome}}</md-option>
         </md-select>
 
         <md-select ng-model='filter.subcategoria' placeholder='Detalhe' layout='row' ng-disabled='!filter.categoria.subcategorias'>
             <md-option value=''>Todos</md-option>
-            <md-option ng-repeat='subcategoria in filter.categoria.subcategorias | orderBy: "id"' ng-value='subcategoria'>{{subcategoria.id}} - {{subcategoria.nome}}</md-option>
+            <md-option ng-repeat='subcategoria in filter.categoria.subcategorias | orderBy: "codigo"' ng-value='subcategoria'>{{subcategoria.codigo}} - {{subcategoria.nome}}</md-option>
         </md-select>
 
         <md-select ng-model='filter.ano' placeholder='Ano'  layout='row'>

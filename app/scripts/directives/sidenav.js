@@ -47,7 +47,7 @@ function sidenavDir (RestApi) {
     $scope.close = closeSidenav;
     $scope.requestPoints = requestPoints;
     $scope.getMunicipios = getMunicipios;
-    $scope.listSubcategoria = listSubcategoria;
+    //$scope.listSubcategoria = listSubcategoria;
 
     $scope.toggleRight();
 
@@ -68,6 +68,8 @@ function sidenavDir (RestApi) {
       if (categoria.id !== 'Todos') {
         $scope.subCategorias = categoria.subcategorias;
       }
+
+      $scope.filter.subcategoria = null
     }
 
     /**

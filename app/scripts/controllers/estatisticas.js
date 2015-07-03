@@ -42,10 +42,6 @@ angular.module('geoCtfApp')
     $scope.estados = formData.estados;
     $scope.anos = formData.anos;
 
-    var years = getYears(1988);
-    years.push('Todos');
-
-    $scope.anos = years.reverse();
     $scope.chart = {};
 
     RestApi.get({ type: 'categorias'}, function(data){
@@ -74,7 +70,6 @@ angular.module('geoCtfApp')
     $scope.carregar = {};
 
     $scope.solicitar = function(estados, categorias, atividades){
-
 
       $scope.carregar.chart1 = true;
       $scope.carregar.chart2 = true;

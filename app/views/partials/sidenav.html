@@ -1,51 +1,66 @@
-	
-	<md-sidenav class="md-sidenav-right md-whiteframe-z2 md-padding" md-component-id="right" layout='column'>
-		<md-subheader class="md-primary">Selecione os dados a serem filtrados...</md-subheader>
-		<div ng-if='filter.error' class="alert alert-danger alert-dismissible" role="alert">
-			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-			<strong>{{filter.errorMessage}}</strong> 
-		</div>
 
-		<form ng-submit='requestPoints(filter)' id='formSide' novalidate name='points'>
 
-			<md-select ng-model="filter.estado" placeholder="Estado" ng-change='getMunicipios(filter.estado)' layout='row' required> 
-			    <md-optgroup label="Norte">
-					<md-option ng-value="estado" ng-repeat="estado in estados | filter: {regiao: 'norte' }" >{{estado.nome}}</md-option>
-			    </md-optgroup>
-			    <md-optgroup label="Nordeste">
-					<md-option ng-value="estado" ng-repeat="estado in estados | filter: {regiao: 'nordeste' }">{{estado.nome}}</md-option>
-			    </md-optgroup>    
-			    <md-optgroup label="Centro-Oeste">
-					<md-option ng-value="estado" ng-repeat="estado in estados | filter: {regiao: 'centro' }">{{estado.nome}}</md-option>
-			    </md-optgroup>    
-			    <md-optgroup label="Sudeste">
-					<md-option ng-value="estado" ng-repeat="estado in estados | filter: {regiao: 'sudeste' }">{{estado.nome}}</md-option>
-			    </md-optgroup>
-			    <md-optgroup label="Sul">
-					<md-option ng-value="estado" ng-repeat="estado in estados | filter: {regiao: 'sul' }">{{estado.nome}}</md-option>
-			    </md-optgroup>
-			</md-select>
-			
-			<!-- <div ng-if='filter.listMunicipios'> -->
-				<md-select  placeholder="Municipios" ng-model="filter.municipio"  layout='row' required>
-					<md-option ng-repeat="municipio in municipios | orderBy: 'nome'" ng-value='municipio'>
-						{{municipio.nome}}
-					</md-option>
-				</md-select>
+<div class="sidenav-alert-container">
+    <div ng-if='filter.error' class="sidenav-alert alert alert-danger alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <strong>{{filter.errorMessage}}</strong>
+    </div>
+</div>
 
-				<md-select ng-model='filter.categoria' placeholder='Atividade' ng-change='listSubcategoria(filter.categoria)' layout='row' required>
-					<md-option ng-repeat='categoria in categorias | orderBy: "id"' ng-value='categoria'>{{categoria.id}} - {{categoria.nome}}</md-option>
-				</md-select>
-				<!--
-				<md-select ng-model='filter.subCategoria' placeholder='Detalhe' layout='row'>
-					<md-option ng-repeat='subcategoria in subCategorias | orderBy: "id"' ng-value='subcategoria'>{{subcategoria.nome}}</md-option>
-				</md-select> 
-				-->
-			<!-- <div> -->
 
-			<br/>
-			<md-content layout-padding layout-align='center' layout='row'>
-				<md-button type='submit' class="md-raised md-primary" layout-align='center' ng-disabled='points.$invalid || filter.carregar || !filter.municipio'>Enviar</md-button>
-			</md-content>
-		</form>
-	</md-sidenav>
+
+<md-button class="sidenav-toggle-button md-raised" ng-click="toggleRight()">
+    <i class='glyphicon glyphicon-filter'></i> Filtro
+</md-button>
+
+<md-sidenav class="md-sidenav-right md-whiteframe-z2 md-padding" md-component-id="right" layout='column'>
+
+
+    <md-subheader class="md-primary">Selecione os dados a serem filtrados...</md-subheader>
+
+    <form ng-submit='requestPoints(filter)' id='formSide' novalidate name='points'>
+
+        <md-select ng-model="filter.estado" placeholder="Estado" ng-change='getMunicipios(filter.estado)' layout='row' required>
+            <md-optgroup label="Norte">
+                <md-option ng-value="estado" ng-repeat="estado in estados | filter: {regiao: 'norte' }" >{{estado.nome}}</md-option>
+            </md-optgroup>
+            <md-optgroup label="Nordeste">
+                <md-option ng-value="estado" ng-repeat="estado in estados | filter: {regiao: 'nordeste' }">{{estado.nome}}</md-option>
+            </md-optgroup>
+            <md-optgroup label="Centro-Oeste">
+                <md-option ng-value="estado" ng-repeat="estado in estados | filter: {regiao: 'centro' }">{{estado.nome}}</md-option>
+            </md-optgroup>
+            <md-optgroup label="Sudeste">
+                <md-option ng-value="estado" ng-repeat="estado in estados | filter: {regiao: 'sudeste' }">{{estado.nome}}</md-option>
+            </md-optgroup>
+            <md-optgroup label="Sul">
+                <md-option ng-value="estado" ng-repeat="estado in estados | filter: {regiao: 'sul' }">{{estado.nome}}</md-option>
+            </md-optgroup>
+        </md-select>
+
+        <md-select  placeholder="Municipios" ng-disabled="!filter.estado" ng-model="filter.municipio"  layout='row' required>
+            <md-option ng-repeat="municipio in municipios | orderBy: 'nome'" ng-value='municipio'>
+                {{municipio.nome}}
+            </md-option>
+        </md-select>
+
+        <md-select ng-model='filter.categoria' placeholder='Categoria' ng-change='listSubcategoria(filter.categoria)' layout='row' required>
+            <md-option ng-repeat='categoria in categorias | orderBy: "id"' ng-value='categoria'>{{categoria.id}} - {{categoria.nome}}</md-option>
+        </md-select>
+
+        <md-select ng-model='filter.subcategoria' placeholder='Detalhe' layout='row' ng-disabled='!filter.categoria.subcategorias'>
+            <md-option value=''>Todos</md-option>
+            <md-option ng-repeat='subcategoria in filter.categoria.subcategorias | orderBy: "id"' ng-value='subcategoria'>{{subcategoria.id}} - {{subcategoria.nome}}</md-option>
+        </md-select>
+
+        <md-select ng-model='filter.ano' placeholder='Ano'  layout='row'>
+            <md-option ng-repeat='ano in anos' ng-value='ano'>{{ano}}</md-option>
+        </md-select>
+
+        <br/>
+        <md-content layout-padding layout-align='center' layout='row'>
+            <a class="md-button md-link md-primary" click="" ng-click="toggleRight()">Cancelar</a>
+            <md-button type='submit' class="md-raised md-primary" layout-align='center' ng-disabled='points.$invalid || filter.carregar || !filter.municipio'>Enviar</md-button>
+        </md-content>
+    </form>
+</md-sidenav>

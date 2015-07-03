@@ -31,4 +31,5 @@ angular.module('geoCtfApp')
     }, true);
 
       $scope.estados = formData.estados;
+      $scope.anos = formData.anos;
   });

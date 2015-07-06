@@ -71,6 +71,7 @@ angular.module('geoCtfApp')
       var arrEstado = '';
       var arrCategoria = '';
       var arrSubcategoria = '';
+      var arrAno;
 
       if(!ano || ano == 'Todos')
         arrAno = '';

@@ -46,7 +46,7 @@ angular.module('geoCtfApp')
         { nome: 'Piauí', regiao: 'Nordeste', sigla: 'PI'},
         { nome: 'Rio Grande do Norte', regiao: 'Nordeste', sigla: 'RN'},
         { nome: 'Sergipe', regiao: 'Nordeste', sigla: 'SE'},
-        { nome: 'Distrito Federal', regiao: 'Centro-Oeste-Oeste', sigla: 'DF'},
+        { nome: 'Distrito Federal', regiao: 'Centro-Oeste', sigla: 'DF'},
         { nome: 'Goiás', regiao: 'Centro-Oeste', sigla: 'GO'},
         { nome: 'Mato Grosso', regiao: 'Centro-Oeste', sigla: 'MT'},
         { nome: 'Mato Grosso do Sul', regiao: 'Centro-Oeste', sigla: 'MS'},

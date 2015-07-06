@@ -57,6 +57,14 @@ angular.module('geoCtfApp')
         { nome: 'Paraná', regiao: 'Sul', sigla: 'PR'},
         { nome: 'Rio grande do Sul', regiao: 'Sul', sigla: 'RS'},
         { nome: 'Santa Catarina', regiao: 'Sul', sigla: 'SC'},
+      ],
+
+      regioes: [ 
+        { nome: 'Centro-Oeste'}, 
+        { nome: 'Norte'},
+        { nome: 'Nordeste'}, 
+        { nome: 'Sul'},
+        { nome: 'Sudeste'} 
       ]
 
     };

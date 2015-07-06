@@ -11,12 +11,16 @@ var app;
 app = angular.module('geoCtfApp');
 app.directive('sidenav', sidenavDir);
 
+sidenavDir.$inject = ['RestApi'];
+
 /**
  * Cria e retorna a diretiva <code>sidenave</code>
  * @param RestApi
  * @returns Object
  */
 function sidenavDir (RestApi) {
+
+  SideNavController.$inject = ['$scope', '$mdSidenav', '$mdUtil', 'Auth'];
 
   /**
    * Exporta a configuração da diretiva
@@ -82,6 +86,7 @@ function sidenavDir (RestApi) {
       var categoria = filter.categoria;
       var subCategoria = filter.subcategoria;
       var municipio = filter.municipio.geocodigo;
+      var ano = filter.ano;
       var getPointsParams = {};
 
       $scope.filter.error = false;
@@ -95,6 +100,10 @@ function sidenavDir (RestApi) {
       if(subCategoria)
 
         getPointsParams.subcategoria = subCategoria.id;
+
+      if(ano)
+
+        getPointsParams.ano = ano;
 
       RestApi.getPoints(getPointsParams, getPointsSuccess);
 

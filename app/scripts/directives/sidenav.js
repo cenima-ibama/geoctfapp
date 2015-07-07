@@ -164,7 +164,8 @@ function sidenavDir (RestApi) {
         html += '<b>Razão social:</b> ' + properties.nome + '<br/>';
         html += '<b>CNPJ:</b> ' + properties.cnpj + '<br/>';
         html += '<b>Fantasia:</b> ' + properties.nome_fantasia + '<br/>';
-        html += '<b>Porte:</b> ' + properties.porte + '<br/><br/>';
+        html += '<b>Porte:</b> ' + properties.porte + '<br/>';
+        html += '<b>Certificado regularidade da pessoa jurídica:</b> ' + (properties.regularidade ? 'Sim' : 'Não')+ '<br/><br/>';
       }
 
       angular.forEach(properties.atividades, function(atividade, key) {
@@ -175,14 +176,12 @@ function sidenavDir (RestApi) {
 
             html += '<hr />';
 
-          if(Auth.isLoggedIn())
-          {
-            html += '<b>Certificado regularidade da pessoa jurídica:</b> ' + atividade.regularidade + '<br/>';
-            html += '<b>Grau de Poluicao:</b> ' + atividade.grau_poluicao  + '<br/>';
-          }
-
           html += '<b>Categoria:</b> ' + atividade.categoria + '<br/>';
           html += '<b>Detalhe:</b> ' + atividade.subcategoria + '<br/>';
+
+          if(Auth.isLoggedIn())
+
+            html += '<b>Grau de Poluicao:</b> ' + atividade.grau_poluicao  + '<br/>';
 
           count++;
         }

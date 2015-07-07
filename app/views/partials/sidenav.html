@@ -16,7 +16,7 @@
 <md-sidenav class="md-sidenav-right md-whiteframe-z2 md-padding" md-component-id="right" layout='column'>
 
 
-    <md-subheader class="md-primary">Selecione os dados a serem filtrados...</md-subheader>
+    <md-subheader class="md-primary">Selecione os dados de interesse:</md-subheader>
 
     <form ng-submit='requestPoints(filter)' id='formSide' novalidate name='points'>
 
@@ -38,7 +38,7 @@
             </md-optgroup>
         </md-select>
 
-        <md-select  placeholder="Municipios" ng-disabled="!filter.estado" ng-model="filter.municipio"  layout='row' required>
+        <md-select  placeholder="Municípios" ng-disabled="!filter.estado" ng-model="filter.municipio"  layout='row' required>
             <md-option ng-repeat="municipio in municipios | orderBy: 'nome'" ng-value='municipio'>
                 {{municipio.nome}}
             </md-option>

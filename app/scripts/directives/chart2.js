@@ -37,7 +37,8 @@ angular.module('geoCtfApp')
             return item.num_atividades !== 0;
           };
 
-          if(!$scope.totalColumns || isNaN($scope.totalColumns)) $scope.totalColumns = 30;
+          if(!$scope.totalColumns || isNaN($scope.totalColumns)) 
+            $scope.totalColumns = 30;
 
           var columns = $scope.totalColumns;
 

@@ -163,3 +163,7 @@ md-content {
 .md-center-tabs{
   margin: 0 !important;
 }
+
+#barra-brasil .brasil-flag {
+    height: 29px !important;
+}

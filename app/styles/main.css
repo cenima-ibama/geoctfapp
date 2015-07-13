@@ -186,3 +186,7 @@ md-content {
 .info.info-show {
   display:inherit;
 }
+
+canvas.max-chart {
+  max-width: 99%;
+}

@@ -13,12 +13,12 @@
 	    	<div class='panel-title' flex>Quantidade por Atividade <span ng-if='chart2series != null' > - </span>{{chart2series[0]}}</div>
 
 	    </div>
-        <div class="panel-body">
+        <div class="panel-body" >
 	        <div ng-if='carregar.chart2'>
 	        	<md-progress-circular md-mode="indeterminate"  class="md-hue-2" flex offset='45'></md-progress-circular>
 	        </div>
 			<canvas ng-if='!carregar.chart2'
-				class="chart-bar" 
+				class="chart-bar max-chart" 
 				data='chart2data' 
 				labels="chart2labels" 
 				series="chart2series" 

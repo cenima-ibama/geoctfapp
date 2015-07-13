@@ -1,6 +1,6 @@
 
 <md-content id='chart'>
-	<md-content class="panel panel-danger" >
+	<md-content class="panel panel-danger">
 	    <div class="panel-heading text-center">
 	    	<div class='panel-title' flex> Quantidade de Atividades por UF
 	    		<span ng-if='chart2series != null' > - </span> 
@@ -13,7 +13,7 @@
 	        	<md-progress-circular md-mode="indeterminate"  class="md-hue-2" offset='45'></md-progress-circular>
 	        </div>
 			<canvas ng-if='!carregar.chart1'
-				class="chart-bar" 
+				class="chart-bar max-chart" 
 				data="chart1data" 
 				labels="chart1labels" 
 				series="chart1series" 

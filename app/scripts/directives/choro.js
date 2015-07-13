@@ -122,7 +122,7 @@ angular.module('geoCtfApp')
 
 
           this._div.innerHTML = '<h4> N° de Atividades </h4> ' + (props ?
-              '<b> ' + props.nome + ':</b> ' + ' <br />' + atv + ' atividades '
+              '<b> ' + props.nome + '</b> ' + ' <br />' + atv + ' atividades '
               : '');
         };
 

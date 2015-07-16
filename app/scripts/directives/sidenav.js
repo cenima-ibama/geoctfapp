@@ -177,7 +177,7 @@ function sidenavDir (RestApi) {
             html += '<hr />';
 
           html += '<b>Categoria:</b> ' + atividade.categoria + '<br/>';
-          html += '<b>Detalhe:</b> ' + atividade.subcategoria + '<br/>';
+          html += '<b>Atividade:</b> ' + atividade.subcategoria + '<br/>';
 
           if(Auth.isLoggedIn())
 

@@ -190,3 +190,7 @@ md-content {
 canvas.max-chart {
   max-width: 99%;
 }
+
+#barra-brasil .brasil-flag {
+    height: 29px !important;
+}

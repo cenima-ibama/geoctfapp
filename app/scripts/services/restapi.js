@@ -14,7 +14,6 @@ angular.module('geoCtfApp')
       {
         get: {
           method:'GET',
-          // params:{ format:'json' },
           isArray: true,
           headers: {
             'Content-Type': 'application/json'
@@ -23,25 +22,20 @@ angular.module('geoCtfApp')
         getObject: {
           method:'GET',
           params:{ format:'json' },
-          // isArray: false,
           headers: {
             'Content-Type': 'application/json'
           },
         },
         getMunicipios: {
-          url: 'http://10.1.8.138:8000/api/:type/:estado',
+          url: 'http://10.1.8.178:8000/api/:type/:estado',
           method:'GET',
-          // params:{ format:'json' },
-          // isArray: true,
           headers: {
             'Content-Type': 'application/json'
           },
         },
         getPoints: {
-          url: 'http://10.1.8.138:8000/api/atividades/:municipio/:categoria',
+          url: 'http://10.1.8.178:8000/api/atividades/:municipio/:categoria',
           method:'GET',
-          // params:{ format:'json' },
-          // isArray: true,
           headers: {
             'Content-Type': 'application/json'
           },
@@ -51,7 +45,7 @@ angular.module('geoCtfApp')
           headers: {
             'Content-Type': 'application/json'
           },
-          // data: type,
+
           isArray: true,
         },
       },

@@ -12,11 +12,17 @@ angular.module('geoCtfApp')
       templateUrl: 'views/partials/chart1.html',
       // template: '<canvas  class='chart-bar chart-stats' data='chart1data' labels='chart1labels' legend='true' series='chart1series' options='options' flex></canvas>',
       restrict: 'E',
-      // link: function postLink(scope, element, attrs) {
-      //   element.text('this is the chart1 directive');
-      // }
       controller: function($scope){
-		
+      	
+      	/** 
+      	* Function to get a geoJson object and return the properties of feature on param
+      	* @param geoJsonObject.features
+		* @return features.properties
+		*/
+		function returnFeatures(item){
+			return item.properties;
+		}
+
 		Chart.defaults.global.colours = ['#337ab7', '#a94442', '#46BFBD', '#7B68EE', '#FDB45C', '#949FB1', '#4D5360'];
 
 		$scope.options = {
@@ -26,7 +32,11 @@ angular.module('geoCtfApp')
 			segmentStrokeWidth: 0.1,
 		};
 
+		// $on coming from estatisticas controller
 		$scope.$on('drawchart1', function(event, dado){
+			//Mapping data features to call returnFeatures and getting only properties
+			var dado = dado.features.map(returnFeatures); 
+
 			var labels = [];
 			var data = [];
 			angular.forEach(dado, function(value, key){
@@ -36,8 +46,9 @@ angular.module('geoCtfApp')
 				}
 			});
 
-			$scope.chart1labels = labels;
-			$scope.chart1data = [data];
+
+			$scope.chart1labels = labels; // Labels refer to X on charts
+			$scope.chart1data = [data]; // Return data on array cos chartsjs lib needs
       		$scope.carregar.chart1 = false;
 		});
       },

@@ -11,46 +11,75 @@ angular.module('geoCtfApp')
     return {
       templateUrl: 'views/partials/chart2.html',
       restrict: 'E',
-      // link: function postLink(scope, element, attrs) {
-      //   element.text('this is the chart2 directive');
-      // }
       controller: function($scope){
-
-        function getNameByParam (param, object){
+        
+        /** 
+        * Function to get name of atividade considering categoria and atividade received as param
+        * That function will search name on each categoria then each atividade on object receveid
+        * @param categoria
+        * @param atividade
+        * @param object
+        * @return atividade name of categoria and atividade receveid 
+        */
+        function getNameByParam (categoria, atividade, object){
           var retorno;
           angular.forEach(object, function(value, key){
-            if(value.id == param){
-              retorno = value;
+            if(value.id == categoria){
+              angular.forEach(value.subcategorias, function(val, k){
+                if(val.codigo == atividade)
+                  retorno = categoria + '-' + atividade + ': ' + val.nome;
+              })
             }
           });
           return retorno;
         }
 
-        $scope.atividadeName = function(points, evt){
-          $scope.legenda = getNameByParam(points[0].label, $scope.chart2atividades);
+        /** 
+        * Function to get name of selected point on chart and return name on scope var
+        * @param points
+        * @return {*} 
+        */
+        $scope.atividadeName = function(points){
+          if(points.length){
+            var param = points[0].label.split('-');
+            var categoria = param[0];
+            var atividade = param[1];
+
+            if(categoria !== 'Outros')
+              $scope.chart2Legenda = getNameByParam(categoria, atividade, $scope.categorias);
+            else
+              $scope.chart2Legenda = "Outros Valores";
+          }
+          else
+            $scope.chart2Legenda = null;
         };
 
+        /** 
+        * Function used on array,filter to return item when value isnt 0
+        * @param points
+        * @return {*} 
+        */
+        function numAtividades(item){
+          return item.num_atividades !== 0;
+        };
 
-      	$scope.$on('drawchart2', function(event, dado){
-
-          function numAtividades(item){
-            return item.num_atividades !== 0;
-          };
+        $scope.$on('drawchart2', function(event, dado){
 
           if(!$scope.totalColumns || isNaN($scope.totalColumns)) 
-            $scope.totalColumns = 30;
+            $scope.totalColumns = 30; 
 
           var columns = $scope.totalColumns;
-
     			var labels = [];
           var data = [];
     			var legend = [];
-          var filtered = dado.filter(numAtividades);
+          var filtered = dado.filter(numAtividades); //Getting filtered value that isnt 0
 
+          /*Sorting value to present asc*/
           filtered.sort(function(a,b) {
             return b.num_atividades - a.num_atividades;
           });
 
+          /*Verifying if number of columns of data is more than selected on form*/
           if(filtered.length > columns){
             var outrasTotal = 0;
 

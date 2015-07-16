@@ -8,9 +8,9 @@
  * Service in the geoCtfApp.
  */
 angular.module('geoCtfApp')
-  .factory('RestApi', function ($resource) {
+  .factory('RestApi', function ($resource, appConfig) {
     // return $resource('//' + window.location.hostname + window.location.pathname + '/moduleGeoCTF.php?:type', {},
-    return $resource('http://10.1.8.138:8000/api/:type/?:subtype', {type: '@type', subtype: '@subtype'},
+    return $resource( appConfig.api_url + '/:type/?:subtype', {type: '@type', subtype: '@subtype'},
       {
         get: {
           method:'GET',
@@ -20,8 +20,16 @@ angular.module('geoCtfApp')
             'Content-Type': 'application/json'
           },
         },
+        getObject: {
+          method:'GET',
+          params:{ format:'json' },
+          // isArray: false,
+          headers: {
+            'Content-Type': 'application/json'
+          },
+        },
         getMunicipios: {
-          url: 'http://10.1.8.138:8000/api/:type/:estado',
+          url: appConfig.api_url + '/:type/:estado',
           method:'GET',
           // params:{ format:'json' },
           // isArray: true,
@@ -30,7 +38,7 @@ angular.module('geoCtfApp')
           },
         },
         getPoints: {
-          url: 'http://10.1.8.138:8000/api/atividades/:municipio/:categoria',
+          url: appConfig.api_url + '/atividades/:municipio/:categoria',
           method:'GET',
           // params:{ format:'json' },
           // isArray: true,

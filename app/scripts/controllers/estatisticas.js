@@ -67,6 +67,7 @@ angular.module('geoCtfApp')
 
       $scope.carregar.chart1 = true;
       $scope.carregar.chart2 = true;
+      $scope.carregar.choro = true;
     
       var arrEstado = '';
       var arrCategoria = '';
@@ -102,6 +103,10 @@ angular.module('geoCtfApp')
 
       RestApi.get({type: 'estatistica-subcategoria', uf: arrEstado, categoria: arrCategoria, subcategoria: arrSubcategoria, ano: arrAno}, function(data){
         $scope.$broadcast('drawchart2', data);
+      });
+
+      RestApi.getObject({type: 'geoestatistica-uf', uf: arrEstado, categoria: arrCategoria, subcategoria: arrSubcategoria, ano: arrAno}, function(data){
+        $scope.$broadcast('drawchoro', data);
       });
     }
 

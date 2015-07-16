@@ -1,0 +1,17 @@
+
+<md-content id='chart'>
+	<md-content class="panel panel-danger" >
+	    <div class="panel-heading text-center">
+	    	<div class='panel-title' flex>  Mapa Temático </div>
+	    </div>
+        <md-content class="panel-body">
+
+        <div ng-if='carregar.choro'>
+        	<md-progress-circular md-mode="indeterminate"  class="md-hue-2" offset='45'></md-progress-circular>
+        </div>
+
+        <div id="choroMap" ng-show="!carregar.choro && geojson "></div>			
+
+		</md-content>
+	</md-content>
+</md-content>

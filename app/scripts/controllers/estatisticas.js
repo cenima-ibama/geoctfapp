@@ -9,11 +9,8 @@
  */
 angular.module('geoCtfApp')
   .controller('EstatisticasCtrl', function ($scope, $rootScope, $cookies, Auth, $location, RestApi, $log, containsObject, formData) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+
+    $scope.tabStats = true;
 
     $scope.$watch(Auth.isLoggedIn, function (value, oldValue) {
       if(!value && oldValue) {
@@ -26,7 +23,7 @@ angular.module('geoCtfApp')
       }
     }, true);
 
-    $cookies.SystemName = 'CTF-APP-GEO';
+    $cookies.SystemName = 'CTF-GEO';
     $rootScope.SystemName = $cookies.SystemName;
     
     $rootScope.map = false;
@@ -117,5 +114,4 @@ angular.module('geoCtfApp')
       });
     }
 
-  
   });

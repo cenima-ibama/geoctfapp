@@ -15,8 +15,8 @@
     </div>
     <div class="collapse navbar-collapse" id="navbar-collapse">
         <div class="nav navbar-nav">
-            <li class=''><a href='#/'><i class='glyphicon glyphicon-globe'></i> Mapa</a></li>
-            <li class=''><a href='#/consultar'><i class='glyphicon glyphicon-signal'></i> Estatística</a></li>
+            <li ng-class='{active: tabMap}'><a href='#/'><i class='glyphicon glyphicon-globe'></i> Mapa</a></li>
+            <li ng-class='{active: tabStats}'><a href='#/consultar'><i class='glyphicon glyphicon-signal'></i> Estatística</a></li>
             <!--<li ng-if='map' class=''><a href='' ng-click='toggleRight()'><i class='glyphicon glyphicon-filter'></i> Filtrar</a></li>-->
         </div>        
         <div class="nav navbar-nav navbar-right" ng-if='!logged'>

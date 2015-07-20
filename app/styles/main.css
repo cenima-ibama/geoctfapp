@@ -194,3 +194,13 @@ canvas.max-chart {
 #barra-brasil .brasil-flag {
     height: 29px !important;
 }
+
+.export-button {
+    color:#FFFFFF;
+}
+
+.export-button:hover,
+.export-button:active,
+.export-button:focus {
+    color: #ececec;
+}

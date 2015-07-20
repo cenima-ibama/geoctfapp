@@ -8,7 +8,7 @@
  * Controller of the geoCtfApp
  */
 angular.module('geoCtfApp')
-  .controller('EstatisticasCtrl', function ($scope, $rootScope, $cookies, Auth, $location, RestApi, $log, containsObject, formData) {
+  .controller('EstatisticasCtrl', function ($scope, $rootScope, $cookies, Auth, $location, RestApi, $log, containsObject, formData, appConfig) {
     $scope.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
@@ -34,6 +34,8 @@ angular.module('geoCtfApp')
     $scope.regioes = formData.regioes;
     $scope.estados = formData.estados;
     $scope.anos = formData.anos;
+
+    $scope.export = new Object;
 
     $scope.chart = new Object;
 
@@ -74,7 +76,7 @@ angular.module('geoCtfApp')
       $scope.carregar.chart1 = true;
       $scope.carregar.chart2 = true;
       $scope.carregar.choro = true;
-    
+
       var arrEstado = '';
       var arrCategoria = '';
       var arrSubcategoria = '';
@@ -99,9 +101,12 @@ angular.module('geoCtfApp')
       arrCategoria = arrCategoria.substring(0,(arrCategoria.length - 1));
       arrSubcategoria = arrSubcategoria.substring(0,(arrSubcategoria.length - 1));
 
+      $scope.export.chart1 = appConfig.apiUrl + '/estatistica-uf/?format=csv&uf=' + arrEstado + '&categoria' + arrCategoria + '&subcategoria=' +arrSubcategoria;
 
-      $log.debug('chart1 = estatistica-uf/?uf=' + arrEstado + '&categoria' + arrCategoria + '&subcategoria=' +arrSubcategoria );
-      $log.debug('chart2 = estatistica-subcategoria/?uf=' + arrEstado + '&categoria=' + arrCategoria + '&subcategoria=' + arrSubcategoria);
+      $scope.export.chart2 = appConfig.apiUrl + '/estatistica-subcategoria/?format=csv&uf=' + arrEstado + '&categoria=' + arrCategoria + '&subcategoria=' + arrSubcategoria;
+
+      $log.debug('chart1 = ' + $scope.export.chart1 );
+      $log.debug('chart2 = ' + $scope.export.chart2 );
 
       // RestApi.get({type: 'estatistica-uf', uf: arrEstado, categoria: arrCategoria, subcategoria: arrSubcategoria, ano: arrAno}, function(data){
       //   $scope.$broadcast('drawchart1', data);

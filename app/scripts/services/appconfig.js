@@ -8,11 +8,11 @@
  * Service in the geoCtfApp.
  */
 angular.module('geoCtfApp')
-  .service('appConfig', function () {
+  .factory('appConfig', function () {
 
     return {
 
-      api_url : 'http://10.1.8.178:8000/api'
+      apiUrl : 'http://10.1.8.178:8000/api'
 
     }
 

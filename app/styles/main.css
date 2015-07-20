@@ -196,10 +196,12 @@ canvas.max-chart {
 }
 
 
-.nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
-  background-color: rgb(63,81,181);
-  /*background-color: #5cb85c;*/
-  /*background-color: #222;*/
-  border-radius: 0;
+.export-button {
+    color:#FFFFFF;
+}
 
+.export-button:hover,
+.export-button:active,
+.export-button:focus {
+    color: #ececec;
 }

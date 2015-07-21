@@ -35,11 +35,11 @@ angular.module('geoCtfApp')
 		// $on coming from estatisticas controller
 		$scope.$on('drawchart1', function(event, dado){
 			//Mapping data features to call returnFeatures and getting only properties
-			var dado = dado.features.map(returnFeatures); 
+			dado = dado.features.map(returnFeatures); 
 
 			var labels = [];
 			var data = [];
-			angular.forEach(dado, function(value, key){
+			angular.forEach(dado, function(value){
 				if(value.num_atividades !== 0){
 					labels.push(value.sigla);
 					data.push(value.num_atividades);

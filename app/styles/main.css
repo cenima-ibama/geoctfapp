@@ -205,3 +205,7 @@ canvas.max-chart {
 .export-button:focus {
     color: #ececec;
 }
+
+.nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
+  background-color: rgba(63,81,181, 0.95);
+  }

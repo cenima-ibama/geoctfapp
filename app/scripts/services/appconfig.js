@@ -14,6 +14,6 @@ angular.module('geoCtfApp')
 
       apiUrl : 'http://10.1.8.178:8000/api'
 
-    }
+    };
 
   });

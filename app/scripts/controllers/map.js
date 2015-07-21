@@ -12,7 +12,7 @@ angular.module('geoCtfApp')
 
     $scope.tabMap = true;
 
-    $cookies.SystemName = 'CTF-GEO';
+    $cookies.SystemName = 'CTF-APP-GEO';
     $rootScope.SystemName = $cookies.SystemName;
 
 

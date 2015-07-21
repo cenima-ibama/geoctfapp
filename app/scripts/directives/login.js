@@ -75,7 +75,7 @@ angular.module('geoCtfApp')
 
           var request = $http({
             method: 'post',
-            url:'//10.1.8.139/server/access.php',
+            url:'//10.1.8.175/server/access.php',
             data:{
               cca : base64_encode(obj.login),
               ssa : base64_encode(obj.password),

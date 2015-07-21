@@ -23,12 +23,13 @@ angular.module('geoCtfApp')
         */
         function getNameByParam (categoria, atividade, object){
           var retorno;
-          angular.forEach(object, function(value, key){
+          angular.forEach(object, function(value){
             if(value.id == categoria){
-              angular.forEach(value.subcategorias, function(val, k){
-                if(val.codigo == atividade)
+              angular.forEach(value.subcategorias, function(val){
+                if(val.codigo == atividade){
                   retorno = categoria + '-' + atividade + ': ' + val.nome;
-              })
+                }
+              });
             }
           });
           return retorno;
@@ -45,13 +46,14 @@ angular.module('geoCtfApp')
             var categoria = param[0];
             var atividade = param[1];
 
-            if(categoria !== 'Outros')
+            if(categoria !== 'Outros'){
               $scope.chart2Legenda = getNameByParam(categoria, atividade, $scope.categorias);
-            else
-              $scope.chart2Legenda = "Outros Valores";
-          }
-          else
+            } else{
+              $scope.chart2Legenda = 'Outros Valores';
+            }
+          } else{
             $scope.chart2Legenda = null;
+          }
         };
 
         /** 
@@ -61,12 +63,13 @@ angular.module('geoCtfApp')
         */
         function numAtividades(item){
           return item.num_atividades !== 0;
-        };
+        }
 
         $scope.$on('drawchart2', function(event, dado){
 
-          if(!$scope.totalColumns || isNaN($scope.totalColumns)) 
+          if(!$scope.totalColumns || isNaN($scope.totalColumns)){ 
             $scope.totalColumns = 30; 
+          }
 
           var columns = $scope.totalColumns;
     			var labels = [];
@@ -88,17 +91,18 @@ angular.module('geoCtfApp')
             }
 
             var outArray = [];
-            for (var i=0; i<columns; i++){
+            for (i=0; i<columns; i++){
               outArray[i]= angular.copy(filtered[i]);
-              if(i === columns-1)
+              if(i === columns-1){
                 outArray[i] = {id: 'Outro', categoria: 'Outros', codigo: 'Outros', nome: 'Outros', num_atividades: outrasTotal};
+              }
             }
 
             angular.forEach(outArray, function(value){
               labels.push(value.categoria + '-' + value.codigo);
               legend.push({id: value.id, codigo: value.categoria});
               data.push(value.num_atividades);            
-            })
+            });
 
             $scope.chart2atividades = legend;
             $scope.chart2labels = labels;
@@ -108,7 +112,7 @@ angular.module('geoCtfApp')
               labels.push(value.categoria + '-' + value.codigo);
               legend.push({id: value.id, codigo: value.categoria});
               data.push(value.num_atividades);            
-            })
+            });
 
             $scope.chart2atividades = legend;
             $scope.chart2labels = labels;

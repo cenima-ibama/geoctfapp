@@ -10,7 +10,7 @@
 angular.module('geoCtfApp')
   .controller('MapCtrl', function ($scope, $rootScope, $cookies, $location, Auth, formData) {
 
-    $rootScope.map = true;
+    $scope.tabMap = true;
 
     $cookies.SystemName = 'CTF-GEO';
     $rootScope.SystemName = $cookies.SystemName;

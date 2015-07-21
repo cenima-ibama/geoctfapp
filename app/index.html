@@ -28,7 +28,16 @@
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
+
+    <div id="barra-brasil" style="background:#7F7F7F; height: 20px; padding:0 0 0 10px;display:block;">
+        <ul id="menu-barra-temp" style="list-style:none;">
+            <li style="display:inline; float:left;padding-right:10px; margin-right:10px; border-right:1px solid #EDEDED"><a href="http://brasil.gov.br" style="font-family:sans,sans-serif; text-decoration:none; color:white;">Portal do Governo Brasileiro</a></li>
+            <li><a style="font-family:sans,sans-serif; text-decoration:none; color:white;" href="http://epwg.governoeletronico.gov.br/barra/atualize.html">Atualize sua Barra de Governo</a></li>
+        </ul>
+    </div>
+
     <div ng-view=""></div>
+
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
@@ -47,6 +56,7 @@
     <script src="bower_components/Chart.js/Chart.js"></script>
     <script src="bower_components/angular-chart.js/dist/angular-chart.js"></script>
     <script src="bower_components/leaflet-groupedlayercontrol/dist/leaflet.groupedlayercontrol.min.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -66,12 +76,17 @@
         <script src="scripts/services/auth.js"></script>
         <script src="scripts/services/restapi.js"></script>
         <script src="scripts/services/containsobject.js"></script>
+        <script src="scripts/services/appconfig.js"></script>
         <script src="scripts/services/formdata.js"></script>
+        <script src="scripts/services/appconfig.js"></script>
+        <script src="scripts/directives/choro.js"></script>
+
     <!-- endbuild -->
 
     <!-- build:js(.) scripts/extra.js -->
     <script src="bower_components/leaflet.markercluster/dist/leaflet.markercluster-src.js"></script>
-    <script src="scripts/directives/choro.js"></script>
     <!-- endbuild -->
+
+    <script src="//barra.brasil.gov.br/barra.js" type="text/javascript"></script>
 </body>
 </html>

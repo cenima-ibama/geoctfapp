@@ -8,17 +8,13 @@
  * Controller of the geoCtfApp
  */
 angular.module('geoCtfApp')
-  .controller('EstatisticasCtrl', function ($scope, $rootScope, $cookies, Auth, $location, RestApi, $log, containsObject, formData) {
+  .controller('EstatisticasCtrl', function ($scope, $rootScope, $cookies, Auth, $location, RestApi, $log, containsObject, formData, appConfig) {
     $scope.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
       'Karma'
     ];
 
-    $cookies.SystemName = 'CTF-APP-GEO';
-    $rootScope.SystemName = $cookies.SystemName;
-    
-    $rootScope.map = false;
 
     $scope.$watch(Auth.isLoggedIn, function (value, oldValue) {
       if(!value && oldValue) {
@@ -31,26 +27,36 @@ angular.module('geoCtfApp')
       }
     }, true);
 
-    $scope.regioes = formData.regioes;
+    $cookies.SystemName = 'CTF-APP-GEO';
+    $rootScope.SystemName = $cookies.SystemName;
+    
+    $rootScope.map = false;
 
+    $scope.regioes = formData.regioes;
     $scope.estados = formData.estados;
     $scope.anos = formData.anos;
 
-    $scope.chart = {};
+    $scope.export = new Object;
+
+    $scope.chart = new Object;
 
     RestApi.get({ type: 'categorias'}, function(data){
       $scope.categorias = data;
       if(!(containsObject($scope.categorias, 'Todos', 'id'))){
         $scope.categorias.push({id: 'Todos' , nome: 'Todos'});
       }
-
       $scope.codigoCategoria = [];
       angular.forEach($scope.categorias, function(value, key){
         $scope.codigoCategoria.push(value.id);
       })
     });
 
-
+    /**
+     * Getting list of each subcategoria in categoria on param
+     * This function add Todos on array of subcategorias
+     * @param categoria
+     * @returns {*}
+    */
     $scope.listSubcategoria = function(categoria){
       $scope.chart.subCategoria = '';
       if(categoria.id !== 'Todos'){
@@ -64,6 +70,9 @@ angular.module('geoCtfApp')
     $scope.carregar = {};
 
     $scope.solicitar = function(estados, categorias, atividades, ano){
+
+      //Reseting chart2 legend
+      $scope.chart2Legenda = null;
 
       $scope.carregar.chart1 = true;
       $scope.carregar.chart2 = true;
@@ -93,13 +102,16 @@ angular.module('geoCtfApp')
       arrCategoria = arrCategoria.substring(0,(arrCategoria.length - 1));
       arrSubcategoria = arrSubcategoria.substring(0,(arrSubcategoria.length - 1));
 
+      $scope.export.chart1 = appConfig.apiUrl + '/estatistica-uf/?format=csv&uf=' + arrEstado + '&categoria' + arrCategoria + '&subcategoria=' +arrSubcategoria;
 
-      $log.debug('chart1 = estatistica-uf/?uf=' + arrEstado + '&categoria' + arrCategoria + '&subcategoria=' +arrSubcategoria );
-      $log.debug('chart2 = estatistica-subcategoria/?uf=' + arrEstado + '&categoria=' + arrCategoria + '&subcategoria=' + arrSubcategoria);
+      $scope.export.chart2 = appConfig.apiUrl + '/estatistica-subcategoria/?format=csv&uf=' + arrEstado + '&categoria=' + arrCategoria + '&subcategoria=' + arrSubcategoria;
 
-      RestApi.get({type: 'estatistica-uf', uf: arrEstado, categoria: arrCategoria, subcategoria: arrSubcategoria, ano: arrAno}, function(data){
-        $scope.$broadcast('drawchart1', data);
-      });
+      $log.debug('chart1 = ' + $scope.export.chart1 );
+      $log.debug('chart2 = ' + $scope.export.chart2 );
+
+      // RestApi.get({type: 'estatistica-uf', uf: arrEstado, categoria: arrCategoria, subcategoria: arrSubcategoria, ano: arrAno}, function(data){
+      //   $scope.$broadcast('drawchart1', data);
+      // });
 
       RestApi.get({type: 'estatistica-subcategoria', uf: arrEstado, categoria: arrCategoria, subcategoria: arrSubcategoria, ano: arrAno}, function(data){
         $scope.$broadcast('drawchart2', data);
@@ -107,6 +119,7 @@ angular.module('geoCtfApp')
 
       RestApi.getObject({type: 'geoestatistica-uf', uf: arrEstado, categoria: arrCategoria, subcategoria: arrSubcategoria, ano: arrAno}, function(data){
         $scope.$broadcast('drawchoro', data);
+        $scope.$broadcast('drawchart1', data);
       });
     }
 

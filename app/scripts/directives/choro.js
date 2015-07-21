@@ -30,13 +30,13 @@ angular.module('geoCtfApp')
         }).addTo($scope.choroMap);
 
 
-        var getColor = function(d) {
+        function getColor(d) {
           var value = $.grep($scope.steps, function(e){ return e.num == d; })[0];
           // using hsl over rgb for better color adjustment (fixing the color and the saturation, and varying the light)
           return 'hsl(101, 80%, ' + value.color + '%)';
         }; 
 
-        var style = function(feature) {
+        function style(feature) {
             return {
                 fillColor: getColor(feature.properties.num_atividades),
                 weight: 2,
@@ -47,24 +47,18 @@ angular.module('geoCtfApp')
             };
         };
 
-        var fillColors = function(steps) {
-
+        function fillColors(steps) {
           for (var i=0; i < steps.length; i++) {
-
             // calculate the porcentage which represents that number, considering the full range activities
             var color = steps[i].num * 100 / steps[steps.length-1].num;
-
             // since 100% represent full light, we get the inverted state
             color = 100 - color;
-
             // remove lights between 0% to 10% and 90% to 100% (for not showing full white and full green)
             color = (color * 0.8) + 10;
-
             // stores the color to its element
             steps[i].color =  Math.ceil(color);
             $scope.steps.push(steps[i]);
           };
-
         };
 
         function highlightFeature(e) {
@@ -89,15 +83,10 @@ angular.module('geoCtfApp')
           $scope.info.update();
         };
 
-        function zoomToFeature(e) {
-          map.fitBounds(e.target.getBounds());
-        };
-
         function onEachFeature(feature, layer) {
           layer.on({
             mouseover: highlightFeature,
-            mouseout: resetHighlight,
-            click: zoomToFeature
+            mouseout: resetHighlight
           });
         };
         
@@ -113,14 +102,11 @@ angular.module('geoCtfApp')
         info.update = function (props) {
           if (props) {
             this._div.classList.add('info-show');
-
             // adding thousand separator
             var atv = props.num_atividades.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
           } else {
             this._div.classList.remove('info-show');
           }
-
-
           this._div.innerHTML = '<h4> N° de Atividades </h4> ' + (props ?
               '<b> ' + props.nome + '</b> ' + ' <br />' + atv + ' atividades '
               : '');
@@ -133,7 +119,7 @@ angular.module('geoCtfApp')
           var steps = [];
           $scope.steps = [];
 
-          $.each(dado.features, function(key,value){
+          angular.forEach(dado.features, function(value, key){
             steps.push({'num': value.properties.num_atividades, 'color': ''});
           });
 
@@ -148,10 +134,10 @@ angular.module('geoCtfApp')
             $scope.choroMap.removeLayer($scope.geojson);
           }
 
-          // $scope.choroMap.dragging.enable();
           $scope.geojson = L.geoJson(dado, {style: style, onEachFeature: onEachFeature}).addTo($scope.choroMap);
           $scope.choroMap.fitBounds($scope.geojson.getBounds());
-          $scope.info.addTo($scope.choroMap);
+          $scope.choroMap.dragging.enable();
+          // $scope.choroMap.dragging.enable();
           // $scope.choroMap.dragging.disable();
 
           $scope.carregar.choro = false;

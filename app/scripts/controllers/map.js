@@ -15,6 +15,14 @@ angular.module('geoCtfApp')
     $cookies.SystemName = 'CTF-APP-GEO';
     $rootScope.SystemName = $cookies.SystemName;
 
+    if ($cookies.get('dataUser')) {
+      // $rootScope.dataUser = JSON.parse($cookies.get('dataUser'));
+      Auth.setUser(JSON.parse($cookies.get('dataUser')));
+      $rootScope.dataUser = {};
+      $rootScope.dataUser.userName = Auth.getUser();
+    }
+
+    $rootScope.logged = Auth.isLoggedIn() ? true : false;
 
     $scope.$watch(Auth.isLoggedIn, function (value, oldValue) {
 

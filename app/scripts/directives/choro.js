@@ -86,7 +86,7 @@ angular.module('geoCtfApp')
         function onEachFeature(feature, layer) {
           layer.on({
             mouseover: highlightFeature,
-            mouseout: resetHighlight,
+            mouseout: resetHighlight
           });
         };
         
@@ -121,7 +121,7 @@ angular.module('geoCtfApp')
 
           angular.forEach(dado.features, function(value, key){
             steps.push({'num': value.properties.num_atividades, 'color': ''});
-          })
+          });
 
           steps = dado['features'].map(function(value) {
             return {'num': value.properties.num_atividades, 'color': ''};
@@ -130,12 +130,13 @@ angular.module('geoCtfApp')
           steps.sort(function(a, b){return a.num-b.num});
           fillColors(steps);
 
-          if ($scope.geojson)
+          if ($scope.geojson) {
             $scope.choroMap.removeLayer($scope.geojson);
+          }
 
           $scope.geojson = L.geoJson(dado, {style: style, onEachFeature: onEachFeature}).addTo($scope.choroMap);
           $scope.choroMap.fitBounds($scope.geojson.getBounds());
-          $scope.info.addTo($scope.choroMap);
+          $scope.choroMap.dragging.enable();
           // $scope.choroMap.dragging.enable();
           // $scope.choroMap.dragging.disable();
 

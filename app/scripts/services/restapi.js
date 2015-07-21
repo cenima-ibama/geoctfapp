@@ -45,8 +45,14 @@ angular.module('geoCtfApp')
           headers: {
             'Content-Type': 'application/json'
           },
-
           isArray: true,
+        },
+        getToken: {
+          url: appConfig.apiUrl + '/token-auth/',
+          method:'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
         },
       },
       {stripTrailingSlashes: false}

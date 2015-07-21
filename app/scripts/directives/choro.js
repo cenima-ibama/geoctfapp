@@ -148,11 +148,11 @@ angular.module('geoCtfApp')
             $scope.choroMap.removeLayer($scope.geojson);
           }
 
-          $scope.choroMap.dragging.enable();
+          // $scope.choroMap.dragging.enable();
           $scope.geojson = L.geoJson(dado, {style: style, onEachFeature: onEachFeature}).addTo($scope.choroMap);
           $scope.choroMap.fitBounds($scope.geojson.getBounds());
           $scope.info.addTo($scope.choroMap);
-          $scope.choroMap.dragging.disable();
+          // $scope.choroMap.dragging.disable();
 
           $scope.carregar.choro = false;
         });

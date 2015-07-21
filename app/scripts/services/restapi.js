@@ -8,9 +8,10 @@
  * Service in the geoCtfApp.
  */
 angular.module('geoCtfApp')
-  .factory('RestApi', function ($resource) {
+  .factory('RestApi', function ($resource, $rootScope) {
     // return $resource('//' + window.location.hostname + window.location.pathname + '/moduleGeoCTF.php?:type', {},
-    return $resource('http://10.1.8.178:8000/api/:type/?:subtype', {type: '@type', subtype: '@subtype'},
+      var url = 'http://10.1.8.178:8000/'
+    return $resource(url + 'api/:type/?:subtype', {type: '@type', subtype: '@subtype'},
       {
         get: {
           method:'GET',
@@ -29,7 +30,7 @@ angular.module('geoCtfApp')
           },
         },
         getMunicipios: {
-          url: 'http://10.1.8.138:8000/api/:type/:estado',
+          url: url + 'api/:type/:estado',
           method:'GET',
           // params:{ format:'json' },
           // isArray: true,
@@ -38,7 +39,7 @@ angular.module('geoCtfApp')
           },
         },
         getPoints: {
-          url: 'http://10.1.8.138:8000/api/atividades/:municipio/:categoria',
+          url: url + 'api/atividades/:municipio/:categoria/',
           method:'GET',
           // params:{ format:'json' },
           // isArray: true,
@@ -53,6 +54,18 @@ angular.module('geoCtfApp')
           },
           // data: type,
           isArray: true,
+        },
+        getToken: {
+          url: url + 'api/token-auth/',
+          method:'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          // data: {
+          //   'username': '@user',
+          //   'password': '@password'
+          // },
+          // isArray: true,
         },
       },
       {stripTrailingSlashes: false}

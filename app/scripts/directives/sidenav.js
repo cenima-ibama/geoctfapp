@@ -20,7 +20,7 @@ sidenavDir.$inject = ['RestApi'];
  */
 function sidenavDir (RestApi) {
 
-  SideNavController.$inject = ['$scope', '$mdSidenav', '$mdUtil', 'Auth'];
+  SideNavController.$inject = ['$scope', '$rootScope', '$mdSidenav', '$mdUtil', 'Auth', '$http'];
 
   /**
    * Exporta a configuração da diretiva
@@ -38,7 +38,7 @@ function sidenavDir (RestApi) {
    * Controller principal da diretiva.
    * @constructor
    */
-  function SideNavController ($scope, $mdSidenav, $mdUtil, Auth){
+  function SideNavController ($scope, $rootScope, $mdSidenav, $mdUtil, Auth, $http){
 
     L.Icon.Default.imagePath = 'images';
 
@@ -97,6 +97,9 @@ function sidenavDir (RestApi) {
       getPointsParams.municipio = municipio;
       getPointsParams.categoria = categoria.id;
 
+      // if($rootScope.dataUser)
+      //   getPointsParams.token = $rootScope.dataUser.token;
+
       if(subCategoria)
 
         getPointsParams.subcategoria = subCategoria.id;
@@ -105,8 +108,16 @@ function sidenavDir (RestApi) {
 
         getPointsParams.ano = ano;
 
+      $http.defaults.headers.get = {};
+
+      if (Auth.isLoggedIn()) {
+        $http.defaults.headers.get['Authorization'] = 'Token ' + Auth.getToken();
+      }
+
       RestApi.getPoints(getPointsParams, getPointsSuccess);
 
+      $http.defaults.headers.get = {};
+      
       /**
        * Função de resultado da requisição de informações de pontos
        * @param data

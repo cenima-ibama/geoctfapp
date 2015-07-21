@@ -7,18 +7,18 @@
  * # login
  */
 angular.module('geoCtfApp')
-  .directive('login', function ($log, $http, Auth) {
+  .directive('login', function ($log, $http, Auth, $cookies) {
     return {
       templateUrl: 'views/partials/login.html',
       restrict: 'E',
       // link: function postLink(scope, element, attrs) {
       // },
-      controller: function($scope, RestApi, $rootScope){
-      	
+      controller: function($scope, RestApi, $rootScope, $cookies){
+
         $rootScope.logout = function(){
-          $rootScope.dataUser = null;
           $rootScope.logged = false;
           Auth.setUser(false, false);
+          $cookies.remove('dataUser');
         };
 
 
@@ -73,37 +73,64 @@ angular.module('geoCtfApp')
             obj.password = obj.password;
           }
 
-          var request = $http({
-            method: 'post',
-            url:'//10.1.8.139/server/access.php',
-            data:{
-              cca : base64_encode(obj.login),
-              ssa : base64_encode(obj.password),
-            },
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-          });
+          $scope.obj = obj;
 
-          request.
-          success(function(data, status){
-            if(data.msg !== 0){
+          RestApi.getToken({ username: obj.login, password: obj.password}
+            , function success(data){
+
               $('#loginModal').modal('hide');
-              Auth.setUser(data.user.name);
+              // console.log(data.token);
 
-              $rootScope.logged_in = data.logged_in ;
-              $rootScope.dataUser = data.user;
+              var dataUser = {};
+              dataUser.name = $scope.obj.login;
+              dataUser.token = data.token;
+
+              Auth.setUser(dataUser);
+              $cookies.put('dataUser', JSON.stringify(dataUser));
+
               $rootScope.logged = true;
-            }
-            else{ 
+            }, function error(data) {
+              // console.log('deu zica');
               $rootScope.logged = false;
               $scope.error = true;
               $scope.errorLogin = 'Usu' + String.fromCharCode(225) +'rio ou senha Inv' + String.fromCharCode(225) + 'lidos';
+
             }
-            $scope.login.carregar = false;
-          }).
-          error(function(data, status){
-            console.log('error code: ' + status );
-            $scope.login.carregar = false;
-          });
+          );
+          
+          $scope.login.carregar = false;
+
+          // var request = $http({
+          //   method: 'post',
+          //   url:'//10.1.8.175/server/access.php',
+          //   data:{
+          //     cca : base64_encode(obj.login),
+          //     ssa : base64_encode(obj.password),
+          //   },
+          //   headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+          // });
+
+          // request.
+          // success(function(data, status){
+          //   if(data.msg !== 0){
+          //     $('#loginModal').modal('hide');
+          //     Auth.setUser(data.user.name);
+
+          //     $rootScope.logged_in = data.logged_in ;
+          //     $rootScope.dataUser = data.user;
+          //     $rootScope.logged = true;
+          //   }
+          //   else{ 
+          //     $rootScope.logged = false;
+          //     $scope.error = true;
+          //     $scope.errorLogin = 'Usu' + String.fromCharCode(225) +'rio ou senha Inv' + String.fromCharCode(225) + 'lidos';
+          //   }
+          //   $scope.login.carregar = false;
+          // }).
+          // error(function(data, status){
+          //   console.log('error code: ' + status );
+          //   $scope.login.carregar = false;
+          // });
       	};
 
       }

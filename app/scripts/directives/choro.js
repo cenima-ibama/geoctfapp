@@ -136,7 +136,8 @@ angular.module('geoCtfApp')
 
           $scope.geojson = L.geoJson(dado, {style: style, onEachFeature: onEachFeature}).addTo($scope.choroMap);
           $scope.choroMap.fitBounds($scope.geojson.getBounds());
-          $scope.choroMap.dragging.enable();
+          $scope.info.addTo($scope.choroMap);
+          // $scope.choroMap.dragging.enable();
           // $scope.choroMap.dragging.enable();
           // $scope.choroMap.dragging.disable();
 

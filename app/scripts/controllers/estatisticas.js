@@ -164,7 +164,7 @@ angular.module('geoCtfApp')
           $scope.carregar.chart2 = false;
           $scope.carregar.choro = false;
 
-          console.log($scope.chart3);
+          console.log("Is on a new Request (See switch)");
       }
 
 

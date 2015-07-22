@@ -9,22 +9,15 @@
  */
 angular.module('geoCtfApp')
   .controller('EstatisticasCtrl', function ($scope, $rootScope, $cookies, Auth, $location, RestApi, $log, containsObject, formData, appConfig) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
 
-    $scope.tabStats = true;
+    if ($cookies.get('dataUser')) {
+      Auth.setUser(JSON.parse($cookies.get('dataUser')));
+      $rootScope.dataUser = {};
+      $rootScope.dataUser.userName = Auth.getUser();
+    }
 
-    $scope.chart4 = {};
+    $rootScope.logged = Auth.isLoggedIn() ? true : false;
 
-  $scope.chart3labels = ["January", "February", "March", "April", "May", "June", "July"];
-  $scope.chart3series = ['Series A', 'Series B'];
-  $scope.chart3data = [
-    [65, 59, 80, 81, 56, 55, 40],
-    [28, 48, 40, 19, 86, 27, 90]
-  ];
 
     $scope.$watch(Auth.isLoggedIn, function (value, oldValue) {
       if(!value && oldValue) {
@@ -33,9 +26,15 @@ angular.module('geoCtfApp')
       }
       if(value) {
         console.log('Connect');
+        Auth.setUser(JSON.parse($cookies.get('dataUser')));
+        $rootScope.dataUser = {};
+        $rootScope.dataUser.userName = Auth.getUser();
        //Do something when the user is connected
       }
     }, true);
+
+
+    $scope.tabStats = true;
 
     $cookies.SystemName = 'CTF-APP-GEO';
     $rootScope.SystemName = $cookies.SystemName;

@@ -16,7 +16,6 @@ angular.module('geoCtfApp')
     $rootScope.SystemName = $cookies.SystemName;
 
     if ($cookies.get('dataUser')) {
-      // $rootScope.dataUser = JSON.parse($cookies.get('dataUser'));
       Auth.setUser(JSON.parse($cookies.get('dataUser')));
       $rootScope.dataUser = {};
       $rootScope.dataUser.userName = Auth.getUser();
@@ -25,7 +24,6 @@ angular.module('geoCtfApp')
     $rootScope.logged = Auth.isLoggedIn() ? true : false;
 
     $scope.$watch(Auth.isLoggedIn, function (value, oldValue) {
-
       if(!value && oldValue) {
         console.log('Disconnect');
         $location.path('#/');
@@ -33,6 +31,9 @@ angular.module('geoCtfApp')
 
       if(value) {
         console.log('Connect');
+        Auth.setUser(JSON.parse($cookies.get('dataUser')));
+        $rootScope.dataUser = {};
+        $rootScope.dataUser.userName = Auth.getUser();
         //Do something when the user is connected
       }
 

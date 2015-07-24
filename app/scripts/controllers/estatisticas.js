@@ -140,24 +140,16 @@ angular.module('geoCtfApp')
           });
           break;
         default:
-          // $scope.export.chart1 = appConfig.apiUrl + '/estatistica-uf/?format=csv&uf=' + arrEstado + '&categoria' + arrCategoria + '&subcategoria=' +arrSubcategoria;
-          // $scope.export.chart2 = appConfig.apiUrl + '/estatistica-subcategoria/?format=csv&uf=' + arrEstado + '&categoria=' + arrCategoria + '&subcategoria=' + arrSubcategoria;
+          $scope.chart3 = {};
+          $scope.chart4 = {};
 
-          // $log.debug('chart1 = ' + $scope.export.chart1 );
-          // $log.debug('chart2 = ' + $scope.export.chart2 );
+          $scope.chart4.labels = ["Download Sales", "In-Store Sales", "Mail-Order Sales"];
+          $scope.chart4.dado = [Math.random()*100, Math.random()*100, Math.random()*100];
+          $scope.chart4.name = 'Empresas Por Porte';
 
-          // RestApi.get({type: 'estatistica-subcategoria', uf: arrEstado, categoria: arrCategoria, subcategoria: arrSubcategoria, ano: arrAno}, function(data){
-          //   $scope.$broadcast('drawchart2', data);
-          // });
-
-          // RestApi.getObject({type: 'geoestatistica-uf', uf: arrEstado, categoria: arrCategoria, subcategoria: arrSubcategoria, ano: arrAno}, function(data){
-          //   $scope.$broadcast('drawchoro', data);
-          //   $scope.$broadcast('drawchart1', data);
-          // });
-
- 
-          // $scope.chart4.dado = ["Sales", "Caio", "teste Sales"];
-          // $scope.chart4.labels = [3, 51, 12];
+          $scope.chart3.labels = ["Sales in month", "Sales in year", "Sales Total"];
+          $scope.chart3.dado = [Math.random()*100, Math.random()*100, Math.random()*100];
+          $scope.chart3.name = 'Empresas Por Regularidade';
 
 
           $scope.carregar.chart1 = false;

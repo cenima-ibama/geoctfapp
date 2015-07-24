@@ -15,16 +15,18 @@ angular.module('geoCtfApp')
           user = aUser;
         },
         getUser : function(aUser){
-          if (user)
+          if (user){
             return user.name;
-          else 
+          } else {
             return null;
+          }
         },
         getToken : function(aUser){
-          if (user)
+          if (user){
             return user.token;
-          else 
+          } else {
             return null;
+          }
         },
         isLoggedIn : function(){
           return (user) ? user : false;

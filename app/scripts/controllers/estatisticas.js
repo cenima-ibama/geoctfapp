@@ -42,6 +42,8 @@ angular.module('geoCtfApp')
     $scope.regioes = formData.regioes;
     $scope.estados = formData.estados;
     $scope.anos = formData.anos;
+    
+    $scope.choroData;
 
     $scope.carregar = {};
     $scope.export = {};
@@ -135,7 +137,8 @@ angular.module('geoCtfApp')
           });
 
           RestApi.getObject({type: 'geoestatistica-uf', uf: arrEstado, categoria: arrCategoria, subcategoria: arrSubcategoria, ano: arrAno}, function(data){
-            $scope.$broadcast('drawchoro', data);
+            // $scope.$broadcast('drawchoro', data);
+            $scope.choroData = data;
             $scope.$broadcast('drawchart1', data);
           });
           break;

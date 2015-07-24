@@ -5,12 +5,8 @@
 	    	<div class='panel-title' flex>  Mapa Estatístico </div>
 	    </div>
         <md-content class="panel-body">
-
-        <div ng-if='carregar.choro'>
-        	<md-progress-circular md-mode="indeterminate"  class="md-hue-2" offset='45'></md-progress-circular>
-        </div>
-
-        <div id="choroMap" ng-show="!carregar.choro && geojson "></div>			
+        
+        <div id="choroMap"></div>
 
 		</md-content>
 	</md-content>

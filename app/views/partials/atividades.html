@@ -4,7 +4,10 @@
 			<filter></filter>
 		</md-content>
 	</md-sidenav> -->
-	<md-content flex class='md-padding' md-scroll-y>
+    <div ng-show='carregar.atividades || carregar.empresas'>
+    	<md-progress-circular md-mode="indeterminate"  class="md-hue-2" offset='45'></md-progress-circular>
+    </div>
+	<md-content flex class='md-padding' md-scroll-y ng-show="!carregar.atividades">
 		<chart2></chart2>
 		<chart1></chart1>
 		<choro geojson='choroData'></choro>

@@ -8,7 +8,7 @@
  * Controller of the geoCtfApp
  */
 angular.module('geoCtfApp')
-  .controller('EstatisticasCtrl', function ($scope, $rootScope, $cookies, Auth, $location, RestApi, $log, containsObject, formData, appConfig) {
+  .controller('EstatisticasCtrl', function ($scope, $rootScope, $cookies, Auth, $location, $q, RestApi, $log, containsObject, formData, appConfig) {
 
     if ($cookies.get('dataUser')) {
       Auth.setUser(JSON.parse($cookies.get('dataUser')));
@@ -94,14 +94,23 @@ angular.module('geoCtfApp')
       //Reseting chart2 legend
       $scope.chart2Legenda = null;
 
-      $scope.carregar.chart1 = true;
-      $scope.carregar.chart2 = true;
-      $scope.carregar.choro = true;
-    
+      // $scope.carregar.chart1 = true;
+      // $scope.carregar.chart2 = true;
+      // $scope.carregar.choro = true;
+
       var arrEstado = '';
       var arrCategoria = '';
       var arrSubcategoria = '';
       var arrAno;
+
+      var rest1Response;
+      var rest2Response;
+    
+      if ($scope.request == 'atividades') {
+        $scope.carregar.atividades = true;
+      } else if ($scope.request == 'empresa'){
+        $scope.carregar.atividades = true;
+      }
 
       if(!ano || ano === 'Todos'){
         arrAno = '';
@@ -132,15 +141,15 @@ angular.module('geoCtfApp')
           $log.debug('chart1 = ' + $scope.export.chart1 );
           $log.debug('chart2 = ' + $scope.export.chart2 );
 
-          RestApi.get({type: 'estatistica-subcategoria', uf: arrEstado, categoria: arrCategoria, subcategoria: arrSubcategoria, ano: arrAno}, function(data){
+          rest1Response = RestApi.get({type: 'estatistica-subcategoria', uf: arrEstado, categoria: arrCategoria, subcategoria: arrSubcategoria, ano: arrAno}, function(data){
             $scope.$broadcast('drawchart2', data);
-          });
+          }).$promise;
 
-          RestApi.getObject({type: 'geoestatistica-uf', uf: arrEstado, categoria: arrCategoria, subcategoria: arrSubcategoria, ano: arrAno}, function(data){
+          rest2Response = RestApi.getObject({type: 'geoestatistica-uf', uf: arrEstado, categoria: arrCategoria, subcategoria: arrSubcategoria, ano: arrAno}, function(data){
             // $scope.$broadcast('drawchoro', data);
             $scope.choroData = data;
             $scope.$broadcast('drawchart1', data);
-          });
+          }).$promise;
           break;
         default:
           $scope.chart3 = {};
@@ -163,7 +172,13 @@ angular.module('geoCtfApp')
       }
 
 
-
+      $q.all([rest1Response,rest2Response]).then(function(){
+        if ($scope.request == 'atividades') {
+          $scope.carregar.atividades = false;
+        } else if ($scope.request == 'empresa'){
+          $scope.carregar.empresas = false;
+        }
+      });
 
     };
   

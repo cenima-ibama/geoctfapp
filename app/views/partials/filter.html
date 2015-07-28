@@ -1,5 +1,5 @@
-<md-content layout-padding id='sidenav'>
-	<md-select-group>
+<md-content layout-padding>
+	<md-select-group >
 		<md-select ng-model='chart.ano' aria-label='chartAno' placeholder='Ano'>
 			<md-option ng-repeat='ano in anos' ng-value='ano'>{{ano}}</md-option>
 		</md-select>
@@ -117,15 +117,27 @@
 
 <hr>
 
-<md-content layout-padding>
+<md-content layout-padding layout-align='end end'>
 	<md-input-container ng-if='column'>
 	    <!-- <label>Colunas</label> -->
 	    <label>Qtde máxima de barras</label>
-	    <input 
+			<!-- 	    
+			<input 
 		    required type="number" 
 		    ng-model="totalColumns" 
 		    min="1" max='200'
-		    tooltip="'Atividades por categoria'" />
+		    popover-trigger="mouseenter"
+		    popover='"Atividades por categoria"'
+		    />
+ 			-->	    
+ 		<input 
+		    required type="number" 
+		    ng-model="totalColumns" 
+		    min="1"
+		    max='200'
+		    tooltip-popup-delay='250'
+		    tooltip='Atividades por Categoria'
+		    />
 	</md-input-container>
 
 	<button 

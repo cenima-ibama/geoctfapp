@@ -63,7 +63,7 @@ angular.module('geoCtfApp')
 	      				}
 	      				$scope.chart.categoria = $scope.chart.atividade = null;
 	      			} else {
-	      				if(!containsObject($scope.at, obj.id, 'id')){
+	      				if(!containsObject($scope.at, param.id, 'id')){
 	      					param.categoria = obj.id;
 	      					$scope.at.push(param);
 	      				}

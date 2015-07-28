@@ -22,14 +22,6 @@ md-tabs md-ink-bar {
   color: green;
   background: green;
 }
-/*
-md-content {
-    overflow: inherit;
-}*/
-
-#sidenav > md-select-group{
-  padding: 5% 0% 5% 0%;
-}
 
 #formSide > md-select{
   padding: 5% 0% 5% 0%;
@@ -266,4 +258,5 @@ canvas.max-chart {
 
 .filterButton{
   max-width: 47%;
+  padding: 5% 0% 8% 0%;
 }

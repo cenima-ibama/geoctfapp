@@ -22,6 +22,7 @@ angular.module('geoCtfApp')
             scope.dado = val.dado;
             scope.labels = val.labels;
             scope.name = val.name;
+            scope.export = val.export;
           }
         }
         

@@ -12,7 +12,8 @@ angular.module('geoCtfApp')
       templateUrl: 'views/partials/choro.html',
       restrict: 'AE',
       scope:{
-        choroData: '=geojson'
+        choroData: '=geojson',
+        choroLegendSteps : '=legendSteps'
       },
       link: function postLink(scope, element, attr) {
 

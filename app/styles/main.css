@@ -71,12 +71,16 @@ md-content {
 }
 
 .leaflet-popup-content{
-  max-height: 20em; 
-  overflow-y: auto; 
+  max-height: 20em;
+  overflow-y: auto;
 }
 
 #choroMap {
   height: 470px;
+}
+
+.panel-danger {
+    text-align: center;
 }
 
 .panel-danger > .panel-heading {
@@ -89,7 +93,7 @@ md-content {
 .modal-dialog{
   max-width: 350px;
   /*margin-top: 5%;*/
-  margin: 5% auto !important; 
+  margin: 5% auto !important;
 }
 
 .legend{
@@ -177,7 +181,7 @@ md-content {
   background: rgba(255,255,255,0.8);
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
   border-radius: 5px;
-  display:none; 
+  display:none;
 }
 
 .info h4 {
@@ -210,7 +214,55 @@ canvas.max-chart {
 
 .nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
   background-color: rgba(63,81,181, 0.95);
-  }
+}
+.choro-legend {
+    padding: 10px 15px 5px;
+    display: inline-block;
+    width: 100%;
+    overflow: visible;
+    max-width: 800px;
+}
+
+.choro-legend .legend-box {
+    display: block;
+    height: 16px;
+}
+
+.choro-legend .gradient {
+    background-image: linear-gradient(to right, hsl(101, 65%, 90%), hsl(101, 65%, 50%), hsl(101, 65%, 10%));
+}
+
+.choro-legend .legend-values,
+.choro-legend .legend-values li{
+    margin: 0px;
+    padding: 0px;
+}
+
+.choro-legend .legend-values {
+    margin-top: 1px;
+    position:relative;
+    border-top: solid 1px #666666;
+}
+
+.choro-legend .legend-values li{
+    display: block;
+    position: absolute;
+    width: 4em;
+    margin-top: 5px;
+    margin-left: -2em;
+    text-align: center;
+    font-size: 0.81em;
+    overflow: visible;
+}
+
+.choro-legend .legend-values li::before {
+    content: '|';
+    font-size: 0.5em;
+    position: absolute;
+    left: 50%;
+    top: -7px;
+    color: black;
+}
 
 .filterButton{
   max-width: 47%;

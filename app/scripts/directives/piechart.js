@@ -15,9 +15,7 @@ angular.module('geoCtfApp')
       scope: {
         pie: '=data'
       },
-      link: function postLink(scope, element, attrs){
-
-        scope.$watch('pie', defineScope);
+      link: function postLink(scope){
 
         function defineScope(val){
           if(val){
@@ -26,6 +24,9 @@ angular.module('geoCtfApp')
             scope.name = val.name;
           }
         }
+        
+        scope.$watch('pie', defineScope);
+
       }
     };
   });

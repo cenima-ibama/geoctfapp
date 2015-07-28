@@ -46,8 +46,8 @@ angular.module('geoCtfApp')
     $scope.choroData;
 
     $scope.carregar = {};
-    $scope.export = {};
-    $scope.chart = {};
+    // $scope.export = {};
+    // $scope.chart = {};
 
     RestApi.get({ type: 'categorias'}, function(data){
       $scope.categorias = data;
@@ -89,7 +89,7 @@ angular.module('geoCtfApp')
     };
 
 
-    $scope.solicitar = function(estados, categorias, atividades, ano){
+    $scope.solicitar = function(estados, categorias, atividades, ano, columns){
 
       //Reseting chart2 legend
       $scope.chart2Legenda = null;
@@ -132,24 +132,53 @@ angular.module('geoCtfApp')
       arrCategoria = arrCategoria.substring(0,(arrCategoria.length - 1));
       arrSubcategoria = arrSubcategoria.substring(0,(arrSubcategoria.length - 1));
 
+      function barData(object){
+        var data = {};
+
+        object = object.features.map(function(item){return item.properties});
+
+        var dado = [];
+        var labels = []; 
+        // var series = [];
+
+        angular.forEach(object, function(value){
+          labels.push(value.sigla);
+          dado.push(value.num_atividades);
+          // series.push(value.series);
+        });
+
+        data.data = [dado];
+        data.labels = labels;
+        // data.series = series;
+
+        return data;
+      }
+
+      var exportCSV = {};
 
       switch($scope.request){
         case 'atividades':
-          $scope.export.chart1 = appConfig.apiUrl + '/estatistica-uf/?format=csv&uf=' + arrEstado + '&categoria' + arrCategoria + '&subcategoria=' +arrSubcategoria;
-          $scope.export.chart2 = appConfig.apiUrl + '/estatistica-subcategoria/?format=csv&uf=' + arrEstado + '&categoria=' + arrCategoria + '&subcategoria=' + arrSubcategoria;
 
-          $log.debug('chart1 = ' + $scope.export.chart1 );
-          $log.debug('chart2 = ' + $scope.export.chart2 );
-
-          rest1Response = RestApi.get({type: 'estatistica-subcategoria', uf: arrEstado, categoria: arrCategoria, subcategoria: arrSubcategoria, ano: arrAno}, function(data){
-            $scope.$broadcast('drawchart2', data);
-          }).$promise;
-
-          rest2Response = RestApi.getObject({type: 'geoestatistica-uf', uf: arrEstado, categoria: arrCategoria, subcategoria: arrSubcategoria, ano: arrAno}, function(data){
-            // $scope.$broadcast('drawchoro', data);
+          var rest2Response = RestApi.getObject({type: 'geoestatistica-uf', uf: arrEstado, categoria: arrCategoria, subcategoria: arrSubcategoria, ano: arrAno}, function(data){
+            $scope.chart1 = barData(data);
+            $scope.chart1.export = appConfig.apiUrl + '/estatistica-uf/?format=csv&uf=' + arrEstado + '&categoria' + arrCategoria + '&subcategoria=' +arrSubcategoria;
+            $scope.chart1.describe = 'geo-ctf-app-atividades-por-categoria.csv';
             $scope.choroData = data;
-            $scope.$broadcast('drawchart1', data);
           }).$promise;
+
+          var rest1Response = RestApi.get({type: 'estatistica-subcategoria', uf: arrEstado, categoria: arrCategoria, subcategoria: arrSubcategoria, ano: arrAno}, function(data){
+            $scope.chart2 = {};
+            $scope.chart2.data = data;
+            $scope.chart2.totalColumns = columns;
+            $scope.chart2.categorias = $scope.categorias;
+            $scope.chart2.describe = 'geo-ctf-app-atividades-por-uf.csv';
+            $scope.chart2.export = appConfig.apiUrl + '/estatistica-subcategoria/?format=csv&uf=' + arrEstado + '&categoria=' + arrCategoria + '&subcategoria=' + arrSubcategoria;
+          }).$promise;
+
+          $q.all([rest1Response, rest2Response]).then(function(){
+            
+          });
+
           break;
         default:
           $scope.chart3 = {};
@@ -164,9 +193,9 @@ angular.module('geoCtfApp')
           $scope.chart3.name = 'Empresas Por Regularidade';
 
 
-          $scope.carregar.chart1 = false;
-          $scope.carregar.chart2 = false;
-          $scope.carregar.choro = false;
+          // $scope.carregar.chart1 = false;
+          // $scope.carregar.chart2 = false;
+          // $scope.carregar.choro = false;
 
           console.log("Is on a new Request (See switch)");
       }

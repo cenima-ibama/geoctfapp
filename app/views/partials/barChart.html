@@ -1,0 +1,30 @@
+
+<md-content id='chart'>
+	<md-content class="panel panel-danger">
+	    <div class="panel-heading text-center" layout="row">
+	    	<div class='panel-title' flex> {{name}}</div>
+			            
+			<a class="export-button" ng-if="export" href="{{export}}" download="{{describe}}">
+                <i class="glyphicon glyphicon-save"></i>
+                CSV
+            </a>
+			
+	    </div>
+        <md-content class="panel-body">
+			<canvas
+				class="chart-bar" 
+				data="data" 
+				labels="labels" 
+				legend="false" 
+				series="series" 
+				options='options'
+				click='atividadeName'>
+			</canvas>
+			
+			<div ng-if='legend' flex class='text-center'>
+				<label>{{legend}}</label>
+			</div>	
+
+		</md-content>
+	</md-content>
+</md-content>

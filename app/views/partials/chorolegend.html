@@ -3,9 +3,7 @@
     <div class="legend-box gradient"></div>
 
     <ul class="legend-values">
-        <li ng-repeat="item in items" style="left:{{item.position}}%">
-            {{item.value}}
-        </li>
+        <li ng-repeat="item in items" style="left:{{item.position}}%">{{item.value | number:0}}</li>
     </ul>
 
 </div>

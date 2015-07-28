@@ -77,6 +77,10 @@ md-content {
   height: 470px;
 }
 
+.panel-danger {
+    text-align: center;
+}
+
 .panel-danger > .panel-heading {
   color: white;
   background-color: rgb(63,81,181);
@@ -208,16 +212,18 @@ canvas.max-chart {
 
 .nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
   background-color: rgba(63,81,181, 0.95);
-  }
+}
 .choro-legend {
-    padding: 0px 5px;
+    padding: 10px 15px 5px;
     display: inline-block;
     width: 100%;
+    overflow: visible;
+    max-width: 800px;
 }
 
 .choro-legend .legend-box {
     display: block;
-    height:20px;
+    height: 16px;
 }
 
 .choro-legend .gradient {
@@ -231,23 +237,27 @@ canvas.max-chart {
 }
 
 .choro-legend .legend-values {
-    margin-top: 5px;
+    margin-top: 1px;
     position:relative;
+    border-top: solid 1px #666666;
 }
 
 .choro-legend .legend-values li{
     display: block;
     position: absolute;
     width: 4em;
+    margin-top: 5px;
     margin-left: -2em;
     text-align: center;
     font-size: 0.81em;
+    overflow: visible;
 }
 
 .choro-legend .legend-values li::before {
     content: '|';
-    font-size: 0.4em;
+    font-size: 0.5em;
     position: absolute;
     left: 50%;
     top: -7px;
+    color: black;
 }

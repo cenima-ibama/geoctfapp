@@ -9,47 +9,47 @@
 angular.module('geoCtfApp')
   .directive('choroLegend', function () {
 
-    var directive = {
+    //Quantidade padrão de itens listados na legenda
+    var DEFAULT_STEP_COUNT = 4;
+
+    return {
       templateUrl: 'views/partials/chorolegend.html',
       restrict: 'E',
-      link: postLink,
-      controller: function ($scope) {
-
-        $scope.$on('drawchoro', onDrawchoroEvent);
-
-        function onDrawchoroEvent(event, dado) {
-          $scope.values = dado.features.map(function (value) {return value.properties.num_atividades});
-        }
-
-      }
+      scope : {
+        choroData : '=data',
+        stepCount : '='
+      },
+      link: postLink
     };
 
-    return directive;
-
+    /**
+     * Ouvinte da criação dos elementos gráficos.
+     * @param {Scope} scope
+     */
     function postLink(scope) {
 
-      scope.$watch('values', onDataChanged);
+      scope.$watch('choroData', onDataChanged);
 
       /**
        * Ouvinte do evento de alteração da propriedade <code>values</code> do <code>scope</code>.
        * @param value
        */
-      function onDataChanged (values) {
-
-        //Quantidade de itens para serem apresentados na legenda
-        var STEP_COUNT = 6;
+      function onDataChanged (choroData) {
 
         var steps = [],
-          stepCount = scope.itemsCount || STEP_COUNT,
+          stepCount = Number(scope.stepCount) || DEFAULT_STEP_COUNT,
           stepPartPercent,
           stepPart,
+          values,
           index = 1,
           value,
           min,
           max,
           step;
 
-        if (values && values.length >= 2) {
+        if (choroData && choroData.features.length >= 2) {
+
+          values = choroData.features.map(function (value) {return value.properties.num_atividades});
 
           stepPartPercent = Math.round(100/stepCount);
           stepPart = (1/stepCount).toFixed(2);
@@ -74,7 +74,6 @@ angular.module('geoCtfApp')
           }
 
           steps.push({value : max, position : 100});
-
           scope.items = steps;
 
         } else

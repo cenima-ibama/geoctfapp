@@ -8,7 +8,7 @@
  * Controller of the geoCtfApp
  */
 angular.module('geoCtfApp')
-  .controller('EstatisticasCtrl', function ($scope, $rootScope, $cookies, Auth, $location, $q, RestApi, $log, containsObject, formData, appConfig) {
+  .controller('EstatisticasCtrl', function ($scope, $rootScope, $cookies, Auth, $location, $q, RestApi, $log, containsObject, formData, appConfig, $locale) {
 
     if ($cookies.get('dataUser')) {
       Auth.setUser(JSON.parse($cookies.get('dataUser')));
@@ -187,10 +187,12 @@ angular.module('geoCtfApp')
           $scope.chart4.labels = ["Download Sales", "In-Store Sales", "Mail-Order Sales"];
           $scope.chart4.dado = [Math.random()*100, Math.random()*100, Math.random()*100];
           $scope.chart4.name = 'Empresas Por Porte';
+          $scope.chart4.export = '';
 
           $scope.chart3.labels = ["Sales in month", "Sales in year", "Sales Total"];
           $scope.chart3.dado = [Math.random()*100, Math.random()*100, Math.random()*100];
           $scope.chart3.name = 'Empresas Por Regularidade';
+          $scope.chart3.export = '';
 
 
           // $scope.carregar.chart1 = false;

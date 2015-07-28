@@ -8,6 +8,10 @@
 
         <div id="choroMap" ng-show="choroData"></div>
 
+        <choro-legend data="choroData"
+                      step-count="choroLegendSteps"
+                      ng-if="choroLegendSteps"></choro-legend>
+
 		</md-content>
 	</md-content>
 </md-content>

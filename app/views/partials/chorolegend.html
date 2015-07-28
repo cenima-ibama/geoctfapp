@@ -1,0 +1,11 @@
+<div class="choro-legend" ng-if="items.length">
+
+    <div class="legend-box gradient"></div>
+
+    <ul class="legend-values">
+        <li ng-repeat="item in items" style="left:{{item.position}}%">
+            {{item.value}}
+        </li>
+    </ul>
+
+</div>

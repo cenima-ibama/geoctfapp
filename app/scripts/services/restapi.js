@@ -34,7 +34,7 @@ angular.module('geoCtfApp')
           },
         },
         getPoints: {
-          url: appConfig.apiUrl + '/atividades/:municipio/:categoria',
+          url: appConfig.apiUrl + '/atividades/:municipio/:categoria/',
           method:'GET',
           headers: {
             'Content-Type': 'application/json'
@@ -45,8 +45,14 @@ angular.module('geoCtfApp')
           headers: {
             'Content-Type': 'application/json'
           },
-
           isArray: true,
+        },
+        getToken: {
+          url: appConfig.apiUrl + '/token-auth/',
+          method:'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
         },
       },
       {stripTrailingSlashes: false}

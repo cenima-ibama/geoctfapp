@@ -26,13 +26,13 @@ angular.module('geoCtfApp')
       		var statesFiltered = [];
 
       		angular.forEach(states, function(value){
-      			if(value.regiao == region.nome){
+      			if(value.regiao === region.nome){
       				statesFiltered.push(value);
       			}
-      		})
+      		});
 
       		$scope.filterEstados = statesFiltered;
-      	}
+      	};
 
 
       	$scope.addValues = function(obj, type, param){
@@ -46,7 +46,7 @@ angular.module('geoCtfApp')
 		      						$scope.es.push(value);
 		      					}
 	      					}
-	      				})
+	      				});
 	      				$scope.chart.estado = $scope.chart.regiao = null;
 	      			} else {
       					if(!containsObject($scope.es, param.sigla, 'sigla')){
@@ -70,7 +70,7 @@ angular.module('geoCtfApp')
 	      				$scope.chart.categoria = $scope.chart.atividade = null;
 	      			}
           }
-      	}
+      	};
 
 
       }

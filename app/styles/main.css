@@ -69,8 +69,8 @@ md-content {
 }
 
 .leaflet-popup-content{
-  max-height: 20em; 
-  overflow-y: auto; 
+  max-height: 20em;
+  overflow-y: auto;
 }
 
 #choroMap {
@@ -87,7 +87,7 @@ md-content {
 .modal-dialog{
   max-width: 350px;
   /*margin-top: 5%;*/
-  margin: 5% auto !important; 
+  margin: 5% auto !important;
 }
 
 .legend{
@@ -175,7 +175,7 @@ md-content {
   background: rgba(255,255,255,0.8);
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
   border-radius: 5px;
-  display:none; 
+  display:none;
 }
 
 .info h4 {
@@ -195,6 +195,7 @@ canvas.max-chart {
     height: 29px !important;
 }
 
+
 .export-button {
     color:#FFFFFF;
 }
@@ -205,6 +206,9 @@ canvas.max-chart {
     color: #ececec;
 }
 
+.nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
+  background-color: rgba(63,81,181, 0.95);
+  }
 .choro-legend {
     padding: 0px 5px;
     display: inline-block;

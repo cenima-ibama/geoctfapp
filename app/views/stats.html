@@ -1,17 +1,18 @@
 <topbar></topbar>
-<!-- <md-content layout-padding>
-  <atividades></atividades>
-</md-content>
- -->
-<md-content layout="row" resizable>
-  <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')" md-scroll-y>
-      <md-content layout-padding> 
-      <filter></filter>
-    </md-content>
+<md-content layout="row" resizable >
+  <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')" md-scroll-y 
+  ng-style="{height: windowHeight-90}" resizable>
+      <md-content layout-padding > 
+       <filter ></filter>
+     </md-content>
   </md-sidenav>
-  <!-- <tabset type="pills"> -->
 
   <tabset justified="true" type="pills" flex>
+    <button type="button" class="navbar-toggle" >
+     <span class="icon-bar"></span>
+     <span class="icon-bar"></span>
+     <span class="icon-bar"></span>
+    </button>
     <tab heading="Por Atividades" select='defineRequest("atividades")'><atividades></atividades></tab>
     <tab heading="Por Empresa"  select='defineRequest("porte")' ><empresas></empresas></tab>
     <!-- <tab heading="Por Another" select='defineRequest("another")'></tab>  -->

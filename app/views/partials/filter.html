@@ -1,4 +1,4 @@
-<md-content layout-padding>
+<md-content layout-padding id='sidenav'>
 	<md-select-group>
 		<md-select ng-model='chart.ano' aria-label='chartAno' placeholder='Ano'>
 			<md-option ng-repeat='ano in anos' ng-value='ano'>{{ano}}</md-option>
@@ -7,6 +7,7 @@
 
 	<md-select-group layout='row' layout-sm='column'>
 		<md-select 
+		class='filterButton'
 		ng-model='chart.regiao' 
 		aria-label='chartRegiao' 
 		placeholder='Região' 
@@ -17,6 +18,7 @@
 			<md-option ng-repeat='regiao in regioes | orderBy: "nome"' ng-value='regiao' >{{regiao.nome}}</md-option>
 		</md-select>
 		<md-select 
+		class='filterButton'
 		ng-model='chart.estado' 
 		aria-label='chartRegiao' 
 		placeholder='Estado' 
@@ -25,25 +27,19 @@
 		flex>
 			<md-option ng-repeat='estado in filterEstados | orderBy: "nome"' ng-value='estado'>{{estado.nome}}</md-option>
 		</md-select>
-
-<!-- 		<md-button flex 
-		class='md-raised md-primary button-sheet'
-		flex offset='50'
-		layout-sm='row'
-		ng-click='addValues(chart.regiao, "e", chart.estado)' 
-		ng-disabled='!chart.regiao'>
-			<small>adicionar</small>
-		</md-button>
- -->
+ 	</md-select-group>
+ 	
+ 	<div layout='row' layout-align='end end'>
  		<button 
 		layout-sm='row'
 		ng-click='addValues(chart.regiao, "e", chart.estado)' 
 		ng-disabled='!chart.regiao'
- 		class='btn btn-link button-sheet'>
- 			<span class='glyphicon glyphicon-plus-sign glyphicon-big'></span>
- 		</button>	
+ 		class='btn btn-success'>
+ 			<span class='glyphicon glyphicon-plus-sign'></span>
+ 			Adicionar
+ 		</button>
+ 	</div>
 
- 	</md-select-group>
 	<div ng-if='es.length' >
 		<label >Estados:</label>
 		<md-chips ng-model="es" readonly="true" >
@@ -63,6 +59,7 @@
 		aria-label='chartCategoria' 
 		placeholder='Categoria' 
 		layout='column' 
+		class='filterButton'
 		layout-sm='row' 
 		flex
 		ng-change='listSubcategoria(chart.categoria)'>
@@ -74,27 +71,23 @@
 		placeholder='Atividade' 
 		layout='column' 
 		layout-sm='row' 
+		class='filterButton'
 		flex>
 			<md-option ng-repeat='atividade in atividades | orderBy: "codigo"' ng-value='atividade'>{{atividade.codigo}}-{{atividade.nome}}</md-option>
 		</md-select>
+	</md-select-group>
 
-<!-- 		<md-button 
-		layout-sm='row'
-		class='md-raised md-primary button-sheet'
-		ng-click='addValues(chart.categoria, "a", chart.atividade)' 
-		ng-disabled='!chart.categoria'>
-			<small>adicionar</small>
-		</md-button>
- -->
+ 	<div layout='row' layout-align='end end'>
 		<button 
 		layout-sm='row'
 		ng-click='addValues(chart.categoria, "a", chart.atividade)' 
 		ng-disabled='!chart.categoria'
- 		class='btn btn-link button-sheet'>
- 			<span class='glyphicon glyphicon-plus-sign glyphicon-big'></span>
- 		</button>	
+ 		class='btn btn-success'>
+ 			<span class='glyphicon glyphicon-plus-sign'></span>
+ 			Adicionar
+ 		</button>
+ 	</div>
 
-	</md-select-group>
 
 	<div ng-if='ct.length'>
 		<label layout='row'>Categorias:</label>
@@ -110,44 +103,35 @@
 
 	<div ng-if='at.length'>
 		<label>Atividades:</label>
-		<md-chips ng-model="at" readonly="true">
+		<md-chips ng-model="at" readonly="true" disabled>
 	      <md-chip-template>
 	        <span>
 	          <strong>{{$chip.categoria}}-</strong>
 	          <strong>{{$chip.codigo}}</strong>
-	          <!-- <em>({{$chip.type}})</em> -->
 	        </span>
 	      </md-chip-template>
 	       <md-icon md-svg-icon="md-cancel" md-chip-remove></md-icon>
 	    </md-chips>
 	</div>
-	
-<!-- 	<input type='text' ng-model='totalColumns' placeholder='30'style='color: black; width:2em; height: 1.5em'/>
- -->
-
 </md-content>
 
 <hr>
+
 <md-content layout-padding>
-	<md-input-container offset='40'>
-	    <label>Colunas</label>
-	    <input required type="number" ng-model="totalColumns" min="1" max='200'>
+	<md-input-container ng-if='column'>
+	    <!-- <label>Colunas</label> -->
+	    <label>Qtde máxima de barras</label>
+	    <input 
+		    required type="number" 
+		    ng-model="totalColumns" 
+		    min="1" max='200'
+		    tooltip="'Atividades por categoria'" />
 	</md-input-container>
 
 	<button 
-	class='btn btn-success right'
-	ng-disabled='carregar.chart1 || carregar.chart2'
-	ng-click='solicitar(es, ct, at, chart.ano, totalColumns)'>
-	Enviar
+		class='btn btn-primary right'
+		ng-disabled='loading'
+		ng-click='solicitar(es, ct, at, chart.ano, totalColumns)'>
+			Enviar
 	</button>
 </md-content>
-<!-- 
-<md-button 
-layout='row'
-class='md-raised md-primary right'
-ng-disabled='carregar.chart1 || carregar.chart2'
-ng-click='solicitar(es, ct, at)'>
-	Enviar
-</md-button>
-
- -->

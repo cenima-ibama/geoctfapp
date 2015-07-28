@@ -27,7 +27,9 @@ md-content {
     overflow: inherit;
 }*/
 
-/*Caso de mudanca de cor nos pontos*/
+#sidenav > md-select-group{
+  padding: 5% 0% 5% 0%;
+}
 
 #formSide > md-select{
   padding: 5% 0% 5% 0%;
@@ -209,3 +211,7 @@ canvas.max-chart {
 .nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
   background-color: rgba(63,81,181, 0.95);
   }
+
+.filterButton{
+  max-width: 47%;
+}

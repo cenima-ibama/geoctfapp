@@ -86,17 +86,24 @@ angular.module('geoCtfApp')
     
     $scope.defineRequest = function (val){
       $scope.request = val;
+      if(val !== 'atividades'){
+        $rootScope.column = false;
+      } else {
+        $rootScope.column = true;
+      }
     };
 
 
     $scope.solicitar = function(estados, categorias, atividades, ano, columns){
 
       //Reseting chart2 legend
-      $scope.chart2Legenda = null;
+      // $scope.chart2Legenda = null;
 
       // $scope.carregar.chart1 = true;
       // $scope.carregar.chart2 = true;
       // $scope.carregar.choro = true;
+
+      $scope.loading = true;
 
       var arrEstado = '';
       var arrCategoria = '';
@@ -109,7 +116,7 @@ angular.module('geoCtfApp')
       if ($scope.request == 'atividades') {
         $scope.carregar.atividades = true;
       } else if ($scope.request == 'empresa'){
-        $scope.carregar.atividades = true;
+        $scope.carregar.empresas = true;
       }
 
       if(!ano || ano === 'Todos'){
@@ -191,13 +198,6 @@ angular.module('geoCtfApp')
           $scope.chart3.labels = ["Sales in month", "Sales in year", "Sales Total"];
           $scope.chart3.dado = [Math.random()*100, Math.random()*100, Math.random()*100];
           $scope.chart3.name = 'Empresas Por Regularidade';
-
-
-          // $scope.carregar.chart1 = false;
-          // $scope.carregar.chart2 = false;
-          // $scope.carregar.choro = false;
-
-          console.log("Is on a new Request (See switch)");
       }
 
 
@@ -207,6 +207,8 @@ angular.module('geoCtfApp')
         } else if ($scope.request == 'empresa'){
           $scope.carregar.empresas = false;
         }
+
+        $scope.loading = false;
       });
 
     };

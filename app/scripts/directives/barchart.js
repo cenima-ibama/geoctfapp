@@ -26,6 +26,23 @@ angular.module('geoCtfApp')
 
 		Chart.defaults.global.colours = ['#337ab7', '#a94442', '#46BFBD', '#7B68EE', '#FDB45C', '#949FB1', '#4D5360'];
 
+		function showFewColumns(param) {
+
+			var data = param.data;
+			var labels = param.labels;
+
+	        if ((labels.length < 5) && (data.length < 5)) {
+	        	var filling = 5 - labels.length;
+
+	        	var leftfilling = Array.apply(null, Array(parseInt(filling/2))).map(Number.prototype.valueOf,0);
+	        	var rightfilling = Array.apply(null, Array(parseInt(filling/2))).map(Number.prototype.valueOf,0);
+
+	        	param.data = leftfilling.map(function(){return ""}).concat(data).concat(rightfilling.map(function(){return ""}));
+	        	param.labels = leftfilling.map(function(){return ""}).concat(labels).concat(rightfilling.map(function(){return ""}));
+	        }
+
+		}
+
         function maxBar(object){
 	        
 	        /** 
@@ -119,8 +136,6 @@ angular.module('geoCtfApp')
 	            });
 
 	            // $scope.chart2atividades = legend;
-	            scope.labels = labels;
-	            scope.data = [data];
           	} else {
 	            angular.forEach(filtered, function(value){
 	              labels.push(value.categoria + '-' + value.codigo);
@@ -129,16 +144,29 @@ angular.module('geoCtfApp')
 	            });
 
 	            // $scope.chart2atividades = legend;
-	            scope.labels = labels;
-	            scope.data = [data];
 	        }
+
+	        var param = {};
+	        param.data = data;
+	        param.labels = labels;
+
+	        showFewColumns(param);
+
+            scope.labels = param.labels;
+            scope.data = [param.data];
         }
 
 
         function noMax(object){
-    		scope.data = object.data;
-            scope.labels = object.labels;
-            scope.series = object.series;	
+	        var param = {};
+	        param.data = object.data[0];
+	        param.labels = object.labels;
+
+	        showFewColumns(param);
+
+    		scope.data = [param.data];
+            scope.labels = param.labels;
+            scope.series = object.series;
         }
 
 

@@ -17,12 +17,14 @@ md-sidenav > .md-subheader {
   width: 100%;
 }
 
-
 md-tabs md-ink-bar {
   color: green;
   background: green;
 }
-
+/*#pieChart{
+  position: fixed
+}
+*/
 #formSide > md-select{
   padding: 5% 0% 5% 0%;
 }
@@ -183,10 +185,6 @@ md-tabs md-ink-bar {
 
 .info.info-show {
   display:inherit;
-}
-
-canvas.max-chart {
-  max-width: 99%;
 }
 
 #barra-brasil .brasil-flag {

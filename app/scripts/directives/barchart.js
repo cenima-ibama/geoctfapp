@@ -26,7 +26,7 @@ angular.module('geoCtfApp')
 
 		Chart.defaults.global.colours = ['#337ab7', '#a94442', '#46BFBD', '#7B68EE', '#FDB45C', '#949FB1', '#4D5360'];
 
-		function showFewColumns(param) {
+		function showFewerColumns(param) {
 
 			var data = param.data;
 			var labels = param.labels;
@@ -150,7 +150,7 @@ angular.module('geoCtfApp')
 	        param.data = data;
 	        param.labels = labels;
 
-	        showFewColumns(param);
+	        showFewerColumns(param);
 
             scope.labels = param.labels;
             scope.data = [param.data];
@@ -162,7 +162,7 @@ angular.module('geoCtfApp')
 	        param.data = object.data[0];
 	        param.labels = object.labels;
 
-	        showFewColumns(param);
+	        showFewerColumns(param);
 
     		scope.data = [param.data];
             scope.labels = param.labels;

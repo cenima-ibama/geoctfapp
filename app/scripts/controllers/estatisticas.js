@@ -68,6 +68,7 @@ angular.module('geoCtfApp')
     */
     $scope.listSubcategoria = function(categoria){
       $scope.chart.subCategoria = '';
+      $scope.chart.atividade = null;
       if(categoria.id !== 'Todos'){
         $scope.atividades = categoria.subcategorias;
         if(!(containsObject($scope.atividades, 'Todos', 'id'))){

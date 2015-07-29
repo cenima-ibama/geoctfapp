@@ -31,6 +31,7 @@ angular.module('geoCtfApp')
       			}
       		});
 
+          $scope.chart.estado = null;
       		$scope.filterEstados = statesFiltered;
       	};
 

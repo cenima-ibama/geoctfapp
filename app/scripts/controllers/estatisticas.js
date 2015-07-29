@@ -96,13 +96,6 @@ angular.module('geoCtfApp')
 
     $scope.solicitar = function(estados, categorias, atividades, ano, columns){
 
-      //Reseting chart2 legend
-      // $scope.chart2Legenda = null;
-
-      // $scope.carregar.chart1 = true;
-      // $scope.carregar.chart2 = true;
-      // $scope.carregar.choro = true;
-
       $scope.loading = true;
 
       var arrEstado = '';
@@ -161,6 +154,26 @@ angular.module('geoCtfApp')
         return data;
       }
 
+      function pieData(object){
+        var data = {};
+
+        var dado = [];
+        var labels = [];
+
+        angular.forEach(object, function(value){ 
+          angular.forEach(value, function(v, k){
+            dado.push(v);
+            labels.push(k);
+          })
+        });
+
+        data.data = dado;
+        data.labels = labels;
+
+        return data;
+
+      }
+
       var exportCSV = {};
 
       switch($scope.request){
@@ -188,18 +201,25 @@ angular.module('geoCtfApp')
 
           break;
         default:
-          $scope.chart3 = {};
+          var rest1Response = RestApi.get({type: 'estatistica-porte', uf: arrEstado, categoria: arrCategoria, subcategoria: arrSubcategoria, ano: arrAno}, function(data){
+            $scope.chart3 = pieData(data);
+            // $scope.chart3.name = 'Empresas Por Regularidade';
+            $scope.chart3.export = '';            
+          }).$promise;
+
+
+          // $scope.chart3 = {};
           $scope.chart4 = {};
 
           $scope.chart4.labels = ["Download Sales", "In-Store Sales", "Mail-Order Sales"];
-          $scope.chart4.dado = [Math.random()*100, Math.random()*100, Math.random()*100];
-          $scope.chart4.name = 'Empresas Por Porte';
+          $scope.chart4.data = [Math.random()*100, Math.random()*100, Math.random()*100];
+          // $scope.chart4.name = 'Empresas Por Porte';
           $scope.chart4.export = '';
 
-          $scope.chart3.labels = ["Sales in month", "Sales in year", "Sales Total"];
-          $scope.chart3.dado = [Math.random()*100, Math.random()*100, Math.random()*100];
-          $scope.chart3.name = 'Empresas Por Regularidade';
-          $scope.chart3.export = '';
+          // $scope.chart3.labels = ["Sales in month", "Sales in year", "Sales Total"];
+          // $scope.chart3.dado = [Math.random()*100, Math.random()*100, Math.random()*100];
+          // $scope.chart3.name = 'Empresas Por Regularidade';
+          // $scope.chart3.export = '';
       }
 
 

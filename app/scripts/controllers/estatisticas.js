@@ -180,14 +180,14 @@ angular.module('geoCtfApp')
       switch($scope.request){
         case 'atividades':
 
-          var rest2Response = RestApi.getObject({type: 'geoestatistica-uf', uf: arrEstado, categoria: arrCategoria, subcategoria: arrSubcategoria, ano: arrAno}, function(data){
+          var rest2Response = RestApi.getGeoEstatisticas({type: 'atividades-uf', uf: arrEstado, categoria: arrCategoria, subcategoria: arrSubcategoria, ano: arrAno}, function(data){
             $scope.chart1 = barData(data);
-            $scope.chart1.export = appConfig.apiUrl + '/estatistica-uf/?format=csv&uf=' + arrEstado + '&categoria' + arrCategoria + '&subcategoria=' +arrSubcategoria;
+            $scope.chart1.export = appConfig.apiUrl + '/estatisticas/atividades-uf/?format=csv&uf=' + arrEstado + '&categoria' + arrCategoria + '&subcategoria=' +arrSubcategoria;
             $scope.chart1.describe = 'geo-ctf-app-atividades-por-categoria.csv';
             $scope.choroData = data;
           }).$promise;
 
-          var rest1Response = RestApi.get({type: 'estatistica-subcategoria', uf: arrEstado, categoria: arrCategoria, subcategoria: arrSubcategoria, ano: arrAno}, function(data){
+          var rest1Response = RestApi.getEstatisticas({type: 'subcategorias', uf: arrEstado, categoria: arrCategoria, subcategoria: arrSubcategoria, ano: arrAno}, function(data){
             $scope.chart2 = {};
             $scope.chart2.data = data;
             $scope.chart2.totalColumns = columns;
@@ -202,25 +202,15 @@ angular.module('geoCtfApp')
 
           break;
         default:
-          var rest1Response = RestApi.get({type: 'estatistica-porte', uf: arrEstado, categoria: arrCategoria, subcategoria: arrSubcategoria, ano: arrAno}, function(data){
+          var rest1Response = RestApi.getEstatisticas({type: 'porte', uf: arrEstado, categoria: arrCategoria, subcategoria: arrSubcategoria, ano: arrAno}, function(data){
             $scope.chart3 = pieData(data);
-            // $scope.chart3.name = 'Empresas Por Regularidade';
-            $scope.chart3.export = '';            
+            $scope.chart3.export = appConfig.apiUrl + '/estatisticas/porte/?format=csv&uf=' + arrEstado + '&categoria=' + arrCategoria + '&subcategoria=' + arrSubcategoria;;            
           }).$promise;
 
-
-          // $scope.chart3 = {};
-          $scope.chart4 = {};
-
-          $scope.chart4.labels = ["Download Sales", "In-Store Sales", "Mail-Order Sales"];
-          $scope.chart4.data = [Math.random()*100, Math.random()*100, Math.random()*100];
-          // $scope.chart4.name = 'Empresas Por Porte';
-          $scope.chart4.export = '';
-
-          // $scope.chart3.labels = ["Sales in month", "Sales in year", "Sales Total"];
-          // $scope.chart3.dado = [Math.random()*100, Math.random()*100, Math.random()*100];
-          // $scope.chart3.name = 'Empresas Por Regularidade';
-          // $scope.chart3.export = '';
+          var rest2Response = RestApi.getEstatisticas({type: 'regularidade', uf: arrEstado, categoria: arrCategoria, subcategoria: arrSubcategoria, ano: arrAno}, function(data){
+            $scope.chart4 = pieData(data);
+            $scope.chart4.export = appConfig.apiUrl + '/estatisticas/regularidade/?format=csv&uf=' + arrEstado + '&categoria=' + arrCategoria + '&subcategoria=' + arrSubcategoria;            
+          }).$promise;
       }
 
 

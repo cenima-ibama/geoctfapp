@@ -182,7 +182,7 @@ angular.module('geoCtfApp')
 
           var rest2Response = RestApi.getObject({type: 'geoestatistica-uf', uf: arrEstado, categoria: arrCategoria, subcategoria: arrSubcategoria, ano: arrAno}, function(data){
             $scope.chart1 = barData(data);
-            $scope.chart1.export = appConfig.apiUrl + '/estatistica-uf/?format=csv&uf=' + arrEstado + '&categoria' + arrCategoria + '&subcategoria=' +arrSubcategoria;
+            $scope.chart1.export = appConfig.apiUrl + '/estatistica-uf/?format=csv&uf=' + arrEstado + '&categoria' + arrCategoria + '&subcategoria=' +arrSubcategoria + '&ano=' + arrAno;
             $scope.chart1.describe = 'geo-ctf-app-atividades-por-categoria.csv';
             $scope.choroData = data;
           }).$promise;
@@ -193,7 +193,7 @@ angular.module('geoCtfApp')
             $scope.chart2.totalColumns = columns;
             $scope.chart2.categorias = $scope.categorias;
             $scope.chart2.describe = 'geo-ctf-app-atividades-por-uf.csv';
-            $scope.chart2.export = appConfig.apiUrl + '/estatistica-subcategoria/?format=csv&uf=' + arrEstado + '&categoria=' + arrCategoria + '&subcategoria=' + arrSubcategoria;
+            $scope.chart2.export = appConfig.apiUrl + '/estatistica-subcategoria/?format=csv&uf=' + arrEstado + '&categoria=' + arrCategoria + '&subcategoria=' + arrSubcategoria + '&ano=' + arrAno;
           }).$promise;
 
           $q.all([rest1Response, rest2Response]).then(function(){
@@ -205,7 +205,7 @@ angular.module('geoCtfApp')
           var rest1Response = RestApi.get({type: 'estatistica-porte', uf: arrEstado, categoria: arrCategoria, subcategoria: arrSubcategoria, ano: arrAno}, function(data){
             $scope.chart3 = pieData(data);
             // $scope.chart3.name = 'Empresas Por Regularidade';
-            $scope.chart3.export = '';            
+            $scope.chart3.export = appConfig.apiUrl + '/estatistica-porte/?format=csv&uf=' + arrEstado + '&categoria=' + arrCategoria + '&subcategoria=' + arrSubcategoria + '&ano=' + arrAno;
           }).$promise;
 
 

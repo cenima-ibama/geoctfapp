@@ -25,21 +25,18 @@ angular.module('geoCtfApp')
           animationSteps : 50,
           animateScale : false,
           // legendTemplate : "<ul id=\"pieChart\" layout=\"column\" class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<segments.length; i++){%><li><span style=\"background-color:<%=segments[i].fillColor%>\"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>"
-      }
-
+        }
+  
         function defineScope(val){
           if(val){
+
+            val.data.sort(function(a,b) {
+              return b - a;
+            });
+
             scope.data = val.data;
             scope.labels = val.labels;
             scope.export = val.export;
-
-            // var dd = angular.element(document.getElementsByClassName('chart-container'));
-            // dd.attr('layout', 'row');
-            // dd.attr('resize');
-
-            // var de = angular.element(document.getElementsByClassName('chart-legend'));
-            // de.attr('layout', 'column');
-
           }
         }
         

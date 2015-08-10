@@ -26,6 +26,23 @@ angular.module('geoCtfApp')
             'Content-Type': 'application/json'
           },
         },
+        getEstatisticas: {
+          url: appConfig.apiUrl + '/estatisticas/:type',
+          method:  'GET',
+          isArray: true,
+          params: { format:'json' },
+          headers:{
+            'Content-Type': 'application/json'
+          }
+        },        
+        getGeoEstatisticas: {
+          url: appConfig.apiUrl + '/geoestatisticas/:type',
+          method:  'GET',
+          params: { format:'json' },
+          headers:{
+            'Content-Type': 'application/json'
+          }
+        },
         getMunicipios: {
           url: appConfig.apiUrl + '/:type/:estado',
           method:'GET',

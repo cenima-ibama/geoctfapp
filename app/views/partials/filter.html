@@ -117,7 +117,7 @@
 
 <hr>
 
-<md-content layout-padding layout-align='end end'>
+<md-content layout-padding >
 	<md-input-container ng-if='column'>
 	    <!-- <label>Colunas</label> -->
 	    <label>Qtde máxima de barras</label>
@@ -130,8 +130,9 @@
 		    popover='"Atividades por categoria"'
 		    />
  			-->	    
- 		<input 
-		    required type="number" 
+ 		<input
+ 			layout='row'
+		    required type="number"
 		    ng-model="totalColumns" 
 		    min="1"
 		    max='200'

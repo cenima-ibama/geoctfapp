@@ -109,7 +109,7 @@ angular.module('geoCtfApp')
     
       if ($scope.request == 'atividades') {
         $scope.carregar.atividades = true;
-      } else if ($scope.request == 'empresa'){
+      } else if ($scope.request == 'empresas'){
         $scope.carregar.empresas = true;
       }
 
@@ -184,7 +184,7 @@ angular.module('geoCtfApp')
             $scope.chart1 = barData(data);
             $scope.chart1.export = appConfig.apiUrl + '/estatisticas/atividades-uf/?format=csv&uf=' + arrEstado + '&categoria' + arrCategoria + '&subcategoria=' +arrSubcategoria;
             $scope.chart1.describe = 'geo-ctf-app-atividades-por-categoria.csv';
-            $scope.choroData = data;
+            $scope.choroAtividades = data;
           }).$promise;
 
           var rest1Response = RestApi.getEstatisticas({type: 'subcategorias', uf: arrEstado, categoria: arrCategoria, subcategoria: arrSubcategoria, ano: arrAno}, function(data){
@@ -196,12 +196,14 @@ angular.module('geoCtfApp')
             $scope.chart2.export = appConfig.apiUrl + '/estatistica-subcategoria/?format=csv&uf=' + arrEstado + '&categoria=' + arrCategoria + '&subcategoria=' + arrSubcategoria;
           }).$promise;
 
-          $q.all([rest1Response, rest2Response]).then(function(){
-            
+         $q.all([rest1Response,rest2Response]).then(function(){
+            $scope.carregar.atividades = false;
+            $scope.loading = false;
           });
 
           break;
-        default:
+        case 'empresas':
+
           var rest1Response = RestApi.getEstatisticas({type: 'porte', uf: arrEstado, categoria: arrCategoria, subcategoria: arrSubcategoria, ano: arrAno}, function(data){
             $scope.chart3 = pieData(data);
             $scope.chart3.export = appConfig.apiUrl + '/estatisticas/porte/?format=csv&uf=' + arrEstado + '&categoria=' + arrCategoria + '&subcategoria=' + arrSubcategoria;;            
@@ -211,18 +213,44 @@ angular.module('geoCtfApp')
             $scope.chart4 = pieData(data);
             $scope.chart4.export = appConfig.apiUrl + '/estatisticas/regularidade/?format=csv&uf=' + arrEstado + '&categoria=' + arrCategoria + '&subcategoria=' + arrSubcategoria;            
           }).$promise;
+
+          var rest3Response = RestApi.getGeoEstatisticas({type: 'empresas-uf', uf: arrEstado, categoria: arrCategoria, subcategoria: arrSubcategoria, ano: arrAno}, function(data){
+            $scope.choroEmpresas = data;
+
+            $scope.filterObject = {};
+            $scope.filterObject.filters = [];
+
+            var filterElement = {};
+            filterElement.name = 'Porte'
+            filterElement.values = $scope.chart3.labels.map(function(value){return value;});
+            filterElement.values.unshift('');
+            filterElement.selected = '';
+            filterElement.dbfield = 'porte';
+            $scope.filterObject.filters.push(filterElement);
+
+            var filterElement = {};
+            filterElement.name = 'Regularidade';
+            filterElement.values = $scope.chart4.labels.map(function(value){return value;});
+            filterElement.values.unshift('');
+            filterElement.dbfield = 'regularidade';
+            filterElement.selected = '';
+            $scope.filterObject.filters.push(filterElement);
+
+            $scope.filterObject.restApi = RestApi;
+            $scope.filterObject.restFunction = 'getGeoEstatisticas';
+            $scope.filterObject.restParam = {type: 'empresas-uf', uf: arrEstado, categoria: arrCategoria, subcategoria: arrSubcategoria, ano: arrAno};
+
+          }).$promise;
+
+          $q.all([rest1Response,rest2Response, rest3Response]).then(function(){
+            $scope.carregar.empresas = false;
+            $scope.loading = false;
+          });
+
+          break;
+        default:
+          break;
       }
-
-
-      $q.all([rest1Response,rest2Response]).then(function(){
-        if ($scope.request == 'atividades') {
-          $scope.carregar.atividades = false;
-        } else if ($scope.request == 'empresa'){
-          $scope.carregar.empresas = false;
-        }
-
-        $scope.loading = false;
-      });
 
     };
   

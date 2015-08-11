@@ -69,7 +69,7 @@ md-tabs md-ink-bar {
   overflow-y: auto;
 }
 
-#choroMap {
+.map {
   height: 470px;
 }
 
@@ -257,4 +257,42 @@ md-tabs md-ink-bar {
 .filterButton{
   max-width: 47%;
   padding: 1em 0 2em 0;
+}
+
+.select-choro .filter-choro-label {
+  min-height: 1.4em;
+  max-height: 1.4em;
+  font-size: 14px;
+}
+
+.select-choro {
+  max-width: 22em;
+  /*max-width: 16.4em;*/
+}
+
+.filter-choro-div {
+  padding-bottom: 0em;
+  padding-top: 0em;
+  padding-right: 1em;
+  min-height: 1.4em;
+  max-height: 1.4em;
+  font-size: 14px;
+  color: #ffffff;
+}
+
+.filter-choro-label {
+  color: #ffffff;  
+  min-width: 8.4em;  
+  max-width: 8.4em;
+  text-align: left;
+}
+
+.btn-choro {
+  text-transform: inherit;
+  margin: 0em;
+  border-color: #ffffff;
+  font-size: 14px;
+  min-height: 1.5em;
+  max-height: 1.5em;
+  line-height: normal;
 }

@@ -12,12 +12,16 @@ angular.module('geoCtfApp')
     //Quantidade padrão de itens listados na legenda
     var DEFAULT_STEP_COUNT = 4;
 
+    //Campo padrão para busca de elementos
+    var DEFAULT_PROPERTY = "";
+
     return {
       templateUrl: 'views/partials/chorolegend.html',
       restrict: 'E',
       scope : {
         choroData : '=data',
-        stepCount : '='
+        stepCount : '=',
+        property: '='
       },
       link: postLink
     };
@@ -45,11 +49,12 @@ angular.module('geoCtfApp')
           value,
           min,
           max,
-          step;
+          step,
+          property = scope.property || DEFAULT_PROPERTY;
 
         if (choroData && choroData.features.length >= 2) {
 
-          values = choroData.features.map(function (value) {return value.properties.num_atividades});
+          values = choroData.features.map(function (value) {return value.properties['num_' + property]});
 
           stepPartPercent = Math.round(100/stepCount);
           stepPart = (1/stepCount).toFixed(2);

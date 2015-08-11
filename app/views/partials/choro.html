@@ -2,15 +2,36 @@
 <md-content id='chart'>
 	<md-content class="panel panel-danger" >
 	    <div class="panel-heading text-center">
-	    	<div class='panel-title' flex>  Mapa Estatístico </div>
+	    	<div class='panel-title' layout="row">
+	    		<div class="select-choro" ng-if="filterOptions" layout='row'>
+		    		<div ng-repeat="felement in filterOptions.filters" layout="column">
+						<md-select ng-model='felement.selected' class="filter-choro-div">
+		  					<md-select-label class="filter-choro-label">{{felement.selected || felement.name}}</md-select-label>
+							<md-option class="filter-choro-option" ng-repeat='filter in felement.values' ng-value='filter'>{{filter}}</md-option>
+						</md-select>
+					</div>
+					<md-button ng-if="filterOptions" class="btn-choro" layout="column" ng-click="filter()"> Filtrar</md-button>
+				</div>
+				<span layout="column" flex> Mapa Estatístico  </span>
+			</div>
 	    </div>
         <md-content class="panel-body">
 
-        <div id="choroMap" ng-show="choroData"></div>
+		<div layout="row" layout-sm="column" layout-align="space-around">
+			<md-progress-circular
+				ng-show='carregar'
+		    	md-mode="indeterminate"
+		    	class="md-hue-2" >
+			</md-progress-circular>
+		</div>
+
+        <div class="map" ng-show="choroData && !carregar" map="atividadesMap"></div>
 
         <choro-legend data="choroData"
                       step-count="choroLegendSteps"
-                      ng-if="choroLegendSteps"></choro-legend>
+                      ng-if="choroLegendSteps"
+                      property="property" ng-show='!carregar'>
+		</choro-legend>
 
 		</md-content>
 	</md-content>

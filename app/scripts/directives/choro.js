@@ -7,22 +7,39 @@
  * # cloro
  */
 angular.module('geoCtfApp')
-  .directive('choro', function () {
+  .directive('choro', function ($q) {
     return {
       templateUrl: 'views/partials/choro.html',
-      restrict: 'AE',
+      restrict: 'E',
       scope:{
         choroData: '=geojson',
-        choroLegendSteps : '=legendSteps'
+        choroLegendSteps : '=legendSteps',
+        mapId : '=mapId',
+        propStep : '=propertyStep',
+        property : '=',
+        filterOptions : '='
       },
-      link: function postLink(scope, element, attr) {
+      link: function postLink(scope, element) {
+
+        var DEF_DEFAULT_PROPERTY = 'atividades';
 
         var info = L.control();
         var steps = [];
         var geojson = null;
         var data;
+        var propertyStep = scope.propStep;
+        var property = scope.property || DEF_DEFAULT_PROPERTY;
 
-        var choroMap = L.map('choroMap', {
+        var map;
+
+        if (scope.mapId)
+          map = element.find('.map').attr('id',scope.property + 'Map');
+        else
+          map = element.find('.map').attr('id',parseInt(Math.random()*100));
+
+
+        var choroMap = L.map(map.attr('id'), {
+        // var choroMap = L.map('choroMap', {
           center: [-15.5, -52],
           zoom: 4,
           minZoom: 4,
@@ -38,7 +55,7 @@ angular.module('geoCtfApp')
 
         function style(feature) {
             return {
-                fillColor: getColor(feature.properties.num_atividades),
+                fillColor: getColor(feature.properties['num_' + property]),
                 weight: 2,
                 opacity: 1,
                 color: 'white',
@@ -106,18 +123,18 @@ angular.module('geoCtfApp')
           if (props) {
             this._div.classList.add('info-show');
             // adding thousand separator
-            var atv = props.num_atividades.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+            var atv = props['num_' + property].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
           } else {
             this._div.classList.remove('info-show');
           }
-          this._div.innerHTML = '<h4> N° de Atividades </h4> ' + (props ?
-              '<b> ' + props.nome + '</b> ' + ' <br />' + atv + ' atividades '
+          this._div.innerHTML = '<h4> N° de ' + property.charAt(0).toUpperCase() + property.slice(1) + ' </h4> ' + (props ?
+              '<b> ' + props.nome + '</b> ' + ' <br />' + atv + ' ' + property +' '
               : '');
         };
 
         function updateChoro() {
           steps = data['features'].map(function(value) {
-            return {'num': value.properties.num_atividades, 'color': ''};
+            return {'num': value.properties['num_' + property], 'color': ''};
           });
 
           steps.sort(function(a, b){return a.num-b.num});
@@ -132,17 +149,33 @@ angular.module('geoCtfApp')
           info.addTo(choroMap);
         };
 
+        scope.filter = function() {
+          scope.carregar = true;
+          scope.filterOptions.filters.map(function(value){
+            var dbfield = value.dbfield || value.name.toLowerCase();
+            scope.filterOptions.restParam[dbfield] = value.selected;
+          });
+
+          var restResponse = scope.filterOptions.restApi[scope.filterOptions.restFunction](scope.filterOptions.restParam,function(data){
+            scope.choroData = data;
+          }).$promise;
+
+          $q.all([restResponse]).then(function(){
+            scope.carregar = false;
+          });
+        };
+
         scope.$watch('choroData', function(info) {
 
-        scope.carregar =  true;
+          scope.carregar =  true;
 
-        // if (attr.data) {
+          // if (attr.data) {
           data = info;
           if (data)
             updateChoro();
-        // }
+          // }
 
-        scope.carregar =  false;
+          scope.carregar =  false;
         });
       }
     };

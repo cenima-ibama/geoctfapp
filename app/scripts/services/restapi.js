@@ -36,7 +36,7 @@ angular.module('geoCtfApp')
           }
         },        
         getGeoEstatisticas: {
-          url: appConfig.apiUrl + '/geoestatisticas/:type',
+          url: appConfig.apiUrl + '/geoestatisticas/:type/',
           method:  'GET',
           params: { format:'json' },
           headers:{

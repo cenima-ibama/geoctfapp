@@ -30,10 +30,6 @@ angular.module('geoCtfApp')
         function defineScope(val){
           if(val){
 
-            val.data.sort(function(a,b) {
-              return b - a;
-            });
-
             scope.data = val.data;
             scope.labels = val.labels;
             scope.export = val.export;

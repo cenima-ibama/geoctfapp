@@ -161,11 +161,16 @@ angular.module('geoCtfApp')
         var dado = [];
         var labels = [];
 
+        object.sort(function(a,b) {
+          return b.quantidade - a.quantidade;
+        });
+
         angular.forEach(object, function(value){
-          angular.forEach(value, function(v, k){
-            dado.push(v);
-            labels.push(k);
-          })
+
+          // angular.forEach(value, function(v, k){
+            dado.push(value.quantidade);
+            labels.push(value.nome);
+          // })
         });
 
         data.data = dado;
@@ -174,6 +179,8 @@ angular.module('geoCtfApp')
         return data;
 
       }
+
+
 
       var exportCSV = {};
 
@@ -213,7 +220,7 @@ angular.module('geoCtfApp')
             $scope.chart4 = pieData(data);
             $scope.chart4.export = appConfig.apiUrl + '/estatisticas/regularidade/?format=csv&uf=' + arrEstado + '&categoria=' + arrCategoria + '&subcategoria=' + arrSubcategoria;
           }).$promise;
-      }
+      
 
           var rest3Response = RestApi.getGeoEstatisticas({type: 'empresas-uf', uf: arrEstado, categoria: arrCategoria, subcategoria: arrSubcategoria, ano: arrAno}, function(data){
             $scope.choroEmpresas = data;

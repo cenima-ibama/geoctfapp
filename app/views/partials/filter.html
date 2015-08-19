@@ -52,7 +52,6 @@
 	    </md-chips>
 	</div>
 
-
 	<md-select-group layout='row'>
 		<md-select 
 		ng-model='chart.categoria' 
@@ -118,7 +117,7 @@
 <hr>
 
 <md-content layout-padding >
-	<md-input-container ng-if='column'>
+	<md-input-container ng-show='column'>
 	    <!-- <label>Colunas</label> -->
 	    <label>Qtde máxima de barras</label>
 			<!-- 	    
@@ -132,7 +131,8 @@
  			-->	    
  		<input
  			layout='row'
-		    required type="number"
+		    required 
+		    type="number"
 		    ng-model="totalColumns" 
 		    min="1"
 		    max='200'
@@ -144,7 +144,7 @@
 	<button 
 		class='btn btn-primary right'
 		ng-disabled='loading'
-		ng-click='solicitar(es, ct, at, chart.ano, totalColumns)'>
+		ng-click="solicitar(es, ct, at, chart.ano, totalColumns)">
 			Enviar
 	</button>
 </md-content>

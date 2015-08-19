@@ -12,7 +12,7 @@ angular.module('geoCtfApp')
 
     return {
 
-      apiUrl : 'http://10.1.8.178:8000/api'
+      apiUrl : 'http://10.1.8.28:82/ctfapi/api'
 
     };
 

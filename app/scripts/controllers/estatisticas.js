@@ -43,6 +43,10 @@ angular.module('geoCtfApp')
     $scope.estados = formData.estados;
     $scope.anos = formData.anos;
 
+    if(!(containsObject($scope.regioes, 'Todos', 'nome'))){
+      $scope.regioes.push({nome: 'Todos'});
+    }
+
     $scope.choroData;
 
     $scope.carregar = {};
@@ -95,6 +99,54 @@ angular.module('geoCtfApp')
     };
 
 
+    function barData(object){
+      var data = {};
+
+      object = object.features.map(function(item){return item.properties});
+
+      var dado = [];
+      var labels = [];
+      // var series = [];
+
+      angular.forEach(object, function(value){
+        labels.push(value.sigla);
+        dado.push(value.num_atividades);
+        // series.push(value.series);
+      });
+
+      data.data = [dado];
+      data.labels = labels;
+      // data.series = series;
+
+      return data;
+    }
+
+    function pieData(object){
+      var data = {};
+
+      var dado = [];
+      var labels = [];
+
+      object.sort(function(a,b) {
+        return b.quantidade - a.quantidade;
+      });
+
+      angular.forEach(object, function(value){
+          if(value.quantidade != 0){
+        // angular.forEach(value, function(v, k){
+            dado.push(value.quantidade);
+            labels.push(value.nome);
+        // })
+          }
+      });
+
+      data.data = dado;
+      data.labels = labels;
+
+      return data;
+
+    }
+
     $scope.solicitar = function(estados, categorias, atividades, ano, columns){
 
       $scope.loading = true;
@@ -133,57 +185,6 @@ angular.module('geoCtfApp')
       arrCategoria = arrCategoria.substring(0,(arrCategoria.length - 1));
       arrSubcategoria = arrSubcategoria.substring(0,(arrSubcategoria.length - 1));
 
-      function barData(object){
-        var data = {};
-
-        object = object.features.map(function(item){return item.properties});
-
-        var dado = [];
-        var labels = [];
-        // var series = [];
-
-        angular.forEach(object, function(value){
-          labels.push(value.sigla);
-          dado.push(value.num_atividades);
-          // series.push(value.series);
-        });
-
-        data.data = [dado];
-        data.labels = labels;
-        // data.series = series;
-
-        return data;
-      }
-
-      function pieData(object){
-        var data = {};
-
-        var dado = [];
-        var labels = [];
-
-        object.sort(function(a,b) {
-          return b.quantidade - a.quantidade;
-        });
-
-        angular.forEach(object, function(value){
-
-          // angular.forEach(value, function(v, k){
-            dado.push(value.quantidade);
-            labels.push(value.nome);
-          // })
-        });
-
-        data.data = dado;
-        data.labels = labels;
-
-        return data;
-
-      }
-
-
-
-      var exportCSV = {};
-
       switch($scope.request){
         case 'atividades':
 
@@ -200,7 +201,7 @@ angular.module('geoCtfApp')
             $scope.chart2.totalColumns = columns;
             $scope.chart2.categorias = $scope.categorias;
             $scope.chart2.describe = 'geo-ctf-app-atividades-por-uf.csv';
-            $scope.chart2.export = appConfig.apiUrl + '/estatistica-subcategoria/?format=csv&uf=' + arrEstado + '&categoria=' + arrCategoria + '&subcategoria=' + arrSubcategoria + '&ano=' + arrAno;
+            $scope.chart2.export = appConfig.apiUrl + '/estatisticas/subcategorias/?format=csv&uf=' + arrEstado + '&categoria=' + arrCategoria + '&subcategoria=' + arrSubcategoria + '&ano=' + arrAno;
           }).$promise;
 
          $q.all([rest1Response,rest2Response]).then(function(){

@@ -19,9 +19,6 @@ angular.module('geoCtfApp')
 
 
       	$scope.changeStates = function(region){
-      		// if(!(states.length)){
-      		// 	var states = angular.copy(service);
-      		// }
       		var states = formData.estados;
       		var statesFiltered = [];
 
@@ -31,25 +28,34 @@ angular.module('geoCtfApp')
       			}
       		});
 
+          if (region.nome !== 'Todos')
+            statesFiltered.push({nome: 'Todos', regiao: 'Todos', sigla: 'Todos'});
+
           $scope.chart.estado = null;
       		$scope.filterEstados = statesFiltered;
       	};
 
 
       	$scope.addValues = function(obj, type, param){
-            var states = formData.estados;
+          var states = formData.estados;
       		switch(type){
 	      		case 'e':
-	      			if(!param || param.nome === 'Todos'){
-	      				angular.forEach(states, function(value){
-	      					if(value.regiao === obj.nome){
-		      					if(!containsObject($scope.es, value.sigla, 'sigla')){
-		      						$scope.es.push(value);
-		      					}
-	      					}
-	      				});
-	      				$scope.chart.estado = $scope.chart.regiao = null;
-	      			} else {
+	      			if(obj.nome == 'Todos'){
+                  angular.forEach(states, function(value){
+                    if(!containsObject($scope.es, value.sigla, 'sigla')){
+                      $scope.es.push(value);
+                    }
+                  });
+              } else if(!param || param.nome === 'Todos'){
+                angular.forEach(states, function(value){
+                  if(value.regiao === obj.nome){
+                    if(!containsObject($scope.es, value.sigla, 'sigla')){
+                      $scope.es.push(value);
+                    }
+                  }
+                });
+                $scope.chart.estado = $scope.chart.regiao = null;
+              } else {
       					if(!containsObject($scope.es, param.sigla, 'sigla')){
       						$scope.es.push(param);
       					}

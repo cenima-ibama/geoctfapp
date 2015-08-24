@@ -29,10 +29,6 @@ md-tabs md-ink-bar {
   padding: 5% 0% 5% 0%;
 }
 
-.md-select-label {
-  width: 100% !important;
-}
-
 #selectMin > md-select{
   max-width: 10em;
 }
@@ -62,6 +58,10 @@ md-tabs md-ink-bar {
 
 #chart > .panel-danger{
   border-color: rgba(63,81,181,.4);
+}
+
+.md-select-label {
+  width: 100% !important;
 }
 
 .leaflet-popup-content{
@@ -255,8 +255,12 @@ md-tabs md-ink-bar {
 }
 
 .filterButton{
-  max-width: 47%;
-  padding: 1em 0 2em 0;
+  max-width: 49%;
+  padding: 1em 0 1em 0;
+}
+
+.filterButtonYear{
+  padding: 0.7em 0 0.5em 0;
 }
 
 .select-choro .filter-choro-label {

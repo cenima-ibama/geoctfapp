@@ -52,7 +52,7 @@
         </md-select>
 
         <md-select ng-model='filter.ano' placeholder='Ano'  layout='row'>
-            <md-option ng-repeat='ano in anos' ng-value='ano'>{{ano}}</md-option>
+            <md-option ng-repeat='ano in anos' ng-value='ano' ng-selected="{{$first}}">{{ano}}</md-option>
         </md-select>
 
         <br/>

@@ -43,15 +43,13 @@ angular.module('geoCtfApp')
     $scope.estados = formData.estados;
     $scope.anos = formData.anos;
 
-    if(!(containsObject($scope.regioes, 'Todos', 'nome'))){
-      $scope.regioes.push({nome: 'Todos'});
+    if(!(containsObject($scope.regioes, 'Todas', 'nome'))){
+      $scope.regioes.push({nome: 'Todas'});
     }
 
     $scope.choroData;
 
     $scope.carregar = {};
-    // $scope.export = {};
-    // $scope.chart = {};
 
     RestApi.get({ type: 'categorias'}, function(data){
       $scope.categorias = data;
@@ -91,11 +89,11 @@ angular.module('geoCtfApp')
 
     $scope.defineRequest = function (val){
       $scope.request = val;
-      if(val !== 'atividades'){
-        $rootScope.column = false;
-      } else {
-        $rootScope.column = true;
-      }
+      // if(val !== 'atividades'){
+      //   $rootScope.column = false;
+      // } else {
+      //   $rootScope.column = true;
+      // }
     };
 
 
@@ -121,7 +119,7 @@ angular.module('geoCtfApp')
       return data;
     }
 
-    function pieData(object){
+    function pieData(object, optional){
       var data = {};
 
       var dado = [];
@@ -140,6 +138,13 @@ angular.module('geoCtfApp')
           }
       });
 
+      if(optional){
+        if(labels[0] == 'irregulares'){
+          labels.reverse();
+          dado.reverse();
+        }
+      }
+
       data.data = dado;
       data.labels = labels;
 
@@ -152,24 +157,17 @@ angular.module('geoCtfApp')
       $scope.loading = true;
 
       var arrEstado = '';
-      var arrCategoria = '';
       var arrSubcategoria = '';
+      var arrCategoria = '';
       var arrAno;
-
-      var rest1Response;
-      var rest2Response;
 
       if ($scope.request == 'atividades') {
         $scope.carregar.atividades = true;
       } else if ($scope.request == 'empresas'){
         $scope.carregar.empresas = true;
       }
-
-      if(!ano || ano === 'Todos'){
-        arrAno = '';
-      } else{
-        arrAno = ano;
-      }
+      
+      (!ano || ano == 'Todos') ? arrAno = '' : arrAno = ano;
 
       angular.forEach(estados, function(value){
         arrEstado += value.sigla + ',';
@@ -187,10 +185,9 @@ angular.module('geoCtfApp')
 
       switch($scope.request){
         case 'atividades':
-
           var rest2Response = RestApi.getGeoEstatisticas({type: 'atividades-uf', uf: arrEstado, categoria: arrCategoria, subcategoria: arrSubcategoria, ano: arrAno}, function(data){
             $scope.chart1 = barData(data);
-            $scope.chart1.export = appConfig.apiUrl + '/estatisticas/atividades-uf/?format=csv&uf=' + arrEstado + '&categoria' + arrCategoria + '&subcategoria=' +arrSubcategoria;
+            $scope.chart1.export = appConfig.apiUrl + '/estatisticas/atividades-uf/?format=csv&ano=' + arrAno + '&uf=' + arrEstado + '&categoria' + arrCategoria + '&subcategoria=' +arrSubcategoria;
             $scope.chart1.describe = 'geo-ctf-app-atividades-por-categoria.csv';
             $scope.choroAtividades = data;
           }).$promise;
@@ -211,24 +208,24 @@ angular.module('geoCtfApp')
 
           break;
         case 'empresas':
-
           var rest1Response = RestApi.getEstatisticas({type: 'porte', uf: arrEstado, categoria: arrCategoria, subcategoria: arrSubcategoria, ano: arrAno}, function(data){
             $scope.chart3 = pieData(data);
-            $scope.chart3.export = appConfig.apiUrl + '/estatisticas/porte/?format=csv&uf=' + arrEstado + '&categoria=' + arrCategoria + '&subcategoria=' + arrSubcategoria;
+            $scope.chart3.export = appConfig.apiUrl + '/estatisticas/porte/?format=csv&ano=' + arrAno + '&uf=' + arrEstado + '&categoria=' + arrCategoria + '&subcategoria=' + arrSubcategoria;
           }).$promise;
 
           var rest2Response = RestApi.getEstatisticas({type: 'regularidade', uf: arrEstado, categoria: arrCategoria, subcategoria: arrSubcategoria, ano: arrAno}, function(data){
-            $scope.chart4 = pieData(data);
-            $scope.chart4.export = appConfig.apiUrl + '/estatisticas/regularidade/?format=csv&uf=' + arrEstado + '&categoria=' + arrCategoria + '&subcategoria=' + arrSubcategoria;
+            $scope.chart4 = pieData(data, true);
+            console.log(data);
+            $scope.chart4.export = appConfig.apiUrl + '/estatisticas/regularidade/?format=csv&ano=' + arrAno + '&uf=' + arrEstado + '&categoria=' + arrCategoria + '&subcategoria=' + arrSubcategoria;
           }).$promise;
       
-
           var rest3Response = RestApi.getGeoEstatisticas({type: 'empresas-uf', uf: arrEstado, categoria: arrCategoria, subcategoria: arrSubcategoria, ano: arrAno}, function(data){
             $scope.choroEmpresas = data;
-
             $scope.filterObject = {};
             $scope.filterObject.filters = [];
+          }).$promise;
 
+          $q.all([rest1Response,rest2Response, rest3Response]).then(function(){
             var filterElement = {};
             filterElement.name = 'Porte'
             filterElement.values = $scope.chart3.labels.map(function(value){return value;});
@@ -237,21 +234,16 @@ angular.module('geoCtfApp')
             filterElement.dbfield = 'porte';
             $scope.filterObject.filters.push(filterElement);
 
-            var filterElement = {};
+            filterElement = {};
             filterElement.name = 'Regularidade';
             filterElement.values = $scope.chart4.labels.map(function(value){return value;});
             filterElement.values.unshift('');
             filterElement.dbfield = 'regularidade';
             filterElement.selected = '';
             $scope.filterObject.filters.push(filterElement);
-
-            $scope.filterObject.restApi = RestApi;
             $scope.filterObject.restFunction = 'getGeoEstatisticas';
             $scope.filterObject.restParam = {type: 'empresas-uf', uf: arrEstado, categoria: arrCategoria, subcategoria: arrSubcategoria, ano: arrAno};
 
-          }).$promise;
-
-          $q.all([rest1Response,rest2Response, rest3Response]).then(function(){
             $scope.carregar.empresas = false;
             $scope.loading = false;
           });

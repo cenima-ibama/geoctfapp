@@ -1,7 +1,7 @@
 <md-content layout-padding>
 	<md-select-group >
-		<md-select ng-model='chart.ano' aria-label='chartAno' placeholder='Ano'>
-			<md-option ng-repeat='ano in anos' ng-value='ano'>{{ano}}</md-option>
+		<md-select ng-model='chart.ano' aria-label='chartAno' placeholder='Ano' class='filterButtonYear'>
+			<md-option ng-repeat='ano in anos' ng-value='ano' ng-selected="{{$first}}">{{ano}}</md-option>
 		</md-select>
 	</md-select-group>
 
@@ -36,7 +36,7 @@
 		ng-disabled='!chart.regiao'
  		class='btn btn-success'>
  			<span class='glyphicon glyphicon-plus-sign'></span>
- 			Adicionar
+ 			Adicionar à pesquisa
  		</button>
  	</div>
 
@@ -83,7 +83,7 @@
 		ng-disabled='!chart.categoria'
  		class='btn btn-success'>
  			<span class='glyphicon glyphicon-plus-sign'></span>
- 			Adicionar
+ 			Adicionar à pesquisa
  		</button>
  	</div>
 

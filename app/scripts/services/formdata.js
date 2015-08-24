@@ -23,8 +23,6 @@ angular.module('geoCtfApp')
       current++;
     }
 
-    years.unshift('Todos');
-
     data = {
 
       anos : years,

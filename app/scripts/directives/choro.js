@@ -7,7 +7,7 @@
  * # cloro
  */
 angular.module('geoCtfApp')
-  .directive('choro', function ($q) {
+  .directive('choro', function ($q, RestApi) {
     return {
       templateUrl: 'views/partials/choro.html',
       restrict: 'E',
@@ -156,7 +156,7 @@ angular.module('geoCtfApp')
             scope.filterOptions.restParam[dbfield] = value.selected;
           });
 
-          var restResponse = scope.filterOptions.restApi[scope.filterOptions.restFunction](scope.filterOptions.restParam,function(data){
+          var restResponse = RestApi[scope.filterOptions.restFunction](scope.filterOptions.restParam,function(data){
             scope.choroData = data;
           }).$promise;
 

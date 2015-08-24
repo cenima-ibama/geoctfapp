@@ -28,7 +28,7 @@ angular.module('geoCtfApp')
       			}
       		});
 
-          if (region.nome !== 'Todos')
+          if (region.nome !== 'Todas')
             statesFiltered.push({nome: 'Todos', regiao: 'Todos', sigla: 'Todos'});
 
           $scope.chart.estado = null;
@@ -40,7 +40,7 @@ angular.module('geoCtfApp')
           var states = formData.estados;
       		switch(type){
 	      		case 'e':
-	      			if(obj.nome == 'Todos'){
+	      			if(obj.nome == 'Todas'){
                   angular.forEach(states, function(value){
                     if(!containsObject($scope.es, value.sigla, 'sigla')){
                       $scope.es.push(value);

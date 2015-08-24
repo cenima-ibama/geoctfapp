@@ -176,7 +176,7 @@ function sidenavDir (RestApi) {
         html += '<b>CNPJ:</b> ' + properties.cnpj + '<br/>';
         html += '<b>Fantasia:</b> ' + properties.nome_fantasia + '<br/>';
         html += '<b>Porte:</b> ' + properties.porte + '<br/>';
-        html += '<b>Certificado regularidade da pessoa jurídica:</b> ' + (properties.regularidade ? 'Sim' : 'Não')+ '<br/><br/>';
+        html += '<b>Certificado regularidade da pessoa jurídica:</b> ' + (properties.regularidade ? 'Possui Certificado de Regularidade Válido' : 'Não Possui Certificado de Regularidade Válido')+ '<br/><br/>';
       }
 
       angular.forEach(properties.atividades, function(atividade, key) {
@@ -190,9 +190,12 @@ function sidenavDir (RestApi) {
           html += '<b>Categoria:</b> ' + atividade.categoria + '<br/>';
           html += '<b>Atividade:</b> ' + atividade.subcategoria + '<br/>';
 
-          if(Auth.isLoggedIn())
-
+          if(Auth.isLoggedIn()){
+            if( atividade.grau_poluicao == 'Sem')
+              atividade.grau_poluicao = '---'
             html += '<b>Grau de Poluicao:</b> ' + atividade.grau_poluicao  + '<br/>';
+          }
+
 
           count++;
         }

@@ -1,4 +1,4 @@
-
+<!-- 
 <md-content id='chart'>
 	<md-content class="panel panel-danger">
 	    <div class="panel-heading text-center" layout="row">
@@ -27,4 +27,28 @@
 
 		</md-content>
 	</md-content>
+</md-content>
+ -->
+
+<md-content layout-padding class='padding'>
+	<div class="line">
+		<p class="title"><strong>{{name}}</strong></p>
+		<a class="export" ng-if='export' href="{{export}}" download="{{describe}}">
+            <i class="glyphicon glyphicon-save"></i>
+            CSV
+        </a>
+	</div>
+	 <canvas
+		class="chart-bar" 
+		data="data" 
+		labels="labels" 
+		legend="false" 
+		series="series" 
+		options='options'
+		click='atividadeName'>
+	</canvas>
+
+	<div ng-if='legend' flex class='text-center'>
+		<label>{{legend}}</label>
+	</div>	
 </md-content>

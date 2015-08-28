@@ -9,7 +9,7 @@
 angular.module('geoCtfApp')
   .directive('map', function () {
     return {
-      template: '<div resizable ng-style="{height: windowHeight-83}" id="map"><sidenav></sidenav></div>',
+      template: '<div resizable ng-style="{height: windowHeight-83, width: windowWidth}" id="map"><sidenav></sidenav></div>',
       restrict: 'E',
       link: function postLink(scope) {
         scope.map = L.map('map').setView([-12, -52], 5);

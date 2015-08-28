@@ -1,4 +1,4 @@
-
+<!-- 
 <md-content id='chart'>
 	<md-content class='panel panel-danger'>
 	    <div class='panel-heading text-center' layout='row'>
@@ -21,4 +21,25 @@
 			</canvas>
 		</md-content>
 	</md-content>
+</md-content>
+ -->
+<md-content class='padding'>
+	<div class="line">
+		<p class="title"><strong>{{name}}</strong></p>
+		<a class="export" ng-if='export' href="{{export}}" download="{{describe}}">
+            <i class="glyphicon glyphicon-save"></i>
+            CSV
+        </a>
+	</div>
+
+    <md-content class='panel-body' style="width: 50%; height: auto; margin:auto" >
+		<canvas 
+			class='chart-pie'
+			data='data'
+			labels='labels'
+			legend='true'
+			options='options'>
+		</canvas>
+	</md-content>
+
 </md-content>

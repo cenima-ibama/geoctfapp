@@ -18,7 +18,6 @@ angular.module('geoCtfApp')
 
     $rootScope.logged = Auth.isLoggedIn() ? true : false;
 
-
     $scope.$watch(Auth.isLoggedIn, function (value, oldValue) {
       if(!value && oldValue) {
         console.log('Disconnect');
@@ -140,8 +139,13 @@ angular.module('geoCtfApp')
 
       if(optional){
         if(labels[0] == 'irregulares'){
+          labels[0] = 'Não Possui Certificado de Regularidade Válido';
+          labels[1] = 'Possui Certificado de Regularidade Válido';
           labels.reverse();
           dado.reverse();
+        } else {
+          labels[0] = 'Possui Certificado de Regularidade Válido';
+          labels[1] = 'Não Possui Certificado de Regularidade Válido';
         }
       }
 
@@ -215,17 +219,17 @@ angular.module('geoCtfApp')
 
           var rest2Response = RestApi.getEstatisticas({type: 'regularidade', uf: arrEstado, categoria: arrCategoria, subcategoria: arrSubcategoria, ano: arrAno}, function(data){
             $scope.chart4 = pieData(data, true);
-            console.log(data);
             $scope.chart4.export = appConfig.apiUrl + '/estatisticas/regularidade/?format=csv&ano=' + arrAno + '&uf=' + arrEstado + '&categoria=' + arrCategoria + '&subcategoria=' + arrSubcategoria;
           }).$promise;
       
           var rest3Response = RestApi.getGeoEstatisticas({type: 'empresas-uf', uf: arrEstado, categoria: arrCategoria, subcategoria: arrSubcategoria, ano: arrAno}, function(data){
             $scope.choroEmpresas = data;
-            $scope.filterObject = {};
-            $scope.filterObject.filters = [];
           }).$promise;
 
           $q.all([rest1Response,rest2Response, rest3Response]).then(function(){
+            $scope.filterObject = {};
+            $scope.filterObject.filters = [];
+
             var filterElement = {};
             filterElement.name = 'Porte'
             filterElement.values = $scope.chart3.labels.map(function(value){return value;});
@@ -250,7 +254,6 @@ angular.module('geoCtfApp')
 
           break;
         default:
-          break;
       }
 
     };

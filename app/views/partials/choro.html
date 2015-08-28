@@ -1,5 +1,5 @@
 
-<md-content id='chart'>
+<!-- <md-content id='chart'>
 	<md-content class="panel panel-danger" >
 	    <div class="panel-heading text-center">
 	    	<div class='panel-title' layout="row">
@@ -37,4 +37,49 @@
 
 		</md-content>
 	</md-content>
+</md-content>
+ -->
+
+<md-content layout-padding >
+	<div class="line" >
+		<p class="title" flex><strong>Mapa Estatístico</strong></p>
+	</div>
+
+	<div ng-if="filterOptions" ng-hide='carregar' layout='column' id='filterChoroOver'>
+		<div ng-repeat="felement in filterOptions.filters" >
+			<md-select ng-model='felement.selected' layout='row' class='filterChoro'>
+				<md-select-label>{{felement.selected || felement.name}}</md-select-label>
+				<md-option ng-repeat='filter in felement.values' ng-value='filter'>
+					{{filter}}
+				</md-option>
+			</md-select>
+		</div>
+		<button ng-if="filterOptions" 
+			class="btn btn-default"
+			id='buttonChoroOver' 
+			ng-click="filter()" 
+			layout='column'
+			> 
+			Filtrar
+		</button>
+	</div>
+
+	<div layout="row" layout-sm="column" layout-align="space-around">
+		<md-progress-circular
+			ng-show='carregar'
+	    	md-mode="indeterminate"
+	    	class="md-hue-2" >
+		</md-progress-circular>
+	</div>
+
+    <div class="map" ng-show="choroData && !carregar" map="atividadesMap"></div>
+
+    <choro-legend 
+		ng-if="choroLegendSteps"
+    	data="choroData"
+    	layout-align='space-around'
+		step-count="choroLegendSteps"
+		property="property" ng-show='!carregar'>
+	</choro-legend>
+
 </md-content>

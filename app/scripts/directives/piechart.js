@@ -11,7 +11,7 @@ angular.module('geoCtfApp')
     return {
       templateUrl: 'views/partials/pieChart.html',
       restrict: 'E',
-      replace: true,
+      // replace: true,
       scope: {
         pie: '=data',
         name: '=',
@@ -22,14 +22,13 @@ angular.module('geoCtfApp')
           segmentShowStroke : true,
           segmentStrokeColor : "#fff",
           segmentStrokeWidth : 0,
-          animationSteps : 50,
+          animationSteps : 10,
           animateScale : false,
           // legendTemplate : "<ul id=\"pieChart\" layout=\"column\" class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<segments.length; i++){%><li><span style=\"background-color:<%=segments[i].fillColor%>\"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>"
         }
   
         function defineScope(val){
           if(val){
-
             scope.data = val.data;
             scope.labels = val.labels;
             scope.export = val.export;

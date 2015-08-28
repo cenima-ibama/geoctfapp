@@ -60,6 +60,9 @@ md-tabs md-ink-bar {
   border-color: rgba(63,81,181,.4);
 }
 
+.padding{
+  padding: 2em 0;
+}
 .md-select-label {
   width: 100% !important;
 }
@@ -196,26 +199,24 @@ md-tabs md-ink-bar {
     color:#FFFFFF;
 }
 
-.export-button:hover,
-.export-button:active,
-.export-button:focus {
-    color: #ececec;
+.export:hover,
+.export:active,
+.export:focus {
+    color: #222;
 }
 
-.nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
-  background-color: rgba(63,81,181, 0.95);
-}
+
 .choro-legend {
-    padding: 10px 15px 5px;
-    display: inline-block;
-    width: 100%;
+    padding: 1em 5em 1em 5em;
+    /*display: inline-block;*/
+    /*width: 100%;*/
     overflow: visible;
-    max-width: 800px;
+    /*max-width: 800px;*/
 }
 
 .choro-legend .legend-box {
     display: block;
-    height: 16px;
+    height: 1em;
 }
 
 .choro-legend .gradient {
@@ -259,44 +260,76 @@ md-tabs md-ink-bar {
   padding: 1em 0 1em 0;
 }
 
-.filterButtonYear{
-  padding: 0.7em 0 0.5em 0;
+.filterButtonYear{padding: 0.7em 0 0.5em 0;}
+
+.filterChoro{
+  padding: 0 0.5em;
+  max-width: 10em;
 }
 
-.select-choro .filter-choro-label {
-  min-height: 1.4em;
-  max-height: 1.4em;
-  font-size: 14px;
+#filterChoroOver{
+  z-index: 1;
+  margin: 0.5em;
+  position: absolute;
+  border-radius: 0.5em;
+  background-color: white;
+  opacity: 0.88;
+  box-shadow: 0.2em 0.2em rgba(0,0,0,0.4);
+}
+#buttonChoroOver{
+  opacity: 0.8;
+  margin: 0.4em;
+  max-width: 4.5em;
+  margin-left: 5.5em;
 }
 
-.select-choro {
-  max-width: 22em;
-  /*max-width: 16.4em;*/
-}
+/*Init charts customization*/
+  .line {
+    position: relative;
+    font-size: 12px;
+    line-height: 20px;
+    text-align: center;
+    text-transform: uppercase;
+    margin-bottom: 2em;
+  }
+  .line:before {
+    position: absolute;
+    top: 50%;
+    display: block;
+    content: "";
+    width: 100%;
+    height: 1px;
+    background-color: #676799;
+  }
 
-.filter-choro-div {
-  padding-bottom: 0em;
-  padding-top: 0em;
-  padding-right: 1em;
-  min-height: 1.4em;
-  max-height: 1.4em;
-  font-size: 14px;
-  color: #ffffff;
-}
+  .title {
+    position: relative;
+    z-index: 2;
+    display: inline-block;
+    padding-left: 1em;
+    padding-right: 1em;
+    color: #6f7890; 
+    vertical-align: middle;
+    background-color: white;
+    font-size: 1.5em;
+    margin: 0 !important;
+  }
 
-.filter-choro-label {
-  color: #ffffff;  
-  min-width: 8.4em;  
-  max-width: 8.4em;
-  text-align: left;
-}
-
-.btn-choro {
-  text-transform: inherit;
-  margin: 0em;
-  border-color: #ffffff;
-  font-size: 14px;
-  min-height: 1.5em;
-  max-height: 1.5em;
-  line-height: normal;
-}
+  .export {
+    position: relative;
+    z-index: 2;
+    display: inline-block;
+    padding-left: 1em;
+    padding-right: 1em;
+    font-size: 14px;
+    color: #6f7890; 
+    background-color: white;
+    margin: 0 1em !important;
+    float: right;
+  }
+/*end charts customization*/
+/*
+.nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
+  background-color: #5cb85c;
+  border-color: #4cae4c;
+}*/

@@ -32,7 +32,7 @@ angular.module('geoCtfApp')
 
         var map;
 
-        if (scope.mapId)
+        if(scope.mapId)
           map = element.find('.map').attr('id',scope.property + 'Map');
         else
           map = element.find('.map').attr('id',parseInt(Math.random()*100));
@@ -151,12 +151,18 @@ angular.module('geoCtfApp')
 
         scope.filter = function() {
           scope.carregar = true;
-          scope.filterOptions.filters.map(function(value){
+          var filterOptions = angular.copy(scope.filterOptions);
+          filterOptions.filters.map(function(value){
             var dbfield = value.dbfield || value.name.toLowerCase();
-            scope.filterOptions.restParam[dbfield] = value.selected;
+            if(value.selected == 'Não Possui Certificado de Regularidade Válido' ){
+              value.selected = 'irregulares';
+            } else if(value.selected == 'Possui Certificado de Regularidade Válido'){
+              value.selected = 'regulares';
+            }
+            filterOptions.restParam[dbfield] = value.selected;
           });
 
-          var restResponse = RestApi[scope.filterOptions.restFunction](scope.filterOptions.restParam,function(data){
+          var restResponse = RestApi[filterOptions.restFunction](filterOptions.restParam,function(data){
             scope.choroData = data;
           }).$promise;
 

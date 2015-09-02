@@ -1,19 +1,22 @@
 
 
-<div layout="row" layout-sm="column" layout-align="space-around">
-	<md-progress-circular
-		ng-if='carregar.empresas'
-    	md-mode="indeterminate"
-    	class="md-hue-2" >
-	</md-progress-circular>
-</div>
 
 
-<md-content layout="row" resizable ng-style="{height: windowHeight-130}">
+<md-content layout="row" ng-style="{height: windowHeight-130}">
+	<div layout="row" layout-sm="column" layout-align="space-around" style='position:fixed; margin: 20% 35%'>
+		<md-progress-circular
+			ng-if='carregar.empresas'
+	    	md-mode="indeterminate"
+	    	class="md-hue-2"
+	    	style='z-index: 1000' >
+	    	<i>Carregando informações</i>
+		</md-progress-circular>
+	</div>
+	<!-- <md-content flex class='md-padding' md-scroll-y ng-class="{opacidade: carregar.empresas}"> -->
 	<md-content flex class='md-padding' md-scroll-y ng-if="!carregar.empresas">
 		<pie-chart data='chart3' name='"Empresas por Porte"'></pie-chart>
 		<pie-chart data='chart4' name='"Empresa por Certificado de Regularidade"'></pie-chart>
-		<choro geojson='choroEmpresas' property='"empresas"'legend-steps="4" filter-options="filterObject"></choro>
+		<choro geojson='choroEmpresas' property='"empresas"'legend-steps="4" filter-options="filterObject" ng-if='!carregar.empresas'></choro>
 		<!-- <choro geojson='choroEmpresas' property='"empresas"' property-step='"num_empresas"' legend-steps="4" map-id='"empresasMap"'></choro> -->
 	</md-content>
 </md-content>

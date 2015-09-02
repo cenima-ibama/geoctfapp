@@ -1,36 +1,45 @@
 <topbar></topbar>
-<md-content layout="row" resizable >
+<md-content layout="row">
   <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')" md-scroll-y 
   ng-style="{height: windowHeight-90}" resizable>
       <md-content layout-padding > 
        <filter ></filter>
      </md-content>
   </md-sidenav>
-  <tabset justified="true" type="pills" flex>
-    <button type="button" class="navbar-toggle" >
+  <tabset justified="true" type="pills" flex resizable>
+    <button type="button" class="navbar-toggle">
      <span class="icon-bar"></span>
      <span class="icon-bar"></span>
      <span class="icon-bar"></span>
     </button>
-    <tab heading="Por Atividades" select='defineRequest("atividades")' disable='loading' flex><atividades></atividades></tab>
-    <tab heading="Por Pessoa Jurídica"  select='defineRequest("empresas")' disable='loading' flex><empresas></empresas></tab>
-    <tab heading="Por Inscrições" select='defineRequest("inscricoes")' disable='loading' flex><inscricoes></inscricoes></tab> 
+    
+    <tab heading="Por Atividades" select='defineRequest("atividades")' disable='loading' >
+      <atividades id='chartContent'></atividades>
+    </tab>
+    
+    <tab heading="Por Pessoa Jurídica"  select='defineRequest("empresas")' disable='loading' >
+      <empresas id='chartContent'></empresas>
+    </tab>
+    
+    <tab heading="Por Inscrições" select='defineRequest("inscricoes")' disable='loading'>
+      <inscricoes id='chartContent'></inscricoes>
+    </tab> 
   </tabset>
 </md-content>
 
 
-    <!-- 
-    <tab heading="Por Atividades" select='defineRequest("atividades")' disable='loading' flex>
-      <atividades ng-hide='hints'></atividades>
-      <hints ng-show='hints'></hints>
-    </tab>
-    
-    <tab heading="Por Pessoa Jurídica"  select='defineRequest("empresas")' disable='loading' flex>
-      <empresas ng-hide='hints'></empresas>
-      <hints ng-show='hints'></hints>
-    </tab>
-    
-    <tab heading="Por Inscrições" select='defineRequest("inscricoes")' disable='loading' flex>
-      <inscricoes ng-hide='hints'></inscricoes>
-      <hints ng-show='hints'></hints>
-    </tab>  -->
+  <!-- 
+  <tab heading="Por Atividades" select='defineRequest("atividades")' disable='loading' flex>
+    <atividades ng-hide='hints'></atividades>
+    <hints ng-show='hints'></hints>
+  </tab>
+  
+  <tab heading="Por Pessoa Jurídica"  select='defineRequest("empresas")' disable='loading' flex>
+    <empresas ng-hide='hints'></empresas>
+    <hints ng-show='hints'></hints>
+  </tab>
+  
+  <tab heading="Por Inscrições" select='defineRequest("inscricoes")' disable='loading' flex>
+    <inscricoes ng-hide='hints'></inscricoes>
+    <hints ng-show='hints'></hints>
+  </tab>  -->

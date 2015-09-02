@@ -17,7 +17,7 @@ angular.module('geoCtfApp')
       $scope.initializeWindowSize();
       return angular.element($window).bind('resize', function() {
         $scope.initializeWindowSize();
-        return $scope.$apply();
+        $scope.$apply();
       });
     };
 });

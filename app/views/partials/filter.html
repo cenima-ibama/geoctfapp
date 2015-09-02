@@ -1,4 +1,4 @@
-<md-content layout-padding>
+<md-content layout-padding ng-init="totalColumns=30">
 	<md-select-group >
 		<md-select ng-model='chart.ano' aria-label='chartAno' placeholder='Ano' class='filterButtonYear'>
 			<md-option ng-repeat='ano in anos' ng-value='ano' ng-selected="{{$first}}">{{ano}}</md-option>

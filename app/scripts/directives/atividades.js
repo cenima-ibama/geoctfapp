@@ -11,5 +11,8 @@ angular.module('geoCtfApp')
     return {
       templateUrl: 'views/partials/atividades.html',
       restrict: 'E',
+      link: function postLink(scope, element, attrs) {
+      	
+      }
     };
   });

@@ -22,6 +22,7 @@ angular.module('geoCtfApp')
 		scope.options = {
 			animationSteps: 2,
 			bezierCurve : false,
+			responsive: true,
 		};
 
 		Chart.defaults.global.colours = ['#337ab7', '#a94442', '#46BFBD', '#7B68EE', '#FDB45C', '#949FB1', '#4D5360'];

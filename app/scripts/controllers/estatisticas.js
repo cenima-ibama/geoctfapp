@@ -32,7 +32,6 @@ angular.module('geoCtfApp')
       }
     }, true);
 
-
     $scope.tabStats = true;
 
     $cookies.SystemName = 'CTF-APP-GEO';
@@ -88,18 +87,20 @@ angular.module('geoCtfApp')
 
     $scope.defineRequest = function (val){
       $scope.request = val;
-      // if(val !== 'atividades'){
-      //   $rootScope.column = false;
-      // } else {
-      //   $rootScope.column = true;
-      // }
+     
+      if(val !== 'atividades'){
+        $rootScope.column = false;
+      } else {
+        $rootScope.column = true;
+      }
     };
 
 
-    function barData(object){
+    function barData(object, features){
       var data = {};
 
-      object = object.features.map(function(item){return item.properties});
+      if (!features)
+        object = object.features.map(function(item){return item.properties}); 
 
       var dado = [];
       var labels = [];
@@ -164,13 +165,15 @@ angular.module('geoCtfApp')
       var arrSubcategoria = '';
       var arrCategoria = '';
       var arrAno;
-
+      
       if ($scope.request == 'atividades') {
         $scope.carregar.atividades = true;
       } else if ($scope.request == 'empresas'){
         $scope.carregar.empresas = true;
-      }
-      
+      } else if ($scope.request == 'inscricoes'){
+        $scope.carregar.inscricoes = true;
+      } 
+
       (!ano || ano == 'Todos') ? arrAno = '' : arrAno = ano;
 
       angular.forEach(estados, function(value){
@@ -227,6 +230,12 @@ angular.module('geoCtfApp')
           }).$promise;
 
           $q.all([rest1Response,rest2Response, rest3Response]).then(function(){
+            /*
+            -- Building empresa Map --
+            Creating objects with labels and selects from previews query
+            object filterObject to get params and passing this to directive
+            see choroMap directive
+            */
             $scope.filterObject = {};
             $scope.filterObject.filters = [];
 
@@ -245,15 +254,30 @@ angular.module('geoCtfApp')
             filterElement.dbfield = 'regularidade';
             filterElement.selected = '';
             $scope.filterObject.filters.push(filterElement);
+
             $scope.filterObject.restFunction = 'getGeoEstatisticas';
             $scope.filterObject.restParam = {type: 'empresas-uf', uf: arrEstado, categoria: arrCategoria, subcategoria: arrSubcategoria, ano: arrAno};
-
+            /* -- End of Building empresa Map -- */
             $scope.carregar.empresas = false;
             $scope.loading = false;
           });
-
           break;
+        case 'inscricoes':
+          var rest1Response = RestApi.getEstatisticas({type: 'inscricoes-uf', uf: arrEstado, categoria: arrCategoria, subcategoria: arrSubcategoria, ano: arrAno}, function(data){
+            $scope.chart5 = barData(data, true);
+          }).$promise;
+
+          
+          $q.all([rest1Response]).then(function(){
+            $scope.chart5.describe = 'geo-ctf-app-inscricoes-por-uf.csv';
+            $scope.chart5.export = appConfig.apiUrl + '/estatisticas/inscricoes-uf/?format=csv&ano=' + arrAno + '&uf=' + arrEstado + '&categoria=' + arrCategoria + '&subcategoria=' + arrSubcategoria;
+
+            $scope.carregar.inscricoes = false;
+            $scope.loading = false;
+          });
+           break;
         default:
+          console.log("Wasnt no one");
       }
 
     };

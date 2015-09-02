@@ -17,7 +17,6 @@ angular.module('geoCtfApp')
       	$scope.ct = []; //Initializing array to push values on function addValues below
       	$scope.at = []; //Initializing array to push values on function addValues below
 
-
       	$scope.changeStates = function(region){
       		var states = formData.estados;
       		var statesFiltered = [];

@@ -1,0 +1,22 @@
+
+
+
+
+<md-content layout="row" ng-style="{height: windowHeight-130}">
+
+	<div layout="row" layout-sm="column" layout-align="space-around" style='position:fixed; margin: 20% 35%'>
+		<md-progress-circular
+			ng-if='carregar.inscricoes'
+	    	md-mode="indeterminate"
+	    	class="md-hue-2"
+	    	style='z-index: 1000'>	 
+	    	<i>Carregando informações</i>   	
+		</md-progress-circular>
+	</div>
+
+	<!-- <md-content flex class='md-padding' md-scroll-y ng-class="{opacidade: carregar.inscricoes}"> -->
+	<md-content flex class='md-padding' md-scroll-y ng-if="!carregar.inscricoes">
+		<bar-chart data='chart5' name='"Inscricoes por UF"'></bar-chart>
+		<!-- <bar-chart data='chart5' name='"Inscrições por ano"'></bar-chart> -->
+	</md-content>
+</md-content>

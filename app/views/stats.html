@@ -1,7 +1,7 @@
 <topbar></topbar>
 <md-content layout="row">
   <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')" md-scroll-y 
-  ng-style="{height: windowHeight-90}" resizable>
+  >
       <md-content layout-padding > 
        <filter ></filter>
      </md-content>
@@ -14,15 +14,15 @@
     </button>
     
     <tab heading="Por Atividades" select='defineRequest("atividades")' disable='loading' >
-      <atividades id='chartContent'></atividades>
+      <atividades ></atividades>
     </tab>
     
     <tab heading="Por Pessoa Jurídica"  select='defineRequest("empresas")' disable='loading' >
-      <empresas id='chartContent'></empresas>
+      <empresas ></empresas>
     </tab>
     
     <tab heading="Por Inscrições" select='defineRequest("inscricoes")' disable='loading'>
-      <inscricoes id='chartContent'></inscricoes>
+      <inscricoes ></inscricoes>
     </tab> 
   </tabset>
 </md-content>

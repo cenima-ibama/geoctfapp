@@ -108,9 +108,13 @@ angular.module('geoCtfApp')
         };
 
 
-        L.tileLayer('http://a.tile.thunderforest.com/transport/{z}/{x}/{y}.png', {
-          attribution: '&copy; Maps <a href="http://www.thunderforest.com">Thunderforest</a>, Data <a href="http://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>'
+        L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+          attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'//,
         }).addTo(choroMap);
+
+        // L.tileLayer('http://a.tile.thunderforest.com/transport/{z}/{x}/{y}.png', {
+        //   attribution: '&copy; Maps <a href="http://www.thunderforest.com">Thunderforest</a>, Data <a href="http://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>'
+        // }).addTo(choroMap);
 
         info.onAdd = function (map) {
           this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"

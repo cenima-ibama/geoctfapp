@@ -93,6 +93,7 @@ angular.module('geoCtfApp')
       } else {
         $rootScope.column = true;
       }
+
     };
 
 
@@ -157,7 +158,7 @@ angular.module('geoCtfApp')
 
     }
 
-    $scope.solicitar = function(estados, categorias, atividades, ano, columns){
+    $scope.solicitar = function(estados, categorias, atividades, ano, columns, last){
 
       $scope.loading = true;
 
@@ -267,17 +268,24 @@ angular.module('geoCtfApp')
             $scope.chart5 = barData(data, true);
           }).$promise;
 
+          var rest2Response = RestApi.getEstatisticas({type: 'inscricoes-uf-total', uf: arrEstado, categoria: arrCategoria, subcategoria: arrSubcategoria, ano: arrAno}, function(data){
+            $scope.chart6 = barData(data, true);
+          }).$promise;
+
           
-          $q.all([rest1Response]).then(function(){
+          $q.all([rest1Response, rest2Response]).then(function(){
             $scope.chart5.describe = 'geo-ctf-app-inscricoes-por-uf.csv';
             $scope.chart5.export = appConfig.apiUrl + '/estatisticas/inscricoes-uf/?format=csv&ano=' + arrAno + '&uf=' + arrEstado + '&categoria=' + arrCategoria + '&subcategoria=' + arrSubcategoria;
+
+            $scope.chart6.describe = 'geo-ctf-app-inscricoes-por-uf-total.csv';
+            $scope.chart6.export = appConfig.apiUrl + '/estatisticas/inscricoes-uf-total/?format=csv&ano=' + arrAno + '&uf=' + arrEstado + '&categoria=' + arrCategoria + '&subcategoria=' + arrSubcategoria;
 
             $scope.carregar.inscricoes = false;
             $scope.loading = false;
           });
            break;
         default:
-          console.log("Wasnt no one");
+          console.log("Escolha fora das seleções possíveis");
       }
 
     };

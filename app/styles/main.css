@@ -21,10 +21,7 @@ md-tabs md-ink-bar {
   color: green;
   background: green;
 }
-/*#pieChart{
-  position: fixed
-}
-*/
+
 #formSide > md-select{
   padding: 5% 0% 5% 0%;
 }
@@ -337,3 +334,4 @@ md-tabs md-ink-bar {
 .opacidade{
   opacity: 0.1;
 }
+

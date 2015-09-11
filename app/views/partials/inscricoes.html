@@ -2,7 +2,7 @@
 
 
 
-<md-content layout="row" ng-style="{height: windowHeight-130}">
+<md-content layout="row" ng-style="{height: windowHeight-130}" id='chartContent'>
 
 	<div layout="row" layout-sm="column" layout-align="space-around" style='position:fixed; margin: 20% 35%'>
 		<md-progress-circular
@@ -16,7 +16,7 @@
 
 	<!-- <md-content flex class='md-padding' md-scroll-y ng-class="{opacidade: carregar.inscricoes}"> -->
 	<md-content flex class='md-padding' md-scroll-y ng-if="!carregar.inscricoes">
-		<bar-chart data='chart5' name='"Inscricoes por UF"'></bar-chart>
-		<!-- <bar-chart data='chart5' name='"Inscrições por ano"'></bar-chart> -->
+		<bar-chart data='chart5' name='"Inscrições por UF (ano selecionado)"'></bar-chart>
+		<bar-chart data='chart6' name='"Inscrições por UF (ano acumulado)"'></bar-chart>
 	</md-content>
 </md-content>

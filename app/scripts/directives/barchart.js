@@ -185,6 +185,11 @@ angular.module('geoCtfApp')
           }
         }
 
+        if(attrs.line)
+        	scope.type = 'line';
+        else
+        	scope.type = 'bar';
+
         scope.$watch('bar', defineScope);
 
 

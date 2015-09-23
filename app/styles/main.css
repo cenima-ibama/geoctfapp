@@ -331,7 +331,11 @@ md-tabs md-ink-bar {
   border-color: #4cae4c;
 }*/
 
-.opacidade{
-  opacity: 0.1;
+.no-margin{
+  margin: -1em !important;
+}
+
+.no-border{
+  border-radius: 0 !important;
 }
 

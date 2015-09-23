@@ -8,7 +8,7 @@
  * Controller of the geoCtfApp
  */
 angular.module('geoCtfApp')
-  .controller('EstatisticasCtrl', function ($scope, $rootScope, $cookies, Auth, $location, $q, RestApi, $log, containsObject, formData, appConfig, $locale) {
+  .controller('EstatisticasCtrl', function ($scope, $rootScope, $cookies, Auth, $location, $q, RestApi, $log, containsObject, formData, appConfig, $locale,  $mdSidenav, $mdUtil) {
 
     if ($cookies.get('dataUser')) {
       Auth.setUser(JSON.parse($cookies.get('dataUser')));
@@ -96,6 +96,10 @@ angular.module('geoCtfApp')
 
     };
 
+
+    $scope.toggleSidenav = function(){
+      $mdSidenav('left').toggle();
+    }
 
     function barData(object, features){
       var data = {};
@@ -186,6 +190,8 @@ angular.module('geoCtfApp')
 
     $scope.solicitar = function(estados, categorias, atividades, ano, columns, last){
 
+      $scope.toggleSidenav();
+      
       $scope.loading = true;
 
       var arrEstado = '';

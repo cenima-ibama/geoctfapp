@@ -310,10 +310,10 @@ angular.module('geoCtfApp')
           
           $q.all([rest1Response, rest2Response, rest3Response]).then(function(){
             $scope.chart5.describe = 'geo-ctf-app-inscricoes-por-uf.csv';
-            $scope.chart5.export = appConfig.apiUrl + '/estatisticas/inscricoes-uf/?format=csv&ano=' + arrAno + '&uf=' + arrEstado + '&categoria=' + arrCategoria + '&subcategoria=' + arrSubcategoria;
+            $scope.chart5.export = appConfig.apiUrl + '/estatisticas/inscricoes-uf/ano/?format=csv&ano=' + arrAno + '&uf=' + arrEstado + '&categoria=' + arrCategoria + '&subcategoria=' + arrSubcategoria;
 
             $scope.chart6.describe = 'geo-ctf-app-inscricoes-por-uf-total.csv';
-            $scope.chart6.export = appConfig.apiUrl + '/estatisticas/inscricoes-uf-total/?format=csv&ano=' + arrAno + '&uf=' + arrEstado + '&categoria=' + arrCategoria + '&subcategoria=' + arrSubcategoria;
+            $scope.chart6.export = appConfig.apiUrl + '/estatisticas/inscricoes-uf/total/?format=csv&ano=' + arrAno + '&uf=' + arrEstado + '&categoria=' + arrCategoria + '&subcategoria=' + arrSubcategoria;
 
             $scope.chart7.describe = 'geo-ctf-app-inscricoes-total.csv';
             $scope.chart7.export = appConfig.apiUrl + '/estatisticas/inscricoes/total/?format=csv&ano=' + arrAno + '&uf=' + arrEstado + '&categoria=' + arrCategoria + '&subcategoria=' + arrSubcategoria;

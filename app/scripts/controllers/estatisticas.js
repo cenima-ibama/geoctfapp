@@ -169,14 +169,12 @@ angular.module('geoCtfApp')
       var dado = [];
       var labels = [];
 
-      object = object[0].inscricoes;
-
       object.sort(function(a,b) {
         return a.ano - b.ano;
       });
 
       angular.forEach(object, function(value){
-        dado.push(value.inscricoes);
+        dado.push(value.quantidade);
         labels.push(value.ano);
       });
 
@@ -184,7 +182,6 @@ angular.module('geoCtfApp')
       data.labels = labels;
 
       return data;
-
     }
 
 
@@ -296,27 +293,27 @@ angular.module('geoCtfApp')
           });
           break;
         case 'inscricoes':
-          var rest1Response = RestApi.getEstatisticas({type: 'inscricoes-uf/ano/', uf: arrEstado, categoria: arrCategoria, subcategoria: arrSubcategoria, ano: arrAno}, function(data){
+          var rest1Response = RestApi.getEstatisticas({type: 'inscricoes-uf-ano/', uf: arrEstado, categoria: arrCategoria, subcategoria: arrSubcategoria, ano: arrAno}, function(data){
             $scope.chart5 = barData(data, true);
           }).$promise;
 
-          var rest2Response = RestApi.getEstatisticas({type: 'inscricoes-uf/total/', uf: arrEstado, categoria: arrCategoria, subcategoria: arrSubcategoria, ano: arrAno}, function(data){
+          var rest2Response = RestApi.getEstatisticas({type: 'inscricoes-uf-total/', uf: arrEstado, categoria: arrCategoria, subcategoria: arrSubcategoria, ano: arrAno}, function(data){
             $scope.chart6 = barData(data, true);
           }).$promise;
 
-          var rest3Response = RestApi.getEstatisticas({type: 'inscricoes/total/', uf: arrEstado, categoria: arrCategoria, subcategoria: arrSubcategoria, ano: arrAno}, function(data){
+          var rest3Response = RestApi.getEstatisticas({type: 'inscricoes-ano/', uf: arrEstado, categoria: arrCategoria, subcategoria: arrSubcategoria, ano: arrAno}, function(data){
             $scope.chart7 = lineData(data);
           }).$promise;
           
           $q.all([rest1Response, rest2Response, rest3Response]).then(function(){
             $scope.chart5.describe = 'geo-ctf-app-inscricoes-por-uf.csv';
-            $scope.chart5.export = appConfig.apiUrl + '/estatisticas/inscricoes-uf/ano/?format=csv&ano=' + arrAno + '&uf=' + arrEstado + '&categoria=' + arrCategoria + '&subcategoria=' + arrSubcategoria;
+            $scope.chart5.export = appConfig.apiUrl + '/estatisticas/inscricoes-uf-ano/?format=csv&ano=' + arrAno + '&uf=' + arrEstado + '&categoria=' + arrCategoria + '&subcategoria=' + arrSubcategoria;
 
             $scope.chart6.describe = 'geo-ctf-app-inscricoes-por-uf-total.csv';
-            $scope.chart6.export = appConfig.apiUrl + '/estatisticas/inscricoes-uf/total/?format=csv&ano=' + arrAno + '&uf=' + arrEstado + '&categoria=' + arrCategoria + '&subcategoria=' + arrSubcategoria;
+            $scope.chart6.export = appConfig.apiUrl + '/estatisticas/inscricoes-uf-total/?format=csv&ano=' + arrAno + '&uf=' + arrEstado + '&categoria=' + arrCategoria + '&subcategoria=' + arrSubcategoria;
 
             $scope.chart7.describe = 'geo-ctf-app-inscricoes-total.csv';
-            $scope.chart7.export = appConfig.apiUrl + '/estatisticas/inscricoes/total/?format=csv&ano=' + arrAno + '&uf=' + arrEstado + '&categoria=' + arrCategoria + '&subcategoria=' + arrSubcategoria;
+            $scope.chart7.export = appConfig.apiUrl + '/estatisticas/inscricoes-ano/?format=csv&ano=' + arrAno + '&uf=' + arrEstado + '&categoria=' + arrCategoria + '&subcategoria=' + arrSubcategoria;
 
             $scope.carregar.inscricoes = false;
             $scope.loading = false;

@@ -94,6 +94,8 @@ angular.module('geoCtfApp')
         $rootScope.column = true;
       }
 
+      // console.log(document.getElementsByTagName('canvas')[0].getAttribute('width'));
+
     };
 
 
@@ -165,6 +167,7 @@ angular.module('geoCtfApp')
 
     function lineData(object, optional){
       var data = {};
+      var acumulado=0;
 
       var dado = [];
       var labels = [];
@@ -173,8 +176,10 @@ angular.module('geoCtfApp')
         return a.ano - b.ano;
       });
 
+
       angular.forEach(object, function(value){
-        dado.push(value.quantidade);
+        acumulado += value.quantidade;
+        dado.push(acumulado);
         labels.push(value.ano);
       });
 
@@ -187,6 +192,7 @@ angular.module('geoCtfApp')
 
     $scope.solicitar = function(estados, categorias, atividades, ano, columns, last){
 
+      $('[data-toggle="popover"]').popover('hide');
       $scope.toggleSidenav();
       
       $scope.loading = true;
@@ -324,5 +330,4 @@ angular.module('geoCtfApp')
       }
 
     };
-  
   });

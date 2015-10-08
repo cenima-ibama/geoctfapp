@@ -11,7 +11,7 @@ angular.module('geoCtfApp')
     return {
       templateUrl: 'views/partials/empresas.html',
       restrict: 'E',
-      link: function postLink(scope, element, attrs) {
-      }
+      // link: function postLink(scope, element, attrs) {
+      // }
     };
   });

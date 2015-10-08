@@ -1,5 +1,5 @@
 <topbar></topbar>
-<md-content layout="row">
+<md-content layout="row" id="statsContent">
   <md-sidenav class="md-sidenav-left md-whiteframe-z2" 
     md-component-id="left" 
     md-is-locked-open="$mdMedia('gt-md')" 
@@ -25,7 +25,18 @@
     ng-click="toggleSidenav()"
     class="btn no-border" 
     hide-gt-md>
-    <span class="glyphicon glyphicon-chevron-right no-margin"></span>
+    <a 
+      id="thisButton"
+      class="glyphicon glyphicon-chevron-right no-margin"
+      ctf-popover 
+      popover-placement='right' 
+      popover-content="Selecione os filtros" 
+      popover-container="#thisButton" 
+      popover-trigger="hover"
+      popover-show="true"
+      >
+      <!-- popover-container="#statsContent" -->
+    </a>
   </button>
   
   <tabset justified="true" type="pills" flex resizable>
@@ -43,8 +54,6 @@
     </tab> 
   </tabset>
 </md-content>
-
-
   <!-- 
   <tab heading="Por Atividades" select='defineRequest("atividades")' disable='loading' flex>
     <atividades ng-hide='hints'></atividades>

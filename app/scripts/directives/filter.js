@@ -17,26 +17,31 @@ angular.module('geoCtfApp')
       	$scope.ct = []; //Initializing array to push values on function addValues below
       	$scope.at = []; //Initializing array to push values on function addValues below
 
-      	$scope.changeStates = function(region){
-      		var states = formData.estados;
-      		var statesFiltered = [];
+        $scope.changeStates = changeStates;
+        $scope.addValues = addValues;
 
-      		angular.forEach(states, function(value){
-      			if(value.regiao === region.nome){
-      				statesFiltered.push(value);
-      			}
-      		});
+
+        function changeStates(region){
+          var states = formData.estados;
+          var statesFiltered = [];
+
+          angular.forEach(states, function(value){
+            if(value.regiao === region.nome){
+              statesFiltered.push(value);
+            }
+          });
 
           if (region.nome !== 'Todas')
             statesFiltered.push({nome: 'Todos', regiao: 'Todos', sigla: 'Todos'});
 
           $scope.chart.estado = null;
-      		$scope.filterEstados = statesFiltered;
-      	};
+          $scope.filterEstados = statesFiltered;
+        }
 
 
-      	$scope.addValues = function(obj, type, param){
+      	function addValues(obj, type, param){
           var states = formData.estados;
+
       		switch(type){
 	      		case 'e':
 	      			if(obj.nome == 'Todas'){
@@ -77,8 +82,6 @@ angular.module('geoCtfApp')
 	      			}
           }
       	};
-
-
       }
     };
   });

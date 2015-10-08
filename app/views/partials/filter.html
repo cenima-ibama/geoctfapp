@@ -1,4 +1,4 @@
-<md-content layout-padding ng-init="totalColumns=30">
+<md-content layout-padding ng-init="totalColumns=30" flex>
 	<md-select-group >
 		<md-select ng-model='chart.ano' aria-label='chartAno' placeholder='Ano' class='filterButtonYear'>
 			<md-option ng-repeat='ano in anos' ng-value='ano' ng-selected="{{$first}}">{{ano}}</md-option>
@@ -112,12 +112,33 @@
 	       <md-icon md-svg-icon="md-cancel" md-chip-remove></md-icon>
 	    </md-chips>
 	</div>
+	
+
 </md-content>
 
 <hr>
 
 <md-content layout-padding >
-	<md-input-container ng-show='column'>
+
+	<a 	
+		layout='row'
+		class='btn btn-primary right'
+		ng-disabled='loading'
+		ng-click="solicitar(es, ct, at, chart.ano, totalColumns)"
+		ctf-popover  
+		popover-placement='right' 
+		popover-content="Selecione os filtros e clique em Enviar" 
+		popover-container="#statsContent"
+		popover-trigger="hover"
+		popover-show="true"
+		>
+			Enviar
+
+	</a>
+	<br ng-show='column'/>
+	<br ng-show='column'/>
+	
+	<md-input-container ng-show='column' flex>
 	    <!-- <label>Colunas</label> -->
 	    <label>Qtde máxima de barras</label>
 			<!-- 	    
@@ -141,11 +162,5 @@
 		    />
 	</md-input-container>
 
-	<button 
-		class='btn btn-primary right'
-		ng-disabled='loading'
-		ng-click="solicitar(es, ct, at, chart.ano, totalColumns)">
-			Enviar
-	</button>
-
 </md-content>
+

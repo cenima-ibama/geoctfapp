@@ -339,3 +339,11 @@ md-tabs md-ink-bar {
   border-radius: 0 !important;
 }
 
+.chart-bar, .chart-line{
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.popover{
+  z-index: 1040 !important;
+}

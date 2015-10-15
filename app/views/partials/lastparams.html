@@ -1,0 +1,17 @@
+<accordion>
+	<accordion-group>
+		<accordion-heading class="panel-primary">
+			Parâmetros Utilizados para apresentação dos dados abaixo: 
+			<i class="pull-right glyphicon glyphicon-small" 
+				ng-class="{'glyphicon-chevron-down': true, 'glyphicon-chevron-right': !true}">
+			</i>
+		</accordion-heading>
+		<small>
+			<p ng-if="ano">Ano: {{ano}} <br/></p>
+			<p ng-if="estados">Estados: {{estados}} <br/></p>
+			<p ng-if="categorias">Categorias: {{categorias}} <br/></p>
+			<p ng-if="atividades">Atividades: {{atividades}}</p>
+		</small>
+
+	</accordion-group>
+</accordion>

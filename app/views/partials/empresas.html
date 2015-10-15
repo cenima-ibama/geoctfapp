@@ -12,11 +12,16 @@
 	    	<i>Carregando informações</i>
 		</md-progress-circular>
 	</div>
-	<!-- <md-content flex class='md-padding' md-scroll-y ng-class="{opacidade: carregar.empresas}"> -->
 	<md-content flex class='md-padding' md-scroll-y ng-if="!carregar.empresas">
+		<last-params 
+			ng-show="{{lastParams.Ano}}"
+			ufs="{{lastParams.Estados}}" 
+			year="{{lastParams.Ano}}" 
+			categories="{{lastParams.Categorias}}" 
+			activities="{{lastParams.Atividades}}">
+		</last-params>
 		<pie-chart data='chart3' name='"Empresas por Porte"'></pie-chart>
 		<pie-chart data='chart4' name='"Empresa por Certificado de Regularidade"'></pie-chart>
 		<choro geojson='choroEmpresas' property='"empresas"'legend-steps="4" filter-options="filterObject" ng-if='!carregar.empresas'></choro>
-		<!-- <choro geojson='choroEmpresas' property='"empresas"' property-step='"num_empresas"' legend-steps="4" map-id='"empresasMap"'></choro> -->
 	</md-content>
 </md-content>

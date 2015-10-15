@@ -33,7 +33,6 @@ module.exports = function(config) {
       'bower_components/angular-aria/angular-aria.js',
       'bower_components/angular-material/angular-material.js',
       'bower_components/bootstrap/dist/js/bootstrap.js',
-      'bower_components/leaflet/dist/leaflet.js',
       'bower_components/leaflet/dist/leaflet-src.js',
       'bower_components/Chart.js/Chart.js',
       'bower_components/angular-chart.js/dist/angular-chart.js',

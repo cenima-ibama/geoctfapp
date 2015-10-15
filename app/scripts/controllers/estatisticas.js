@@ -10,55 +10,58 @@
 angular.module('geoCtfApp')
   .controller('EstatisticasCtrl', function ($scope, $rootScope, $cookies, Auth, $location, $q, RestApi, $log, containsObject, formData, appConfig, $locale,  $mdSidenav, $mdUtil) {
 
-    if ($cookies.get('dataUser')) {
+    if ( $cookies.get('dataUser') ) {
       Auth.setUser(JSON.parse($cookies.get('dataUser')));
       $rootScope.dataUser = {};
       $rootScope.dataUser.userName = Auth.getUser();
     }
 
-    $rootScope.logged = Auth.isLoggedIn() ? true : false;
-
     $scope.$watch(Auth.isLoggedIn, function (value, oldValue) {
       if(!value && oldValue) {
-        console.log('Disconnect');
         $location.path('#/');
       }
+      
+      var dataUser = {};
+      
       if(value) {
-        console.log('Connect');
         Auth.setUser(JSON.parse($cookies.get('dataUser')));
-        $rootScope.dataUser = {};
-        $rootScope.dataUser.userName = Auth.getUser();
-       //Do something when the user is connected
+        dataUser.userName = Auth.getUser();
+        $rootScope.dataUser = dataUser;
+        //Do something when the user is connected
       }
     }, true);
+
+    Auth.isLoggedIn() ? $rootScope.logged = true : $rootScope.logged = false;
 
     $scope.tabStats = true;
 
     $cookies.SystemName = 'CTF-APP-GEO';
     $rootScope.SystemName = $cookies.SystemName;
 
-    $scope.regioes = formData.regioes;
-    $scope.estados = formData.estados;
-    $scope.anos = formData.anos;
-
-    if(!(containsObject($scope.regioes, 'Todas', 'nome'))){
-      $scope.regioes.push({nome: 'Todas'});
-    }
-
     $scope.choroData;
-
     $scope.carregar = {};
 
     RestApi.get({ type: 'categorias'}, function(data){
       $scope.categorias = data;
-      if(!(containsObject($scope.categorias, 'Todos', 'id'))){
-        $scope.categorias.push({id: 'Todos' , nome: 'Todos'});
-      }
+      
+      if( ! ( containsObject ( $scope.categorias, 'Todos', 'id') ) ){ $scope.categorias.push({id: 'Todos' , nome: 'Todos'}) }
+
       $scope.codigoCategoria = [];
-      angular.forEach($scope.categorias, function(value){
-        $scope.codigoCategoria.push(value.id);
-      });
+
+      angular.forEach($scope.categorias, function(value){ $scope.codigoCategoria.push(value.id) });
+
     });
+
+    $scope.solicitar = solicitar;
+    $scope.listSubcategoria = listSubcategoria;
+    $scope.defineRequest = defineRequest;
+    $scope.toggleSidenav = toggleSidenav;
+
+    $scope.regioes = formData.regioes;
+    $scope.estados = formData.estados;
+    $scope.anos = formData.anos;
+
+    if( ! ( containsObject ( $scope.regioes, 'Todas', 'nome' ) ) ){ $scope.regioes.push({nome: 'Todas'}) }
 
     /**
      * Getting list of each subcategoria in categoria on param
@@ -66,7 +69,7 @@ angular.module('geoCtfApp')
      * @param categoria
      * @returns {*}
     */
-    $scope.listSubcategoria = function(categoria){
+    function listSubcategoria(categoria){
       $scope.chart.subCategoria = '';
       $scope.chart.atividade = null;
       if(categoria.id !== 'Todos'){
@@ -75,7 +78,7 @@ angular.module('geoCtfApp')
           $scope.atividades.push({codigo: 'Todos', id:'Todos', nome: 'Todos'});
         }
       }
-    };
+    }
 
     /**
      * Getting type of request that will be maded
@@ -84,8 +87,9 @@ angular.module('geoCtfApp')
      * @param val
      * @returns {*}
     */
+    function toggleSidenav(){ $mdSidenav('left').toggle() }
 
-    $scope.defineRequest = function (val){
+    function defineRequest(val){
       $scope.request = val;
      
       if(val !== 'atividades'){
@@ -93,14 +97,6 @@ angular.module('geoCtfApp')
       } else {
         $rootScope.column = true;
       }
-
-      // console.log(document.getElementsByTagName('canvas')[0].getAttribute('width'));
-
-    };
-
-
-    $scope.toggleSidenav = function(){
-      $mdSidenav('left').toggle();
     }
 
     function barData(object, features){
@@ -122,48 +118,59 @@ angular.module('geoCtfApp')
       data.data = [dado];
       data.labels = labels;
       // data.series = series;
-
       return data;
     }
 
     function pieData(object, optional){
-      var data = {};
-
-      var dado = [];
-      var labels = [];
+      var data = {},
+        dado = [],
+        labels = [],
+        size=0;
 
       object.sort(function(a,b) {
         return b.quantidade - a.quantidade;
-      });
+      })
 
-      angular.forEach(object, function(value){
+      if(!!optional){
+        angular.forEach(object, function(value){
+          dado.push(value.quantidade);
+          labels.push(value.nome);
+        })
+      } else {
+        angular.forEach(object, function(value){
           if(value.quantidade != 0){
-        // angular.forEach(value, function(v, k){
             dado.push(value.quantidade);
             labels.push(value.nome);
-        // })
           }
-      });
+        })
+      }
 
       if(optional){
         if(labels[0] == 'irregulares'){
-          labels[0] = 'Não Possui Certificado de Regularidade Válido';
-          labels[1] = 'Possui Certificado de Regularidade Válido';
+          labels[0] ? labels[0] = 'Não Possui Certificado de Regularidade Válido': labels[0];
+          labels[1] ? labels[1] = 'Possui Certificado de Regularidade Válido': labels[1];
           labels.reverse();
           dado.reverse();
         } else {
-          labels[0] = 'Possui Certificado de Regularidade Válido';
-          labels[1] = 'Não Possui Certificado de Regularidade Válido';
+          labels[0] ? labels[0] = 'Possui Certificado de Regularidade Válido': labels[0];
+          labels[0] ? labels[1] = 'Possui Certificado de Regularidade Válido': labels[1];
         }
       }
 
-      data.data = dado;
-      data.labels = labels;
+      dado.forEach(function(el){
+        if(el > 0) size++;
+      })
+
+      if(size){
+        data.data = dado;
+        data.labels = labels;
+      } else {
+        data.data = [null];
+        data.labels = labels;
+      }
 
       return data;
-
     }
-
 
     function lineData(object, optional){
       var data = {};
@@ -178,8 +185,7 @@ angular.module('geoCtfApp')
 
 
       angular.forEach(object, function(value){
-        acumulado += value.quantidade;
-        dado.push(acumulado);
+        dado.push(value.quantidade);
         labels.push(value.ano);
       });
 
@@ -189,18 +195,34 @@ angular.module('geoCtfApp')
       return data;
     }
 
+    function lastParam(list, type){
+      var values = '';
+       if(type == 'categoria'){
+        list = list.map(function(data){
+          return data.id
+        });
+      } else{
+        list = list.map(function(data){
+          return data.categoria + '-' + data.codigo;
+        });
+      }
 
-    $scope.solicitar = function(estados, categorias, atividades, ano, columns, last){
+      angular.forEach(list, function(value){
+        values += value + ', ';
+      })
 
-      $('[data-toggle="popover"]').popover('hide');
+      return values.substring(0,(values.length - 2));
+    }
+
+    function solicitar(estados, categorias, atividades, ano, columns){
+
       $scope.toggleSidenav();
-      
       $scope.loading = true;
 
-      var arrEstado = '';
-      var arrSubcategoria = '';
-      var arrCategoria = '';
-      var arrAno;
+      var arrEstado ='',
+        arrSubcategoria='',
+        arrCategoria='',
+        arrAno='';
       
       if ($scope.request == 'atividades') {
         $scope.carregar.atividades = true;
@@ -226,8 +248,20 @@ angular.module('geoCtfApp')
       arrCategoria = arrCategoria.substring(0,(arrCategoria.length - 1));
       arrSubcategoria = arrSubcategoria.substring(0,(arrSubcategoria.length - 1));
 
+
+
+      $scope.lastParams = {};
+      $scope.lastParams.Estados = arrEstado;
+      $scope.lastParams.Atividades = lastParam(atividades, 'atividade');
+      $scope.lastParams.Categorias = lastParam(categorias, 'categoria');
+      $scope.lastParams.Ano = ano;
+
+
+
       switch($scope.request){
         case 'atividades':
+          $scope.lastAtividades = true;
+
           var rest2Response = RestApi.getGeoEstatisticas({type: 'atividades-uf', uf: arrEstado, categoria: arrCategoria, subcategoria: arrSubcategoria, ano: arrAno}, function(data){
             $scope.chart1 = barData(data);
             $scope.chart1.export = appConfig.apiUrl + '/estatisticas/atividades-uf/?format=csv&ano=' + arrAno + '&uf=' + arrEstado + '&categoria' + arrCategoria + '&subcategoria=' +arrSubcategoria;
@@ -328,6 +362,6 @@ angular.module('geoCtfApp')
         default:
           console.log("Escolha fora das seleções possíveis");
       }
+    }
 
-    };
   });

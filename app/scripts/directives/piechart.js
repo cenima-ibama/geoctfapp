@@ -29,9 +29,14 @@ angular.module('geoCtfApp')
   
         function defineScope(val){
           if(val){
+            if(!val.data[0]){
+              scope.noData = true;
+            }
+
             scope.data = val.data;
             scope.labels = val.labels;
             scope.export = val.export;
+            
           }
         }
         

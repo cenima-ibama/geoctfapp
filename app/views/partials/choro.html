@@ -49,7 +49,7 @@
 		<div ng-repeat="felement in filterOptions.filters" >
 			<md-select ng-model='felement.selected' layout='row' class='filterChoro'>
 				<md-select-label>{{felement.selected || felement.name}}</md-select-label>
-				<md-option ng-repeat='filter in felement.values' ng-value='filter'>
+				<md-option ng-repeat='filter in felement.values track by $index' ng-value='filter'>
 					{{filter}}
 				</md-option>
 			</md-select>

@@ -10,7 +10,7 @@
 angular.module('geoCtfApp')
   .factory('RestApi', function ($resource, appConfig) {
     // return $resource('//' + window.location.hostname + window.location.pathname + '/moduleGeoCTF.php?:type', {},
-    return $resource( appConfig.apiUrl + '/:type/?:subtype', {type: '@type', subtype: '@subtype'},
+    return $resource( appConfig.apiUrl + '/:type/?:subtype/', {type: '@type', subtype: '@subtype'},
       {
         get: {
           method:'GET',
@@ -27,7 +27,7 @@ angular.module('geoCtfApp')
           },
         },
         getEstatisticas: {
-          url: appConfig.apiUrl + '/estatisticas/:type',
+          url: appConfig.apiUrl + '/estatisticas/:type/',
           method:  'GET',
           isArray: true,
           params: { format:'json' },
@@ -44,7 +44,7 @@ angular.module('geoCtfApp')
           }
         },
         getMunicipios: {
-          url: appConfig.apiUrl + '/:type/:estado',
+          url: appConfig.apiUrl + '/:type/:estado/',
           method:'GET',
           headers: {
             'Content-Type': 'application/json'

@@ -33,12 +33,30 @@
 <md-content layout-padding class='padding' ng-if="data">
 	<div class="line">
 		<p class="title"><strong>{{name}}</strong></p>
-		<a class="export" ng-if='export' href="{{export}}" download="{{describe}}" target="_blank">
+		<a class="export" ng-if='export' href="{{export}}" download="{{describe}}" target="_blank" >
             <i class="glyphicon glyphicon-save"></i>
+            <!-- ng-hide="nodata" -->
             CSV
         </a>
 	</div>
-	 <canvas
+
+<!--     <md-content class='panel-body' style="text-align: center">
+	
+    	<md-content 
+    		ng-show="noData" 
+    		layout-align="space-around" 
+    		flex
+    		>
+
+    		<alert type="info">
+    		 Não há dados para os filtros selecionados
+    		</alert>
+    		
+		</md-content>
+	</md-content> -->
+	
+	<!-- ng-hide='noData' -->
+	<canvas 
 		class="chart-bar" 
 		data="data" 
 		labels="labels" 

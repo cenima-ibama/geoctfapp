@@ -13,9 +13,15 @@
 	    	<i>Carregando informações</i>   	
 		</md-progress-circular>
 	</div>
-
-	<!-- <md-content flex class='md-padding' md-scroll-y ng-class="{opacidade: carregar.inscricoes}"> -->
 	<md-content flex class='md-padding' md-scroll-y ng-if="!carregar.inscricoes">
+		<last-params 
+			ng-show="{{lastParams.Ano}}"
+			ufs="{{lastParams.Estados}}" 
+			year="{{lastParams.Ano}}" 
+			categories="{{lastParams.Categorias}}" 
+			activities="{{lastParams.Atividades}}">
+		</last-params>
+
 		<bar-chart data='chart5' name='"Inscrições por UF (ano selecionado)"'></bar-chart>
 		<bar-chart data='chart6' name='"Inscrições por UF (ano acumulado)"'></bar-chart>
 		<line-chart data='chart7' name='"Acumulado Anos"'></line-chart>

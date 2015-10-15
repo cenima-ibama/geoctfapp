@@ -22,6 +22,11 @@ md-tabs md-ink-bar {
   background: green;
 }
 
+/*.panel-default > .panel-heading {
+  color: #333;
+  background-color: white !important;
+}*/
+
 #formSide > md-select{
   padding: 5% 0% 5% 0%;
 }

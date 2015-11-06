@@ -64,9 +64,9 @@ angular.module('geoCtfApp')
 					'quantidade de pessoas jur' + icute + 'dicas.';
 
 	inscricaoAnoAtual = 'Este gr' + acute + 'fico representa a quantidade de pessoas jur' + icute + 'dicas' +
-						'que exercem ou exerciam as atividades selecionadas, agrupadas pela respectiva unidade de '
-						'federa' + cedil + atil + 'o, de acordo com a regi' + atil + 'o escolhida na pesquisa' +
-						'e inscritas no CTF/APP no ano selecionado';
+						' que exercem ou exerciam as atividades selecionadas, agrupadas pela respectiva unidade de ' +
+						' federa' + cedil + atil + 'o, de acordo com a regi' + atil + 'o escolhida na pesquisa' +
+						' e inscritas no CTF/APP no ano selecionado';
 
 	inscricaoAnoTotal = 'Este gr' + acute + 'fico representa a quantidade cumulativa de pessoas jur' + icute + 'dicas' +
 						' inscritas no CTF/APP at' + ecute + ' o ano selecionado, que exercem ou exerciam as atividades' +

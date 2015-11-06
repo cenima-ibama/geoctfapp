@@ -12,6 +12,7 @@ angular.module('geoCtfApp')
       templateUrl: 'views/partials/choro.html',
       restrict: 'E',
       scope:{
+        help: "=",
         choroData: '=geojson',
         choroLegendSteps : '=legendSteps',
         mapId : '=mapId',

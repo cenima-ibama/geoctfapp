@@ -36,7 +36,7 @@ angular.module('geoCtfApp')
 	atividadeUF =	'Este gr' + acute + 'fico representa a quantidade de pessoas jur' + icute + 'dicas*' +
 					' que exercem ou exerciam as atividades selecionadas no ano escolhido,' +
 					' agrupadas pela respectiva unidade de federa' + cedil + atil + 'o,' +
-					' de acordo com a regi' + atil + 'o selecionada na pesquisa<br/><br/>',
+					' de acordo com a regi' + atil + 'o selecionada na pesquisa<br/><br/>' +
 					'* cada pessoa jur' + icute + 'dica pode exercer uma ou mais atividades do CTF/APP';
 	
 	atividadeMapa = 'Este mapa representa a quantidade de pessoas jur' + icute + 'dicas*' +

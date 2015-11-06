@@ -2,7 +2,7 @@
 
 <md-content layout="row" ng-style="{height: windowHeight-130}" id='chartContent'>
 
-	<div layout="row" layout-sm="column" layout-align="space-around" style='position:fixed; margin: 20% 35%'>
+	<div layout="row" layout-sm="column" layout-align="space-around" class="centerEl">
 		<md-progress-circular
 			ng-if='carregar.atividades'
 	    	md-mode="indeterminate"
@@ -23,9 +23,9 @@
 			activities="{{lastParams.Atividades}}">
 		</last-params>
 		
-		<bar-chart data='chart2' name='"Atividades por Categoria"' info='true'></bar-chart>
-		<bar-chart data='chart1' name='"Atividades por UF"'></bar-chart>
-		<choro geojson='choroAtividades' property='"atividades"' legend-steps="4"></choro>
+		<bar-chart data='chart2' name='"Atividades por Categoria"' info='true' help="atividadeCategoria"></bar-chart>
+		<bar-chart data='chart1' name='"Atividades por UF"' help="atividadeUF"></bar-chart>
+		<choro geojson='choroAtividades' property='"atividades"' legend-steps="4" help="atividadeMapa"></choro>
 		<!-- <choro geojson='choroAtividades' property='"atividades"' property-step='"num_atividades"' legend-steps="4" map-id='"atividadesMap"'></choro> -->
 	</md-content>
 </md-content>

@@ -42,7 +42,21 @@
 
 <md-content layout-padding ng-show="choroData">
 	<div class="line" >
-		<p class="title" flex><strong>Mapa Estatístico</strong></p>
+		<p class="title" flex>
+			<strong>Mapa Estatístico</strong>
+	 		<a 
+	 			tabindex="0"
+	 			ctf-popover
+				popover-trigger="focus"	 			
+				popover-content="{{help}}"
+				popover-delay="false"
+				popover-placement="bottom"
+				class="btn btn-link helpLink" 
+				layout="column" >
+				<!-- <img id="helpImg"/> -->
+				<span class="glyphicon glyphicon-question-sign"></span>
+			</a>
+		</p>
 	</div>
 
 	<div ng-if="filterOptions" ng-hide='carregar' layout='column' id='filterChoroOver'>

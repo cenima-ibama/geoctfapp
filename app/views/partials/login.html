@@ -1,11 +1,13 @@
 
 <div class="modal-dialog">
-  <div class="modal-content md-padding" >
+  <div class="modal-content" layout-padding >
     <div class="modal-header">
       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-      <div layout='row' flex offset='25'>
-        <h4 class="modal-title" id="myModalLabel" ><img src='images/ibama-logo.png' height="30" width="30"></h4>
-        <h4 class="modal-title" id="myModalLabel" ><img src='images/ctf.png' height="30" width="80" ></h4>
+      <div layout='row' flex='25'>
+        <h4 class="modal-title" id="loginModalTitle" >
+          <img src='images/ibama-logo.png' height="30" width="30">
+          <img src='images/ctf.png' height="30" width="80" >
+        </h4>
       </div>
     </div>
 
@@ -28,18 +30,25 @@
           <input type='password' ng-model="access.password" >
         </md-input-container>
 
-        <md-container layout='row'>
-          <div ng-if='login.carregar' layout="column" layout-align="space-around" flex >
-            <md-progress-circular md-mode="indeterminate"  class="md-hue-2"></md-progress-circular>
-          </div>
-          <div flex class='text-right' >
-            <md-button class="md-raised md-primary" layout='column' layout-sm="column" type='submit' >Enviar</md-button>
-          </div>
+        <md-container layout='row' flex>
+            <md-progress-circular 
+              md-mode="indeterminate"  
+              class="md-hue-2"
+              layout="column" 
+              ng-if='login.carregar'>
+            </md-progress-circular >
+            <div layout="column" flex offset="50">
+              <md-button 
+                class="md-raised md-primary" 
+                type='submit'>
+                  enviar
+              </md-button>
+            </div>
         </md-container>
         <hr>
         <div class="control-group ">
           <h4>Acesso Restrito</h4>
-          <p>O acesso a essa sessão é permitida somente a usuários registrados no sistema Ibama-Net.</p>
+          <p>O acesso a este sistema é permitido somente a usuários registrados no sistema Ibama-Net.</p>
         </div>
       </form>
     </div>

@@ -17,6 +17,7 @@ angular.module('geoCtfApp')
 
         $rootScope.logout = logout;
         $scope.acessar = acessar;
+        $scope.login = {};
 
         function logout(){
           $rootScope.logged = false;
@@ -61,11 +62,6 @@ angular.module('geoCtfApp')
 
       	function acessar(obj){
 
-          $scope.login = {};
-          $scope.login.carregar = false;
-
-
-
           $scope.error = false;
           $scope.login.carregar = true;
 
@@ -83,7 +79,6 @@ angular.module('geoCtfApp')
           RestApi.getToken({ username: obj.login, password: obj.password}, 
             function success(data){
               $('#loginModal').modal('hide');
-              // console.log(data.token);
 
               var dataUser = {};
               dataUser.name = $scope.obj.login;
@@ -91,12 +86,15 @@ angular.module('geoCtfApp')
 
               Auth.setUser(dataUser);
               $cookies.put('dataUser', JSON.stringify(dataUser));
+              $scope.login.carregar = false;
+
 
               $rootScope.logged = true;
             }, function error(data) {
               $rootScope.logged = false;
               $scope.error = true;
               $scope.errorLogin = 'Usu' + String.fromCharCode(225) +'rio ou senha Inv' + String.fromCharCode(225) + 'lidos';
+              $scope.login.carregar = false;
 
             }
           );

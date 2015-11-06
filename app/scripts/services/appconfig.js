@@ -12,8 +12,8 @@ angular.module('geoCtfApp')
 
     return {
 
-      apiUrl : 'http://10.1.8.28:82/ctfapi/api/'
-
+      apiUrl : '//10.1.8.28:82/ctfapi/api',
+      guiaUrl: 'guia.pdf'
     };
 
   });

@@ -23,12 +23,13 @@ angular.module('geoCtfApp')
 
         var DEF_DEFAULT_PROPERTY = 'atividades';
 
-        var info = L.control();
-        var steps = [];
-        var geojson = null;
-        var data;
-        var propertyStep = scope.propStep;
-        var property = scope.property || DEF_DEFAULT_PROPERTY;
+        var info = L.control(),
+          steps = [],
+          geojson = null,
+          name,
+          data,
+          propertyStep = scope.propStep,
+          property = scope.property || DEF_DEFAULT_PROPERTY;
 
         var map;
 
@@ -46,6 +47,10 @@ angular.module('geoCtfApp')
           maxZoom: 4,
           zoomControl: false
         });
+
+        String.prototype.capitalize = function() {
+            return this.replace(/(?:^|\s)\S/g, function(a) { return a.toUpperCase(); });
+        };
         
         function getColor(d) {
           var value = $.grep(steps, function(e){ return e.num == d; })[0];
@@ -131,8 +136,11 @@ angular.module('geoCtfApp')
           } else {
             this._div.classList.remove('info-show');
           }
-          this._div.innerHTML = '<h4> N° de ' + property.charAt(0).toUpperCase() + property.slice(1) + ' </h4> ' + (props ?
-              '<b> ' + props.nome + '</b> ' + ' <br />' + atv + ' ' + property +' '
+
+          (property === 'empresas') ? (name = 'pessoas jur' + String.fromCharCode(237) + 'dicas') : (name = property.capitalize());
+
+          this._div.innerHTML = '<h4> N' + String.fromCharCode(186) + ' de ' + name + ' </h4> ' + (props ?
+              '<b> ' + props.nome + '</b> ' + ' <br />' + atv + ' ' + name +' '
               : '');
         };
 
@@ -158,9 +166,9 @@ angular.module('geoCtfApp')
           var filterOptions = angular.copy(scope.filterOptions);
           filterOptions.filters.map(function(value){
             var dbfield = value.dbfield || value.name.toLowerCase();
-            if(value.selected == 'Não Possui Certificado de Regularidade Válido' ){
+            if(value.selected == 'Não Possui Certificado de Regularidade V' + String.fromCharCode(225) +'lido' ){
               value.selected = 'irregulares';
-            } else if(value.selected == 'Possui Certificado de Regularidade Válido'){
+            } else if(value.selected == 'Possui Certificado de Regularidade V' + String.fromCharCode(225) +'lido'){
               value.selected = 'regulares';
             }
             filterOptions.restParam[dbfield] = value.selected;

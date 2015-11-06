@@ -12,35 +12,36 @@ angular.module('geoCtfApp')
       templateUrl: 'views/partials/lineChart.html',
       restrict: 'E',
       scope: {
+        help: "=",
       	bar: '=data',
       	info: '=',
       	name: '=',
       },
       link: function postLink(scope, element, attrs) {
 
-		scope.options = {
-			animationSteps: 2,
-			bezierCurve : false,
-			responsive: true,
-		};
+    		scope.options = {
+    			animationSteps: 2,
+    			bezierCurve : false,
+    			responsive: true,
+    		};
 
-        scope.$watch('bar', defineScope);
+            scope.$watch('bar', defineScope);
 
-		Chart.defaults.global.colours = ['#337ab7', '#a94442', '#46BFBD', '#7B68EE', '#FDB45C', '#949FB1', '#4D5360'];
+	     	Chart.defaults.global.colours = ['#337ab7', '#a94442', '#46BFBD', '#7B68EE', '#FDB45C', '#949FB1', '#4D5360'];
 
-        function noMax(object){
-	        var param = {};
-    		scope.data = [object.data[0]];
-            scope.labels = object.labels;
-            scope.series = object.series;
-        }
+            function noMax(object){
+    	        var param = {};
+          		scope.data = [object.data[0]];
+              scope.labels = object.labels;
+              scope.series = object.series;
+            }
 
-        function defineScope(data){
-			if(data){
-				noMax(data);
-				scope.export = data.export;
-				scope.describe = data.describe;
-			}
+            function defineScope(data){
+    			if(data){
+    				noMax(data);
+    				scope.export = data.export;
+    				scope.description = data.description;
+    			}
         }
       }
     };

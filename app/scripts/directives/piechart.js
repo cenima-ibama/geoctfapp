@@ -15,6 +15,7 @@ angular.module('geoCtfApp')
       scope: {
         pie: '=data',
         name: '=',
+        help: "=",
       },
       link: function postLink(scope){
 

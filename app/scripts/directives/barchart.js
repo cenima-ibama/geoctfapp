@@ -13,6 +13,7 @@ angular.module('geoCtfApp')
       // template: '<div></div>',
       restrict: 'E',
       scope: {
+      	help: "=",
       	bar: '=data',
       	info: '=',
       	name: '=',
@@ -173,22 +174,20 @@ angular.module('geoCtfApp')
 
         function defineScope(data){
           if(data){
+
+          	(attrs.selectedata) ? (scope.name += (attrs.selectedata + ')') ) : (scope.name = scope.name);
+
           	if(scope.info){
           		maxBar(data);
           		scope.export = data.export;
-          		scope.describe = data.describe;
+          		scope.description = data.description;
           	} else{
           		noMax(data);
           		scope.export = data.export;
-          		scope.describe = data.describe;
+          		scope.description = data.description;
           	}
           }
         }
-
-        if(attrs.line)
-        	scope.type = 'line';
-        else
-        	scope.type = 'bar';
 
         scope.$watch('bar', defineScope);
 

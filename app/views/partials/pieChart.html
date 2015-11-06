@@ -5,7 +5,7 @@
 
 	    	<div class='panel-title' flex>{{name}}</div>
 
-            <a class="export-button" ng-if="export" href="{{export}}" download="{{describe}}">
+            <a class="export-button" ng-if="export" href="{{export}}" download="{{description}}">
                 <i class="glyphicon glyphicon-save"></i>
                 CSV
             </a>
@@ -25,10 +25,34 @@
  -->
 <md-content class='padding' ng-if="data">
 	<div class="line">
-		<p class="title"><strong>{{name}}</strong></p>
-		<a ng-hide='noData' class="export" ng-if='export' href="{{export}}" download="{{describe}}" target="_blank">
-            <i class="glyphicon glyphicon-save"></i>
-            CSV
+		<p class="title">
+			<strong>{{name}}</strong>
+	 		<a 
+	 			ctf-popover
+	 			tabindex="0"
+	 			popover-delay="false"
+				popover-trigger="focus"
+				popover-content="{{help}}"
+				popover-placement="bottom"
+				class="btn btn-link helpLink" 
+				layout="column" >
+				<!-- <img id="helpImg"/> -->
+				<span class="glyphicon glyphicon-question-sign" class='parent'></span>
+			</a>
+
+		</p>
+		<a ng-hide='noData' 
+			class="export" 
+			ng-if='export' 
+			href="{{export}}" 
+			download="{{description}}" 
+			target="_blank"
+			ctf-popover
+			popover-placement="left"
+			popover-container="#statsContent"
+			popover-content="Clique aqui para fazer o download dos resultados">
+			    <i class="glyphicon glyphicon-save"></i>
+            	CSV
         </a>
 	</div>
 
@@ -37,9 +61,7 @@
     	<md-content 
     		ng-show="noData" 
     		layout-align="space-around" 
-    		flex
-    		>
-
+    		flex>
     		<alert type="info">
     		 Não há dados para os filtros selecionados
     		</alert>

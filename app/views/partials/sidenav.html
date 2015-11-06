@@ -8,13 +8,13 @@
 </div>
 
 <md-button class="sidenav-toggle-button md-raised" ng-click="toggleRight()">
-    <i class='glyphicon glyphicon-filter'></i> Filtro
+    <i class='glyphicon glyphicon-list-alt'></i> Filtro
 </md-button>
 
 <md-sidenav class="md-sidenav-right md-whiteframe-z2 md-padding" md-component-id="right" layout='column'>
 
 
-    <md-subheader class="md-primary">Selecione os dados de interesse:</md-subheader>
+    <md-subheader class="md-primary">Selecione os parâmetros de pesquisa:</md-subheader>
 
     <form ng-submit='requestPoints(filter)' id='formSide' novalidate name='points'>
 
@@ -46,19 +46,25 @@
             <md-option ng-repeat='categoria in categorias | orderBy: "id"' ng-value='categoria'>{{categoria.id}} - {{categoria.nome}}</md-option>
         </md-select>
 
-        <md-select ng-model='filter.subcategoria' placeholder='Detalhe' layout='row' ng-disabled='!filter.categoria.subcategorias'>
+        <md-select ng-model='filter.subcategoria' placeholder='Atividade' layout='row' ng-disabled='!filter.categoria.subcategorias'>
             <md-option value=''>Todos</md-option>
             <md-option ng-repeat='subcategoria in filter.categoria.subcategorias | orderBy: "codigo"' ng-value='subcategoria'>{{subcategoria.codigo}} - {{subcategoria.nome}}</md-option>
         </md-select>
 
-        <md-select ng-model='filter.ano' placeholder='Ano'  layout='row'>
-            <md-option ng-repeat='ano in anos' ng-value='ano' ng-selected="{{$first}}">{{ano}}</md-option>
+        <md-select ng-model='filter.ano' placeholder='Ano' placeholder="Ano (obrigatório)" layout='row'>
+            <md-option ng-repeat='ano in anos' ng-value='ano'>{{ano}}</md-option>
         </md-select>
 
         <br/>
         <md-content layout-padding layout-align='center' layout='row'>
-            <a class="md-button md-link md-primary" click="" ng-click="toggleRight()">Cancelar</a>
-            <md-button type='submit' class="md-raised md-primary" layout-align='center' ng-disabled='points.$invalid || filter.carregar || !filter.municipio'>Enviar</md-button>
+            <a class="md-button md-raised md-warn" ng-click="toggleRight()">Cancelar</a>
+            <md-button 
+                type='submit' 
+                class="md-raised md-primary"
+                layout-align='center' 
+                ng-disabled='points.$invalid || filter.carregar || !filter.municipio || !filter.ano'>
+                    Pesquisar
+            </md-button>
         </md-content>
     </form>
 </md-sidenav>

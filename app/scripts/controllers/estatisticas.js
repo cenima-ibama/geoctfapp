@@ -8,7 +8,7 @@
  * Controller of the geoCtfApp
  */
 angular.module('geoCtfApp')
-  .controller('EstatisticasCtrl', function ($scope, $rootScope, $cookies, Auth, $location, $q, RestApi, $log, containsObject, formData, appConfig, $locale,  $mdSidenav, $mdUtil) {
+  .controller('EstatisticasCtrl', function ($scope, $rootScope, $cookies, Auth, $location, $q, RestApi, $log, containsObject, formData, appConfig, $locale,  $mdSidenav, $mdUtil, infoService) {
 
     if ( $cookies.get('dataUser') ) {
       Auth.setUser(JSON.parse($cookies.get('dataUser')));
@@ -18,12 +18,14 @@ angular.module('geoCtfApp')
 
     $scope.$watch(Auth.isLoggedIn, function (value, oldValue) {
       if(!value && oldValue) {
+        $log.info('User Disconnected');
         $location.path('#/');
       }
       
       var dataUser = {};
       
       if(value) {
+        $log.info('User Connected');
         Auth.setUser(JSON.parse($cookies.get('dataUser')));
         dataUser.userName = Auth.getUser();
         $rootScope.dataUser = dataUser;
@@ -34,9 +36,6 @@ angular.module('geoCtfApp')
     Auth.isLoggedIn() ? $rootScope.logged = true : $rootScope.logged = false;
 
     $scope.tabStats = true;
-
-    $cookies.SystemName = 'CTF-APP-GEO';
-    $rootScope.SystemName = $cookies.SystemName;
 
     $scope.choroData;
     $scope.carregar = {};
@@ -61,7 +60,19 @@ angular.module('geoCtfApp')
     $scope.estados = formData.estados;
     $scope.anos = formData.anos;
 
-    if( ! ( containsObject ( $scope.regioes, 'Todas', 'nome' ) ) ){ $scope.regioes.push({nome: 'Todas'}) }
+    if( ! ( containsObject ( $scope.regioes, 'Todas', 'nome' ) ) )
+      { $scope.regioes.push({nome: 'Todas'}) };
+
+    //Help info in scope vars
+    $scope.atividadeCategoria = infoService.atividadeCategoria;
+    $scope.atividadeUF = infoService.atividadeUF;
+    $scope.atividadeMapa = infoService.atividadeMapa;
+    $scope.pessoaPorte = infoService.pessoaPorte;
+    $scope.pessoaRegularidade = infoService.pessoaRegularidade;
+    $scope.pessoaMapa = infoService.pessoaMapa;
+    $scope.inscricaoAnoAtual = infoService.inscricaoAnoAtual;
+    $scope.inscricaoAnoTotal = infoService.inscricaoAnoTotal;
+    $scope.inscricaoSerie = infoService.inscricaoSerie;
 
     /**
      * Getting list of each subcategoria in categoria on param
@@ -91,12 +102,13 @@ angular.module('geoCtfApp')
 
     function defineRequest(val){
       $scope.request = val;
-     
+
       if(val !== 'atividades'){
         $rootScope.column = false;
       } else {
         $rootScope.column = true;
       }
+
     }
 
     function barData(object, features){
@@ -215,6 +227,8 @@ angular.module('geoCtfApp')
     }
 
     function solicitar(estados, categorias, atividades, ano, columns){
+
+      $("[ctf-popover]").popover("hide");
 
       $scope.toggleSidenav();
       $scope.loading = true;
@@ -363,5 +377,10 @@ angular.module('geoCtfApp')
           console.log("Escolha fora das seleções possíveis");
       }
     }
+
+      $rootScope.ok = function() {
+          $mdDialog.hide();
+      }
+
 
   });

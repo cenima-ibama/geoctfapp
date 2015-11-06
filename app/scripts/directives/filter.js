@@ -7,7 +7,7 @@
  * # filter
  */
 angular.module('geoCtfApp')
-  .directive('filter', function () {
+  .directive('filter', function ($modal, $mdDialog) {
     return {
       templateUrl: 'views/partials/filter.html',
       restrict: 'E',
@@ -19,7 +19,6 @@ angular.module('geoCtfApp')
 
         $scope.changeStates = changeStates;
         $scope.addValues = addValues;
-
 
         function changeStates(region){
           var states = formData.estados;
@@ -40,6 +39,9 @@ angular.module('geoCtfApp')
 
 
       	function addValues(obj, type, param){
+
+          $("[ctf-popover]").popover("hide");
+          
           var states = formData.estados;
 
       		switch(type){

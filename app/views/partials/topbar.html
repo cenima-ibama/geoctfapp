@@ -11,24 +11,24 @@
          <span class="icon-bar"></span>
       </button>
       <a class="navbar-brand navbar-brand-img" flex><img src='images/ibama-logo-white.png' width='35' height='35'  /></a>
-      <a class="navbar-brand" flex>{{SystemName}}</a>
+      <a class="navbar-brand" flex>Geo CTF/APP</a>
     </div>
     <div class="collapse navbar-collapse" id="navbar-collapse">
         <div class="nav navbar-nav">
             <li ng-class='{active: tabMap}'><a href='#/'><i class='glyphicon glyphicon-globe'></i> Mapa</a></li>
-            <li ng-class='{active: tabStats}'><a href='#/consultar'><i class='glyphicon glyphicon-signal'></i> Estatística</a></li>
+            <li ng-class='{active: tabStats}'><a href='#/consultar'><i class='glyphicon glyphicon-signal'></i> Estatísticas</a></li>
+            <li><a href="" ng-click="requestPDF()" target="_blank"><i class='glyphicon glyphicon-download-alt'></i> Guia do usuário</a></li>
         </div>        
         <div class="nav navbar-nav navbar-right" ng-if='!logged'>
-            <li class=''><a href='' data-toggle="modal" data-target="#loginModal"><i class='glyphicon glyphicon-user'></i> Login</a></li>
+            <li class=''><a href='' data-toggle="modal" data-target="#loginModal"><i class='glyphicon glyphicon-user'></i> Entrar</a></li>
         </div>
         <div class="nav navbar-nav navbar-right" ng-if='logged'>
           <li class="dropdown">
             <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class='glyphicon glyphicon-user'></i>  {{dataUser.userName}} <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
-              <li><a href="" ng-click='logout()'>Logout</a></li>
+              <li><a href="" ng-click='logout()'>Sair</a></li>
             </ul>
           </li>
-
         </div>
     </div>
   </div>
@@ -38,4 +38,47 @@
 
 <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <login></login>
+</div>
+
+<!-- Modal anoDescriptionLabel -->
+<div class="modal" id="anoDescription" tabindex="-1" role="dialog" aria-labelledby="anoDescriptionLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <!-- <h4 class="modal-title">Definição do campo "Ano"</h4> -->
+        <md-content layout-padding>
+          O campo "Ano" contribui de forma diferente nos resultados das pesquisas,
+          a depender da Aba considerada, conforme tabela abaixo:
+        </md-content>
+
+      </div>
+      <div class="modal-body">
+        <table class="table table-hover table-responsive table-bordered">
+          <tr>
+            <th>Aba</th>
+            <th>Relação entre o campo "Ano" e os resultados das pesquisas</th>
+          </tr>
+          <tr>
+            <td><i>Atividades</i></td>
+            <td>Atividades dedicadas pelas pessoas jurídicas no <b>ano selecionado</b></td>
+          </tr>
+          <tr>
+            <td><i>Pessoas Jurídicas</i></td>
+            <td>Pessoas jurídicas que se dedicam a atividades <b>no ano selecionado</b></td>
+          </tr>
+          <tr>
+            <td><i>Inscrições</i></td>
+            <td>Pessoas jurídicas inscritas no CTF/APP <b>no ano até o ano selecionado</b>, de acordo com o gráfico analisado</td>
+          </tr>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+      </div>
+    </div>
+  </div>
 </div>

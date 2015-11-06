@@ -18,7 +18,7 @@ angular
     'ngTouch',
     'ngMaterial',
     'chart.js',
-    'ui.bootstrap'
+    'ui.bootstrap',
   ])
   .config(function ($routeProvider) {
     $routeProvider
@@ -34,3 +34,5 @@ angular
         redirectTo: '/'
       });
   });
+
+

@@ -7,19 +7,7 @@
       <md-content layout-padding> 
         <filter></filter>
      </md-content>
-
-<!--     <div layout-padding>  
-      <button
-        class="btn btn-danger right" 
-        ng-click='toggleSidenav()' 
-        hide-gt-md>
-          <
-      </button>
-    </div> -->
   </md-sidenav>
-
-
-
   <button 
     type="button" 
     ng-click="toggleSidenav()"
@@ -35,37 +23,39 @@
       popover-trigger="hover"
       popover-show="true"
       >
-      <!-- popover-container="#statsContent" -->
     </a>
   </button>
   
   <tabset justified="true" type="pills" flex resizable>
 
-    <tab heading="Por Atividades" select='defineRequest("atividades")' disable='loading' >
+    <tab heading="Atividades" select='defineRequest("atividades")' disable='loading' 
+
+      ctf-popover
+      popover-content="Informações sobre as atividades: número de pessoas jurídicas inscritas,
+      atividades mais frequentes e distribuição geográfica" 
+      popover-container="#statsContent"
+      popover-placement="bottom">
       <atividades ></atividades>
     </tab>
     
-    <tab heading="Por Pessoa Jurídica"  select='defineRequest("empresas")' disable='loading' >
+    <tab heading="Pessoas Jurídicas"  select='defineRequest("empresas")' disable='loading' 
+      ctf-popover  
+      popover-placement='bottom' 
+      popover-content="Informações sobre pessoas jurídicas: porte, certificado de regularidade
+      e distribuição geográfica" 
+      popover-container="#statsContent">
       <empresas ></empresas>
     </tab>
     
-    <tab heading="Por Inscrições" select='defineRequest("inscricoes")' disable='loading'>
+    <tab heading="Inscrições" select='defineRequest("inscricoes")' disable='loading'
+      ctf-popover  
+      popover-placement='bottom' 
+      popover-content="Informações sobre as inscrições: no ano selecionado, acumulado
+      até o ano selecionado e série histórica" 
+      popover-container="#statsContent"
+      popover-trigger="hover">
       <inscricoes ></inscricoes>
     </tab> 
   </tabset>
 </md-content>
-  <!-- 
-  <tab heading="Por Atividades" select='defineRequest("atividades")' disable='loading' flex>
-    <atividades ng-hide='hints'></atividades>
-    <hints ng-show='hints'></hints>
-  </tab>
-  
-  <tab heading="Por Pessoa Jurídica"  select='defineRequest("empresas")' disable='loading' flex>
-    <empresas ng-hide='hints'></empresas>
-    <hints ng-show='hints'></hints>
-  </tab>
-  
-  <tab heading="Por Inscrições" select='defineRequest("inscricoes")' disable='loading' flex>
-    <inscricoes ng-hide='hints'></inscricoes>
-    <hints ng-show='hints'></hints>
-  </tab>  -->
+

@@ -8,12 +8,9 @@
  * Controller of the geoCtfApp
  */
 angular.module('geoCtfApp')
-  .controller('MapCtrl', function ($scope, $rootScope, $cookies, $location, Auth, formData) {
+  .controller('MapCtrl', function ($scope, $rootScope, $cookies, $location, Auth, formData, $log) {
 
     $scope.tabMap = true;
-
-    $cookies.SystemName = 'CTF-APP-GEO';
-    $rootScope.SystemName = $cookies.SystemName;
 
     if ($cookies.get('dataUser')) {
       Auth.setUser(JSON.parse($cookies.get('dataUser')));
@@ -25,12 +22,12 @@ angular.module('geoCtfApp')
 
     $scope.$watch(Auth.isLoggedIn, function (value, oldValue) {
       if(!value && oldValue) {
-        console.log('Disconnect');
+        $log.info('User Disconnected');
         $location.path('#/');
       }
 
       if(value) {
-        console.log('Connect');
+        $log.info('User Connected');
         Auth.setUser(JSON.parse($cookies.get('dataUser')));
         $rootScope.dataUser = {};
         $rootScope.dataUser.userName = Auth.getUser();

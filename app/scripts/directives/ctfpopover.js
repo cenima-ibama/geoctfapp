@@ -18,7 +18,7 @@ angular.module('geoCtfApp')
 	                content: attrs.popoverContent ? attrs.popoverContent : 'Popover Content',
 	                placement: attrs.popoverPlacement ? attrs.popoverPlacement : 'bottom',
 	                container: attrs.popoverContainer ? attrs.popoverContainer : el.prev(),
-                    delay: attrs.popoverDelay ? {"show": 0, "hide": 0} : {"show": 1800, "hide" : 300},
+                    delay: attrs.popoverDelay ? {"show": 0, "hide": 0} : {"show": 1000, "hide" : 300},
 	            });
 
             	if(attrs.popoverShow){

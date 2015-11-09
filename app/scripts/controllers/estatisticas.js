@@ -329,6 +329,7 @@ angular.module('geoCtfApp')
             filterElement.values.unshift('');
             filterElement.selected = '';
             filterElement.dbfield = 'porte';
+            filterElement.description = 'Filtrar por porte no mapa estatístico';
             $scope.filterObject.filters.push(filterElement);
 
             filterElement = {};
@@ -337,6 +338,7 @@ angular.module('geoCtfApp')
             filterElement.values.unshift('');
             filterElement.dbfield = 'regularidade';
             filterElement.selected = '';
+            filterElement.description = 'Filtrar por regularidade no mapa estatístico';
             $scope.filterObject.filters.push(filterElement);
 
             $scope.filterObject.restFunction = 'getGeoEstatisticas';

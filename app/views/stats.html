@@ -20,7 +20,7 @@
       popover-placement='right' 
       popover-content="Selecione os filtros" 
       popover-container="#thisButton" 
-      popover-trigger="hover"
+      popover-trigger="focus"
       popover-show="true"
       >
     </a>
@@ -57,5 +57,47 @@
       <inscricoes ></inscricoes>
     </tab> 
   </tabset>
-</md-content>
 
+  <!-- Modal anoDescriptionLabel -->
+  <div class="modal" id="anoDescription" tabindex="-1" role="dialog" aria-labelledby="anoDescriptionLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <!-- <h4 class="modal-title">Definição do campo "Ano"</h4> -->
+          <md-content layout-padding>
+            O campo "Ano" contribui de forma diferente nos resultados das pesquisas,
+            a depender da Aba considerada, conforme tabela abaixo:
+          </md-content>
+
+        </div>
+        <div class="modal-body">
+          <table class="table table-hover table-responsive table-bordered">
+            <tr>
+              <th>Aba</th>
+              <th>Relação entre o campo "Ano" e os resultados das pesquisas</th>
+            </tr>
+            <tr>
+              <td><i>Atividades</i></td>
+              <td>Atividades dedicadas pelas pessoas jurídicas no <b>ano selecionado</b></td>
+            </tr>
+            <tr>
+              <td><i>Pessoas Jurídicas</i></td>
+              <td>Pessoas jurídicas que se dedicam a atividades <b>no ano selecionado</b></td>
+            </tr>
+            <tr>
+              <td><i>Inscrições</i></td>
+              <td>Pessoas jurídicas inscritas no CTF/APP <b>no ano ou até o ano selecionado</b>, de acordo com o gráfico analisado</td>
+            </tr>
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</md-content>

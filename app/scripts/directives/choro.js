@@ -140,8 +140,11 @@ angular.module('geoCtfApp')
 
           (property === 'empresas') ? (name = 'pessoas jur' + String.fromCharCode(237) + 'dicas') : (name = property.capitalize());
 
-          this._div.innerHTML = '<h4> N' + String.fromCharCode(186) + ' de ' + name + ' </h4> ' + (props ?
+          /*this._div.innerHTML = '<h4> N' + String.fromCharCode(186) + ' de ' + name + ' </h4> ' + (props ?
               '<b> ' + props.nome + '</b> ' + ' <br />' + atv + ' ' + name +' '
+              : '');*/
+          this._div.innerHTML = '<h4> N' + String.fromCharCode(186) + ' de pessoas jur'+String.fromCharCode(237)+'dicas </h4> ' + (props ?
+              '<b> ' + props.nome + '</b> <br />' + atv + ' pessoas jur' +String.fromCharCode(237)+ 'dicas'
               : '');
         };
 

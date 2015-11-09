@@ -20,7 +20,7 @@ angular.module('geoCtfApp')
   		inscricaoSerie,
   		acute = String.fromCharCode(225),
   		icute = String.fromCharCode(237),
-  		atil  = String.fromCharCode(225),
+  		atil  = String.fromCharCode(227),
   		cedil = String.fromCharCode(231),
   		ecute = String.fromCharCode(233),
   		ucute = String.fromCharCode(250),
@@ -42,7 +42,7 @@ angular.module('geoCtfApp')
 	atividadeMapa = 'Este mapa representa a quantidade de pessoas jur' + icute + 'dicas*' +
 					' que exercem ou exerciam as atividades selecionadas no ano escolhido.' +
 					' O agrupamento ' + ecute + ' realizado pela respectiva unidade de federa' +
-					cedil + atil + ', de acordo com a regi' + atil + 'o selecionada na pesquisa<br/><br>' +
+					cedil + atil + 'o, de acordo com a regi' + atil + 'o selecionada na pesquisa<br/><br>' +
 					'* cada pessoa jur' + icute + 'dica pode exercer uma ou mais atividades do CTF/APP';
 
 	pessoaPorte = 	'Este gr' + acute + 'fico representa a quantidade de pessoas jur' + icute + 'dicas' +
@@ -61,7 +61,7 @@ angular.module('geoCtfApp')
 					' exerciam as atividades selecionadas no ano escolhido. O agrupamento ' + ecute + 'realizado' +
 					' pela respectiva unidade de federa' + cedil + atil + 'o, de acordo com a regi' + atil + 'o' +
 					' selecionada na pesquisa. A escola de cor apresentada ' + ecute + ' proporcional ' + apick + 
-					'quantidade de pessoas jur' + icute + 'dicas.';
+					' quantidade de pessoas jur' + icute + 'dicas.';
 
 	inscricaoAnoAtual = 'Este gr' + acute + 'fico representa a quantidade de pessoas jur' + icute + 'dicas' +
 						' que exercem ou exerciam as atividades selecionadas, agrupadas pela respectiva unidade de ' +
@@ -87,6 +87,6 @@ angular.module('geoCtfApp')
   		inscricaoAnoAtual: inscricaoAnoAtual,
   		inscricaoAnoTotal: inscricaoAnoTotal,
   		inscricaoSerie: inscricaoSerie
-  	}
+  	};
     // AngularJS will instantiate a singleton by calling "new" on this function
   });

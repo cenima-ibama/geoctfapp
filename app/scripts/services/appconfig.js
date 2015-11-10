@@ -9,11 +9,8 @@
  */
 angular.module('geoCtfApp')
   .factory('appConfig', function () {
-
     return {
-
-      apiUrl : '//10.1.8.28:82/ctfapi/api',
-      guiaUrl: 'guia.pdf'
+		apiUrl : '//10.1.8.28:82/ctfapi/api',
+		guiaUrl: 'guia.pdf'
     };
-
   });

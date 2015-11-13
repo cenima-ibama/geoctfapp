@@ -8,7 +8,7 @@
  * Controller of the geoCtfApp
  */
 angular.module('geoCtfApp')
-  .controller('EstatisticasCtrl', function ($scope, $rootScope, $cookies, Auth, $location, $q, RestApi, $log, containsObject, formData, appConfig, $locale,  $mdSidenav, $mdUtil, infoService) {
+  .controller('EstatisticasCtrl', function ($scope, $rootScope, $cookies, Auth, $location, $q, RestApi, $log, containsObject, formData, appConfig, $locale,  $mdSidenav, $mdUtil, infoService, $timeout) {
 
     if ( $cookies.get('dataUser') ) {
       Auth.setUser(JSON.parse($cookies.get('dataUser')));
@@ -34,9 +34,7 @@ angular.module('geoCtfApp')
     }, true);
 
     Auth.isLoggedIn() ? $rootScope.logged = true : $rootScope.logged = false;
-
     $scope.tabStats = true;
-
     $scope.choroData;
     $scope.carregar = {};
 
@@ -380,9 +378,7 @@ angular.module('geoCtfApp')
       }
     }
 
-      $rootScope.ok = function() {
-          $mdDialog.hide();
-      }
+    $timeout(function(){$("[ctf-popover]").popover("hide")}, 4000);
 
 
   });

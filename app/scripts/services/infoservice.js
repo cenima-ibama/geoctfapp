@@ -42,7 +42,8 @@ angular.module('geoCtfApp')
 	atividadeMapa = 'Este mapa representa a quantidade de pessoas jur' + icute + 'dicas*' +
 					' que exercem ou exerciam as atividades selecionadas no ano escolhido.' +
 					' O agrupamento ' + ecute + ' realizado pela respectiva unidade da federa' +
-					cedil + atil + 'o, de acordo com a regi' + atil + 'o selecionada na pesquisa<br/><br>' +
+					cedil + atil + 'o, de acordo com a regi' + atil + 'o selecionada na pesquisa.' +
+					'<br/>A escala de cor apresentada ' +ecute+ ' proporcional '+apick+' quantidade de pessoas jur'+icute+'dicas<br/><br/>' +
 					'* Cada pessoa jur' + icute + 'dica pode exercer uma ou mais atividades do CTF/APP';
 
 	pessoaPorte = 	'Este gr' + acute + 'fico representa a quantidade de pessoas jur' + icute + 'dicas' +
@@ -60,7 +61,7 @@ angular.module('geoCtfApp')
 	pessoaMapa = 	'Este mapa representa a quantidade de pessoas jur' + icute + 'dicas distintas que exercem ou'+
 					' exerciam as atividades selecionadas no ano escolhido. O agrupamento ' + ecute + ' realizado' +
 					' pela respectiva unidade da federa' + cedil + atil + 'o, de acordo com a regi' + atil + 'o' +
-					' selecionada na pesquisa. A escala de cor apresentada ' + ecute + ' proporcional ' + apick + 
+					' selecionada na pesquisa. <br>A escala de cor apresentada ' + ecute + ' proporcional ' + apick + 
 					' quantidade de pessoas jur' + icute + 'dicas.';
 
 	inscricaoAnoAtual = 'Este gr' + acute + 'fico representa a quantidade de pessoas jur' + icute + 'dicas' +

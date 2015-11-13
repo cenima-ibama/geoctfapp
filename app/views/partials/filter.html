@@ -53,16 +53,17 @@
 		</md-select>
  	</md-select-group>
  	
- 	<div layout='row' layout-align='end end'>
+ 	<div layout='row' layout-align='end end'
+		ctf-popover
+		popover-content="Para selecionar todas, não especifique a região"
+		popover-container="#statsContent"
+		popover-placement="right"
+		>
  		<button 
-			ctf-popover
-			popover-content="Para selecionar todas, não especifique a região"
-			popover-container="#statsContent"
-			popover-placement="right"
 			ng-disabled='!chart.regiao'
 			layout-sm='row'
 			ng-click='addValues(chart.regiao, "e", chart.estado)'
-	 		class='btn btn-success'>
+	 		class='btn btn-success right'>
 			<span class='glyphicon glyphicon-plus-sign'></span>
  				Adicionar à pesquisa
  		</button>
@@ -120,15 +121,16 @@
 		</md-select>
 	</md-select-group>
 
- 	<div layout='row' layout-align='end end'>
+ 	<div layout='row' layout-align='end end'
+		ctf-popover  
+		popover-content="Para selecionar todas, não especifique a categoria"
+		popover-container="#statsContent"
+		popover-placement="right">
+		
 		<button 
 		layout-sm='row'
 		ng-click='addValues(chart.categoria, "a", chart.atividade)' 
 		ng-disabled='!chart.categoria'
-		ctf-popover  
-		popover-content="Para selecionar todas, não especifique a categoria"
-		popover-container="#statsContent"
-		popover-placement="right"
  		class='btn btn-success'>
  			<span class='glyphicon glyphicon-plus-sign'></span>
  				Adicionar à pesquisa
@@ -169,7 +171,7 @@
 		class='btn btn-primary right'
 		ng-disabled='loading || !chart.ano'
 		ng-click="solicitar(es, ct, at, chart.ano, totalColumns)"
-		ctf-popover  
+		ctf-popover 
 		popover-placement='right' 
 		popover-content="Selecione os filtros e clique em Pesquisar" 
 		popover-container="#statsContent"

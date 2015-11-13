@@ -25,6 +25,7 @@ angular.module('geoCtfApp')
           segmentStrokeWidth : 0,
           animationSteps : 10,
           animateScale : false,
+
           // legendTemplate : "<ul id=\"pieChart\" layout=\"column\" class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<segments.length; i++){%><li><span style=\"background-color:<%=segments[i].fillColor%>\"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>"
         }
   

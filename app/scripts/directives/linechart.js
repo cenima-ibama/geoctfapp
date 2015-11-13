@@ -22,7 +22,6 @@ angular.module('geoCtfApp')
     		scope.options = {
     			animationSteps: 2,
     			bezierCurve : false,
-    			responsive: true,
     		};
 
             scope.$watch('bar', defineScope);

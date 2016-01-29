@@ -7,18 +7,17 @@
  * # topbar
  */
 angular.module('geoCtfApp')
-  .directive('topbar', function (appConfig, $location) {
+  .directive('topbar', function (appConfig) {
     return {
       templateUrl: 'views/partials/topbar.html',
       restrict: 'AE',
       controller: function($rootScope){
      	
-      	$rootScope.requestPDF = requestPDF;
-
       	function requestPDF(){
-          // window.location.href = appConfig.guiaUrl;
-		    	$location.path(appConfig.guiaUrl);
+          window.open(appConfig.guiaUrl, '_blank');
       	}
+
+        $rootScope.requestPDF = requestPDF;
 
       },
     };

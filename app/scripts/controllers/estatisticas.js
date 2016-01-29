@@ -41,7 +41,7 @@ angular.module('geoCtfApp')
     RestApi.get({ type: 'categorias'}, function(data){
       $scope.categorias = data;
       
-      if( ! ( containsObject ( $scope.categorias, 'Todos', 'id') ) ){ $scope.categorias.push({id: 'Todos' , nome: 'Todos'}) }
+      // if( ! ( containsObject ( $scope.categorias, 'Todos', 'id') ) ){ $scope.categorias.push({id: 'Todos' , nome: 'Todos'}) }
 
       $scope.codigoCategoria = [];
 
@@ -58,8 +58,7 @@ angular.module('geoCtfApp')
     $scope.estados = formData.estados;
     $scope.anos = formData.anos;
 
-    if( ! ( containsObject ( $scope.regioes, 'Todas', 'nome' ) ) )
-      { $scope.regioes.push({nome: 'Todas'}) };
+    // if( ! ( containsObject ( $scope.regioes, 'Todas', 'nome' ) ) ) { $scope.regioes.push({nome: 'Todas'}) };
 
     //Help info in scope vars
     $scope.atividadeCategoria = infoService.atividadeCategoria;

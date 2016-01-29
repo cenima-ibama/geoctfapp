@@ -117,7 +117,36 @@ function sidenavDir (RestApi) {
       RestApi.getPoints(getPointsParams, getPointsSuccess);
 
       $http.defaults.headers.get = {};
+
       
+      /**
+       * Função para deleção de features que não estão ativas
+       * @param data
+       */
+      function deleteFeature(data){
+
+        var propertie,
+          categoria = $scope.filter.categoria.nome,
+          subcategoria = $scope.filter.subcategoria ? $scope.filter.subcategoria.nome : null;
+
+        var dado = data.features.filter(function(a){
+          var ret  = a.properties.atividades.filter(function(b){
+            if(b.categoria == categoria && (!subcategoria || b.subcategoria === subcategoria)){
+              if(b.ativa)
+                return b;
+            }
+          });
+          return ret.length > 0;
+        });
+
+        if(dado.length)
+          data['features'] = dado;
+        else
+          data = 0;  
+        
+        return data; 
+      }
+
       /**
        * Função de resultado da requisição de informações de pontos
        * @param data
@@ -126,19 +155,32 @@ function sidenavDir (RestApi) {
         if(data.features.length) {
 
           $scope.markers = new L.MarkerClusterGroup();
-          $scope.points = L.geoJson(data, {pointToLayer: pointToLayer });
 
-          $scope.map.addLayer($scope.markers);
-          $scope.map.fitBounds($scope.markers);
+          data = deleteFeature(data);
 
-          $scope.filter.carregar = false;
-          closeSidenav();
+          if(data.length){
 
+            $scope.points = L.geoJson(data, {pointToLayer: pointToLayer });
+
+            $scope.map.addLayer($scope.markers);
+            $scope.map.fitBounds($scope.markers);
+
+            $scope.filter.carregar = false;
+            closeSidenav();
+            
+          } else {
+
+            $scope.filter.error = true;
+            $scope.filter.errorMessage = 'Não foram encontrados registros para o cruzamento selecionado';
+            $scope.filter.carregar = false;
+
+          }
         } else {
 
           $scope.filter.error = true;
-          $scope.filter.errorMessage = 'Não foram encontrados pontos para este cruzamento';
+          $scope.filter.errorMessage = 'Não foram encontrados registros para o cruzamento selecionado';
           $scope.filter.carregar = false;
+
         }
       }
 
@@ -177,6 +219,7 @@ function sidenavDir (RestApi) {
         html += '<b>Fantasia:</b> ' + properties.nome_fantasia + '<br/>';
         html += '<b>Porte:</b> ' + properties.porte + '<br/>';
         html += '<b>Certificado regularidade da pessoa jurídica:</b> ' + (properties.regularidade ? 'Possui Certificado de Regularidade Válido' : 'Não Possui Certificado de Regularidade Válido')+ '<br/><br/>';
+        html += '<br/><b>Última atualização do dado em: </b> ' + (properties.data_atualizacao ? properties.data_atualizacao : 'Sem informação de atualização da base de dados')    + '<br/><br/>';
       }
 
       angular.forEach(properties.atividades, function(atividade, key) {

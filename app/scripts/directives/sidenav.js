@@ -158,7 +158,7 @@ function sidenavDir (RestApi) {
 
           data = deleteFeature(data);
 
-          if(data.length){
+          if(data){
 
             $scope.points = L.geoJson(data, {pointToLayer: pointToLayer });
 
